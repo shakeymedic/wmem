@@ -276,29 +276,4 @@ window.addEventListener('scroll', () => {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderTools();
-    
-    // Animate stats counter
-    animateStats();
 });
-
-// Animate statistics numbers
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number[data-target]');
-    
-    stats.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60 FPS
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                stat.textContent = target;
-                clearInterval(timer);
-            } else {
-                stat.textContent = Math.floor(current);
-            }
-        }, 16);
-    });
-}
