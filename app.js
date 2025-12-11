@@ -86,9 +86,11 @@ const icons = {
 function createToolCard(tool) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
+    const betaBadge = tool.beta ? '<span class="beta-badge">BETA</span>' : '';
     
     return `
         <div class="tool-card ${featuredClass}" data-category="${tool.category}" data-tags="${tool.tags.join(' ')}" data-tool-id="${tool.id}">
+            ${betaBadge}
             <div class="tool-screenshot">
                 <img src="${tool.screenshot}" alt="${tool.name} screenshot" onerror="this.parentElement.classList.add('no-screenshot')">
                 <div class="tool-screenshot-overlay">
@@ -113,39 +115,74 @@ function createToolCard(tool) {
     `;
 }
 
-// Filter tools based on category and search term
-function filterTools() {
-    const filteredTools = tools.filter(tool => {
-        const matchesCategory = currentFilter === 'all' || tool.category === currentFilter;
-        const matchesSearch = searchTerm === '' || 
-            tool.name.toLowerCase().includes(searchTerm) ||
-            tool.description.toLowerCase().includes(searchTerm) ||
-            tool.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
-            tool.category.toLowerCase().includes(searchTerm);
-        
-        return matchesCategory && matchesSearch;
-    });
-    
-    return filteredTools;
-}
-
 // Render tools to the grid
 function renderTools() {
-    const filteredTools = filterTools();
-    
-    if (filteredTools.length === 0) {
-        toolsGrid.style.display = 'none';
-        noResults.style.display = 'block';
-    } else {
-        toolsGrid.style.display = 'grid';
-        noResults.style.display = 'none';
-        toolsGrid.innerHTML = filteredTools.map(tool => createToolCard(tool)).join('');
+    // Logic for "Sectioned" view vs "Grid" view
+    // Only show sections if we are on 'All Tools' and NOT searching
+    const isDefaultView = currentFilter === 'all' && searchTerm === '';
+
+    toolsGrid.innerHTML = '';
+    noResults.style.display = 'none';
+
+    if (isDefaultView) {
+        // SECTIONED VIEW: Render distinct sections with titles
+        toolsGrid.style.display = 'block'; // Disable the main grid to allow stacking sections
+        toolsGrid.classList.remove('tools-grid-layout');
+
+        const categories = ['Live Tools', 'Simulation', 'Education & Advisory'];
+
+        categories.forEach(category => {
+            const categoryTools = tools.filter(t => t.category === category);
+            
+            if (categoryTools.length > 0) {
+                // 1. Create Section Title
+                const sectionHeader = document.createElement('h3');
+                sectionHeader.className = 'category-section-title';
+                sectionHeader.textContent = category;
+                toolsGrid.appendChild(sectionHeader);
+
+                // 2. Create Grid Container for this section
+                const sectionGrid = document.createElement('div');
+                sectionGrid.className = 'tools-grid-layout'; // Use the grid styling
+                sectionGrid.innerHTML = categoryTools.map(tool => createToolCard(tool)).join('');
+                toolsGrid.appendChild(sectionGrid);
+            }
+        });
         
-        // Add click handlers to tool cards and links
-        setTimeout(() => {
-            attachToolClickHandlers();
-        }, 50);
+    } else {
+        // FILTERED/SEARCHED VIEW: Render one mixed grid
+        toolsGrid.style.display = 'grid'; // Enable main grid
+        toolsGrid.classList.add('tools-grid-layout');
+
+        const filteredTools = tools.filter(tool => {
+            const matchesCategory = currentFilter === 'all' || tool.category === currentFilter;
+            const matchesSearch = searchTerm === '' || 
+                tool.name.toLowerCase().includes(searchTerm) ||
+                tool.description.toLowerCase().includes(searchTerm) ||
+                tool.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+                tool.category.toLowerCase().includes(searchTerm);
+            
+            return matchesCategory && matchesSearch;
+        });
+
+        if (filteredTools.length === 0) {
+            toolsGrid.style.display = 'none';
+            noResults.style.display = 'block';
+        } else {
+            toolsGrid.innerHTML = filteredTools.map(tool => createToolCard(tool)).join('');
+        }
     }
+
+    // Add click handlers to tool cards and links
+    setTimeout(() => {
+        attachToolClickHandlers();
+        
+        // Stagger animation
+        const cards = document.querySelectorAll('.tool-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.05}s`;
+        });
+    }, 50);
 }
 
 // Attach click handlers to tool cards and links
@@ -239,14 +276,6 @@ window.addEventListener('scroll', () => {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderTools();
-    
-    // Add stagger animation to tool cards
-    setTimeout(() => {
-        const cards = document.querySelectorAll('.tool-card');
-        cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.05}s`;
-        });
-    }, 100);
     
     // Animate stats counter
     animateStats();
