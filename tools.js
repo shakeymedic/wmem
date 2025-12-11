@@ -1,6 +1,6 @@
 // Tools data - easy to update by adding new objects to this array
 const tools = [
-    // LIVE TOOLS - For real clinical use
+    // --- LIVE TOOLS ---
     {
         id: "als-app",
         name: "Cardiac Arrest App",
@@ -24,6 +24,17 @@ const tools = [
         screenshot: "screenshots/rsi-tool.png"
     },
     {
+        id: "em-obstetrics",
+        name: "Obstetric Emergencies",
+        description: "Real-time cognitive aid for managing obstetric emergencies including PPH, eclampsia, and maternal resuscitation",
+        category: "Live Tools",
+        tags: ["obstetrics", "pregnancy", "PPH", "eclampsia", "emergency"],
+        url: "https://emobstetrics.netlify.app",
+        featured: true,
+        icon: "procedure",
+        screenshot: "screenshots/em-obstetrics.png"
+    },
+    {
         id: "sedation",
         name: "Procedural Sedation Tool",
         description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
@@ -33,6 +44,17 @@ const tools = [
         featured: true,
         icon: "procedure",
         screenshot: "screenshots/sedation.png"
+    },
+    {
+        id: "sedation-agitated",
+        name: "Agitated Patient Sedation",
+        description: "Protocol for the safe sedation and management of patients with acute behavioural disturbance",
+        category: "Live Tools",
+        tags: ["sedation", "agitated", "ABD", "behavioural", "mental health"],
+        url: "https://wmebemsedationagitated.netlify.app",
+        featured: false,
+        icon: "procedure",
+        screenshot: "screenshots/sedation-agitated.png"
     },
     {
         id: "major-trauma",
@@ -46,18 +68,74 @@ const tools = [
         screenshot: "screenshots/major-trauma.png"
     },
     {
+        id: "paeds-trauma-imaging",
+        name: "Paeds Trauma Imaging",
+        description: "Decision support tool for CT imaging in paediatric trauma based on latest Royal College of Radiology advice",
+        category: "Live Tools",
+        tags: ["paediatrics", "trauma", "imaging", "CT", "radiology"],
+        url: "https://wmebempaedstraumaimaging.netlify.app",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/paeds-trauma.png"
+    },
+    {
         id: "rosc-management",
         name: "Post-ROSC Management",
         description: "Dedicated tool for the receipt and management of post-return of spontaneous circulation patients in the ED",
         category: "Live Tools",
         tags: ["ROSC", "post-arrest", "cardiac arrest", "resuscitation", "critical care"],
         url: "https://wmebemcardiacarrest.netlify.app",
-        featured: true,
+        featured: false,
         icon: "cardiac",
         screenshot: "screenshots/rosc-management.png"
     },
-    
-    // SIMULATION TOOLS - For training
+    {
+        id: "hyponatraemia",
+        name: "Hyponatraemia Guide",
+        description: "Interactive guide for the assessment and safe management of hyponatraemia in the emergency department",
+        category: "Live Tools",
+        tags: ["hyponatraemia", "electrolytes", "metabolic", "sodium", "guidelines"],
+        url: "https://wmebemhyponatraemia.netlify.app",
+        featured: false,
+        icon: "guidelines",
+        screenshot: "screenshots/hyponatraemia.png"
+    },
+    {
+        id: "limping-child",
+        name: "Limping Child Pathway",
+        description: "Clinical pathway for the assessment, risk stratification, and management of the limping child",
+        category: "Live Tools",
+        tags: ["paediatrics", "orthopaedics", "limp", "septic arthritis", "koch"],
+        url: "https://wmebemlimpingchild.netlify.app",
+        featured: false,
+        icon: "assessment",
+        screenshot: "screenshots/limping-child.png"
+    },
+    {
+        id: "antiemetics",
+        name: "Antiemetics Guidance",
+        description: "Evidence-based advice and guidance on antiemetic selection and dosing for various presentations",
+        category: "Live Tools",
+        tags: ["antiemetics", "pharmacology", "vomiting", "nausea", "guidelines"],
+        url: "https://wmebemantiemetics2.netlify.app",
+        featured: false,
+        icon: "procedure",
+        screenshot: "screenshots/antiemetics.png"
+    },
+    {
+        id: "triage-app",
+        name: "Experimental Triage",
+        description: "Experimental digital triage support tool for initial patient assessment and categorization",
+        category: "Live Tools",
+        tags: ["triage", "assessment", "streaming", "priority", "experimental"],
+        url: "https://wmebemtriage.netlify.app",
+        featured: false,
+        beta: true,
+        icon: "assessment",
+        screenshot: "screenshots/triage.png"
+    },
+
+    // --- SIMULATION TOOLS ---
     {
         id: "em-simulator",
         name: "Emergency Medicine Simulator",
@@ -70,6 +148,29 @@ const tools = [
         screenshot: "screenshots/em-simulator.png"
     },
     {
+        id: "incident-game",
+        name: "Major Incident Game",
+        description: "Interactive simulation game for training in major incident command, control, and triage",
+        category: "Simulation",
+        tags: ["major incident", "simulation", "game", "command", "triage"],
+        url: "https://wmebemincident.netlify.app",
+        featured: false,
+        beta: true,
+        icon: "trauma",
+        screenshot: "screenshots/incident-game.png"
+    },
+    {
+        id: "mass-casualty-triage",
+        name: "Mass Casualty Triage",
+        description: "Training application for mass casualty triage sorting using standard sieve and sort methods",
+        category: "Simulation",
+        tags: ["triage", "major incident", "training", "sieve", "sort"],
+        url: "https://tstmitt.netlify.app",
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/mass-casualty.png"
+    },
+    {
         id: "defib-sim",
         name: "Defibrillator Simulator",
         description: "Interactive defibrillator simulation tool for training in cardioversion, defibrillation, and external pacing",
@@ -80,8 +181,8 @@ const tools = [
         icon: "defib",
         screenshot: "screenshots/defib-sim.png"
     },
-    
-    // EDUCATION & ADVISORY TOOLS - Guidelines and references
+
+    // --- EDUCATION & ADVISORY ---
     {
         id: "dvla-guide",
         name: "DVLA Driving Advice",
@@ -94,6 +195,28 @@ const tools = [
         screenshot: "screenshots/dvla-guide.png"
     },
     {
+        id: "omi-stemi",
+        name: "OMI / STEMI Education",
+        description: "Educational resource covering the new OMI (Occlusion MI) paradigm and STEMI recognition",
+        category: "Education & Advisory",
+        tags: ["ECG", "cardiology", "STEMI", "OMI", "education"],
+        url: "https://wmebemstemitoomi.netlify.app",
+        featured: false,
+        icon: "cardiac",
+        screenshot: "screenshots/omi.png"
+    },
+    {
+        id: "hot-joint",
+        name: "Hot Joint Education",
+        description: "Educational resource covering the assessment, investigation, and management of the hot swollen joint",
+        category: "Education & Advisory",
+        tags: ["orthopaedics", "septic arthritis", "gout", "education", "joint"],
+        url: "https://wmebemhotjoint.netlify.app",
+        featured: false,
+        icon: "assessment",
+        screenshot: "screenshots/hot-joint.png"
+    },
+    {
         id: "tloc-tool",
         name: "Syncope & TLOC Assessment",
         description: "Evidence-based risk stratification and investigation guidance for syncope and transient loss of consciousness",
@@ -103,6 +226,39 @@ const tools = [
         featured: false,
         icon: "assessment",
         screenshot: "screenshots/tloc-tool.png"
+    },
+    {
+        id: "ct-risk",
+        name: "CT Risk in Children",
+        description: "Educational summary and critical appraisal regarding radiation risk and malignancy from CT scans in children",
+        category: "Education & Advisory",
+        tags: ["paediatrics", "radiation", "CT", "risk", "education"],
+        url: "https://wmebemctrisk.netlify.app",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/ct-risk.png"
+    },
+    {
+        id: "sedation-edu",
+        name: "Sedation Education",
+        description: "Educational modules covering pharmacology, safety, and techniques for procedural sedation",
+        category: "Education & Advisory",
+        tags: ["sedation", "education", "pharmacology", "safety", "training"],
+        url: "https://wmebemsedation.netlify.app",
+        featured: false,
+        icon: "procedure",
+        screenshot: "screenshots/sedation-edu.png"
+    },
+    {
+        id: "dvla-poster",
+        name: "DVLA Advice Poster",
+        description: "Quick-reference visual poster summarizing common DVLA driving restrictions for ED patients",
+        category: "Education & Advisory",
+        tags: ["DVLA", "driving", "poster", "reference", "visual"],
+        url: "https://dvlaemposter.netlify.app",
+        featured: false,
+        icon: "guidelines",
+        screenshot: "screenshots/dvla-poster.png"
     },
     {
         id: "pericardiocentesis",
