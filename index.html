@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="West Midlands Evidence Based Emergency Medicine - Educational tools and resources for Emergency Medicine doctors">
+    <title>WMEBEM - West Midlands Evidence Based Emergency Medicine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="wmebem_logo.png" alt="WMEBEM Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>WMEBEM</h1>
+                        <p>West Midlands Evidence Based Emergency Medicine</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Evidence-Based Emergency Medicine</div>
+                <h2 class="hero-title">Emergency Medicine Educational Tools</h2>
+                <p class="hero-subtitle">Interactive simulation, documentation, and clinical decision support tools designed by EM practitioners for real-world emergency department use</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="10">0</span>
+                        <span class="stat-label">Tools Available</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="3">0</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">Open Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section" id="home">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Available Tools</h2>
+                <p class="section-subtitle">Interactive simulation and documentation tools for emergency medicine practice</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search tools by name, category, or keyword..."
+                    >
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All Tools</button>
+                    <button class="filter-btn" data-category="Live Tools">Live Tools</button>
+                    <button class="filter-btn" data-category="Simulation">Simulation</button>
+                    <button class="filter-btn" data-category="Education & Advisory">Education & Advisory</button>
+                </div>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Tools will be dynamically loaded here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <h3>No tools found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">About WMEBEM</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                <path d="M2 17l10 5 10-5"></path>
+                                <path d="M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <h3>Evidence-Based</h3>
+                        <p>All tools are built on current best evidence and guidelines in emergency medicine practice</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </div>
+                        <h3>Practical Tools</h3>
+                        <p>Designed for real-world emergency department use, from simulation to documentation</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3>For EM Doctors</h3>
+                        <p>Created by emergency medicine practitioners for training and clinical practice</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="wmebem_logo.png" alt="WMEBEM Logo" class="footer-logo">
+                    <p class="footer-text">West Midlands Evidence Based Emergency Medicine</p>
+                    <p class="footer-text">Educational tools for Emergency Medicine practitioners</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.rcem.ac.uk/" target="_blank" rel="noopener">RCEM</a></li>
+                        <li><a href="https://www.nice.org.uk/" target="_blank" rel="noopener">NICE</a></li>
+                        <li><a href="https://www.resus.org.uk/" target="_blank" rel="noopener">Resuscitation Council UK</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WMEBEM. All rights reserved. Built for medical education and training purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tool Modal -->
+    <div class="tool-modal" id="toolModal">
+        <div class="tool-modal-backdrop"></div>
+        <div class="tool-modal-container">
+            <div class="tool-modal-header">
+                <div class="tool-modal-title">
+                    <span id="modalToolName">Tool Name</span>
+                </div>
+                <div class="tool-modal-actions">
+                    <button class="tool-modal-btn" id="openInNewTab" title="Open in new tab">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </button>
+                    <button class="tool-modal-btn tool-modal-close" id="closeModal" title="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="tool-modal-content">
+                <div class="tool-modal-loader" id="modalLoader">
+                    <div class="loader-spinner"></div>
+                    <p>Loading tool...</p>
+                </div>
+                <iframe id="toolIframe" class="tool-iframe" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="tools.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
