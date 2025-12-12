@@ -13,10 +13,31 @@ const closeModalBtn = document.getElementById('closeModal');
 const openInNewTabBtn = document.getElementById('openInNewTab');
 const modalBackdrop = document.querySelector('.tool-modal-backdrop');
 
+// Theme Elements
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
 // State
 let currentFilter = 'all';
 let searchTerm = '';
 let currentToolUrl = '';
+
+// Dark Mode Logic
+if (localStorage.getItem('darkMode') === 'enabled') {
+    body.classList.add('dark-mode');
+}
+
+if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    });
+}
 
 // Modal Functions
 function openModal(toolName, toolUrl) {
