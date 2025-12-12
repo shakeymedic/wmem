@@ -60,8 +60,19 @@ openInNewTabBtn.addEventListener('click', () => {
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && toolModal.classList.contains('active')) {
-        closeModal();
+    // Search shortcut '/'
+    if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+    }
+    
+    // Escape to clear search or close modal
+    if (e.key === 'Escape') {
+        if (toolModal.classList.contains('active')) {
+            closeModal();
+        } else if (document.activeElement === searchInput) {
+            searchInput.blur();
+        }
     }
 });
 
@@ -277,3 +288,10 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
     renderTools();
 });
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+    });
+}
