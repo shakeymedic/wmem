@@ -32,6 +32,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     background-color: #f9fafb;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -47,6 +48,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease;
 }
 
 .header-content {
@@ -83,6 +85,7 @@ body {
 .nav {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-link {
@@ -107,6 +110,21 @@ body {
     right: 0;
     height: 2px;
     background-color: var(--primary-blue);
+}
+
+/* Dark Mode Toggle */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Hero Section */
@@ -788,6 +806,32 @@ body {
     text-align: center;
 }
 
+/* Clinical Governance & Disclaimer */
+.governance-section {
+    margin-bottom: 1.5rem;
+}
+
+.report-issue-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #dc2626; /* Red for importance */
+    color: white;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(220, 38, 38, 0.2);
+}
+
+.report-issue-btn:hover {
+    background-color: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(220, 38, 38, 0.3);
+}
+
 .disclaimer-text {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.7);
@@ -797,6 +841,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.5rem;
     background: rgba(0, 0, 0, 0.2);
+    line-height: 1.5;
 }
 
 .footer-bottom p {
@@ -1092,4 +1137,74 @@ body {
 
 .tool-card {
     animation: fadeIn 0.5s ease-out;
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    --primary-blue: #3b82f6; /* Lighter blue for dark bg */
+    --primary-blue-dark: #60a5fa;
+    --white: #1f2937; /* Dark Grey */
+    --black: #f9fafb; /* White text */
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    background-color: #111827; /* Very dark grey background */
+}
+
+body.dark-mode .tool-card, 
+body.dark-mode .header,
+body.dark-mode .tool-modal-container {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+body.dark-mode .media-card,
+body.dark-mode .about-card {
+    background-color: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .media-section,
+body.dark-mode .about-section {
+    background-color: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .nav-link {
+    color: #e5e7eb;
+}
+
+body.dark-mode .search-input {
+    background-color: #111827;
+    color: white;
+}
+
+body.dark-mode .filter-btn {
+    background-color: #1f2937;
+    color: #e5e7eb;
+}
+
+body.dark-mode .filter-btn:hover {
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+body.dark-mode .filter-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+body.dark-mode .tool-card:hover {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .tool-modal-content,
+body.dark-mode .tool-modal-loader,
+body.dark-mode .tool-iframe {
+    background-color: #111827;
+}
+
+body.dark-mode .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
