@@ -113,7 +113,7 @@ body {
 .hero {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
     color: var(--white);
-    padding: 3rem 0; /* Reduced from 5rem to 3rem */
+    padding: 3rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -124,51 +124,12 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: hidden;
-    opacity: 0.1;
-}
-
-.hero-shape {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    animation: float 20s infinite ease-in-out;
-}
-
-.hero-shape-1 {
-    width: 300px;
-    height: 300px;
-    top: -100px;
-    right: -50px;
-    animation-delay: 0s;
-}
-
-.hero-shape-2 {
-    width: 200px;
-    height: 200px;
-    bottom: -50px;
-    left: 10%;
-    animation-delay: 7s;
-}
-
-.hero-shape-3 {
-    width: 150px;
-    height: 150px;
-    top: 50%;
-    left: -50px;
-    animation-delay: 3s;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) translateX(0) scale(1);
-    }
-    33% {
-        transform: translateY(-30px) translateX(20px) scale(1.1);
-    }
-    66% {
-        transform: translateY(20px) translateX(-20px) scale(0.9);
-    }
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDI1aDUwbDEwLTIwIDEwIDQwbDEwLTIwaDUwIiBzdHJva2U9IndoaXRlIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjEiLz48L3N2Zz4=');
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.2;
+    mask-image: linear-gradient(to right, transparent, black, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black, transparent);
 }
 
 .hero-content {
@@ -201,7 +162,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    margin-bottom: 1rem; /* Reduced from 3rem */
+    margin-bottom: 1rem;
     opacity: 0.95;
     line-height: 1.7;
     max-width: 700px;
@@ -299,10 +260,6 @@ body {
 }
 
 /* Tools Grid Layouts */
-.tools-grid {
-    /* Container */
-}
-
 .tools-grid-layout {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -829,6 +786,17 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 1.5rem;
     text-align: center;
+}
+
+.disclaimer-text {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .footer-bottom p {
