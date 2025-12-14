@@ -1,7 +1,7 @@
 {
   "name": "WMEBEM Tools",
   "short_name": "WMEBEM",
-  "start_url": "/",
+  "start_url": "/#home",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563a8",
