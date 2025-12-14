@@ -90,6 +90,17 @@ const tools = [
         screenshot: "screenshots/rosc-management.png"
     },
     {
+        id: "box-breathing",
+        name: "Box Breathing App",
+        description: "Visual pacing tool for box breathing techniques to manage stress, anxiety, and performance",
+        category: "Live Tools",
+        tags: ["wellbeing", "anxiety", "breathing", "stress", "performance"],
+        url: "https://wmebemboxbreathing.netlify.app/",
+        featured: false,
+        icon: "monitor", // 'monitor' fits, or you could add a 'lungs' icon to app.js
+        screenshot: "screenshots/box-breathing.png"
+    },
+    {
         id: "hyponatraemia",
         name: "Hyponatraemia Guide",
         description: "Interactive guide for the assessment and safe management of hyponatraemia in the emergency department",
