@@ -1,11 +1,11 @@
 // Tools data - easy to update by adding new objects to this array
 const tools = [
-    // --- LIVE TOOLS ---
+    // --- RESUS & TRAUMA ---
     {
         id: "als-app",
         name: "Cardiac Arrest App",
         description: "Real-time tool for managing and documenting actual cardiac arrest resuscitations in the emergency department",
-        category: "Live Tools",
+        category: "Resus & Trauma",
         tags: ["resuscitation", "ALS", "cardiac arrest", "documentation", "real-time"],
         url: "https://wmebemals.netlify.app",
         featured: true,
@@ -13,54 +13,10 @@ const tools = [
         screenshot: "screenshots/als-app.png"
     },
     {
-        id: "rsi-tool",
-        name: "RSI Management Tool",
-        description: "Structured tool to assist with planning, execution, and documentation of rapid sequence intubation in the ED",
-        category: "Live Tools",
-        tags: ["RSI", "intubation", "airway", "documentation", "checklist"],
-        url: "https://wmebemrsi.netlify.app",
-        featured: true,
-        icon: "airway",
-        screenshot: "screenshots/rsi-tool.png"
-    },
-    {
-        id: "em-obstetrics",
-        name: "Obstetric Emergencies",
-        description: "Real-time cognitive aid for managing obstetric emergencies including PPH, eclampsia, and maternal resuscitation",
-        category: "Live Tools",
-        tags: ["obstetrics", "pregnancy", "PPH", "eclampsia", "emergency"],
-        url: "https://emobstetrics.netlify.app",
-        featured: true,
-        icon: "procedure",
-        screenshot: "screenshots/em-obstetrics.png"
-    },
-    {
-        id: "sedation",
-        name: "Procedural Sedation Tool",
-        description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
-        category: "Live Tools",
-        tags: ["sedation", "procedures", "documentation", "safety", "monitoring"],
-        url: "https://sedation.netlify.app",
-        featured: true,
-        icon: "procedure",
-        screenshot: "screenshots/sedation.png"
-    },
-    {
-        id: "sedation-agitated",
-        name: "Agitated Patient Sedation",
-        description: "Protocol for the safe sedation and management of patients with acute behavioural disturbance",
-        category: "Live Tools",
-        tags: ["sedation", "agitated", "ABD", "behavioural", "mental health"],
-        url: "https://wmebemsedationagitated.netlify.app",
-        featured: false,
-        icon: "procedure",
-        screenshot: "screenshots/sedation-agitated.png"
-    },
-    {
         id: "major-trauma",
         name: "Major Trauma Management",
         description: "Complete app to run and document major trauma cases including primary and secondary survey protocols",
-        category: "Live Tools",
+        category: "Resus & Trauma",
         tags: ["trauma", "ATLS", "primary survey", "secondary survey", "documentation"],
         url: "https://majortrauma.netlify.app",
         featured: true,
@@ -68,10 +24,45 @@ const tools = [
         screenshot: "screenshots/major-trauma.png"
     },
     {
+        id: "sedation",
+        name: "Procedural Sedation Tool",
+        description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
+        category: "Resus & Trauma",
+        tags: ["sedation", "procedures", "documentation", "safety", "monitoring"],
+        url: "https://sedation.netlify.app",
+        featured: true,
+        icon: "procedure",
+        screenshot: "screenshots/sedation.png"
+    },
+    {
+        id: "rsi-tool",
+        name: "RSI Management Tool",
+        description: "Structured tool to assist with planning, execution, and documentation of rapid sequence intubation in the ED",
+        category: "Resus & Trauma",
+        tags: ["RSI", "intubation", "airway", "documentation", "checklist"],
+        url: "https://wmebemrsi.netlify.app",
+        featured: true,
+        icon: "airway",
+        screenshot: "screenshots/rsi-tool.png"
+    },
+    {
+        id: "rosc-management",
+        name: "Post-ROSC Management",
+        description: "Dedicated tool for the receipt and management of post-return of spontaneous circulation patients in the ED",
+        category: "Resus & Trauma",
+        tags: ["ROSC", "post-arrest", "cardiac arrest", "resuscitation", "critical care"],
+        url: "https://wmebemcardiacarrest.netlify.app",
+        featured: false,
+        icon: "cardiac",
+        screenshot: "screenshots/rosc-management.png"
+    },
+
+    // --- PAEDIATRICS ---
+    {
         id: "paeds-trauma-imaging",
         name: "Paeds Trauma Imaging",
         description: "Decision support tool for CT imaging in paediatric trauma based on latest Royal College of Radiology advice",
-        category: "Live Tools",
+        category: "Paediatrics",
         tags: ["paediatrics", "trauma", "imaging", "CT", "radiology"],
         url: "https://wmebempaedstraumaimaging.netlify.app",
         featured: false,
@@ -79,32 +70,45 @@ const tools = [
         screenshot: "screenshots/paeds-trauma.png"
     },
     {
-        id: "rosc-management",
-        name: "Post-ROSC Management",
-        description: "Dedicated tool for the receipt and management of post-return of spontaneous circulation patients in the ED",
-        category: "Live Tools",
-        tags: ["ROSC", "post-arrest", "cardiac arrest", "resuscitation", "critical care"],
-        url: "https://wmebemcardiacarrest.netlify.app",
+        id: "limping-child",
+        name: "Limping Child Pathway",
+        description: "Clinical pathway for the assessment, risk stratification, and management of the limping child",
+        category: "Paediatrics",
+        tags: ["paediatrics", "orthopaedics", "limp", "septic arthritis", "koch"],
+        url: "https://wmebemlimpingchild.netlify.app",
         featured: false,
-        icon: "cardiac",
-        screenshot: "screenshots/rosc-management.png"
+        icon: "assessment",
+        screenshot: "screenshots/limping-child.png"
+    },
+
+    // --- CLINICAL SUPPORT ---
+    {
+        id: "em-obstetrics",
+        name: "Obstetric Emergencies",
+        description: "Real-time cognitive aid for managing obstetric emergencies including PPH, eclampsia, and maternal resuscitation",
+        category: "Clinical Support",
+        tags: ["obstetrics", "pregnancy", "PPH", "eclampsia", "emergency"],
+        url: "https://emobstetrics.netlify.app",
+        featured: true,
+        icon: "procedure",
+        screenshot: "screenshots/em-obstetrics.png"
     },
     {
-        id: "box-breathing",
-        name: "Box Breathing App",
-        description: "Visual pacing tool for box breathing techniques to manage stress, anxiety, and performance",
-        category: "Live Tools",
-        tags: ["wellbeing", "anxiety", "breathing", "stress", "performance"],
-        url: "https://wmebemboxbreathing.netlify.app/",
+        id: "sedation-agitated",
+        name: "Agitated Patient Sedation",
+        description: "Protocol for the safe sedation and management of patients with acute behavioural disturbance",
+        category: "Clinical Support",
+        tags: ["sedation", "agitated", "ABD", "behavioural", "mental health"],
+        url: "https://wmebemsedationagitated.netlify.app",
         featured: false,
-        icon: "monitor", // 'monitor' fits, or you could add a 'lungs' icon to app.js
-        screenshot: "screenshots/box-breathing.png"
+        icon: "procedure",
+        screenshot: "screenshots/sedation-agitated.png"
     },
     {
         id: "hyponatraemia",
         name: "Hyponatraemia Guide",
         description: "Interactive guide for the assessment and safe management of hyponatraemia in the emergency department",
-        category: "Live Tools",
+        category: "Clinical Support",
         tags: ["hyponatraemia", "electrolytes", "metabolic", "sodium", "guidelines"],
         url: "https://wmebemhyponatraemia.netlify.app",
         featured: false,
@@ -112,21 +116,10 @@ const tools = [
         screenshot: "screenshots/hyponatraemia.png"
     },
     {
-        id: "limping-child",
-        name: "Limping Child Pathway",
-        description: "Clinical pathway for the assessment, risk stratification, and management of the limping child",
-        category: "Live Tools",
-        tags: ["paediatrics", "orthopaedics", "limp", "septic arthritis", "koch"],
-        url: "https://wmebemlimpingchild.netlify.app",
-        featured: false,
-        icon: "assessment",
-        screenshot: "screenshots/limping-child.png"
-    },
-    {
         id: "antiemetics",
         name: "Antiemetics Guidance",
         description: "Evidence-based advice and guidance on antiemetic selection and dosing for various presentations",
-        category: "Live Tools",
+        category: "Clinical Support",
         tags: ["antiemetics", "pharmacology", "vomiting", "nausea", "guidelines"],
         url: "https://wmebemantiemetics2.netlify.app",
         featured: false,
@@ -137,13 +130,24 @@ const tools = [
         id: "triage-app",
         name: "Experimental Triage",
         description: "Experimental digital triage support tool for initial patient assessment and categorization",
-        category: "Live Tools",
+        category: "Clinical Support",
         tags: ["triage", "assessment", "streaming", "priority", "experimental"],
         url: "https://wmebemtriage.netlify.app",
         featured: false,
         beta: true,
         icon: "assessment",
         screenshot: "screenshots/triage.png"
+    },
+    {
+        id: "box-breathing",
+        name: "Box Breathing App",
+        description: "Visual pacing tool for box breathing techniques to manage stress, anxiety, and performance",
+        category: "Clinical Support",
+        tags: ["wellbeing", "anxiety", "breathing", "stress", "performance"],
+        url: "https://wmebemboxbreathing.netlify.app/",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/box-breathing.png"
     },
 
     // --- SIMULATION TOOLS ---
