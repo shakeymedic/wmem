@@ -75,7 +75,9 @@
                 
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-category="all">All Tools</button>
-                    <button class="filter-btn" data-category="Live Tools">Live Tools</button>
+                    <button class="filter-btn" data-category="Resus & Trauma">Resus & Trauma</button>
+                    <button class="filter-btn" data-category="Paediatrics">Paediatrics</button>
+                    <button class="filter-btn" data-category="Clinical Support">Clinical Support</button>
                     <button class="filter-btn" data-category="Simulation">Simulation</button>
                     <button class="filter-btn" data-category="Education & Advisory">Education & Advisory</button>
                 </div>
@@ -255,6 +257,12 @@
                 <div class="tool-modal-loader" id="modalLoader">
                     <div class="loader-spinner"></div>
                     <p>Loading tool...</p>
+                </div>
+                <div class="tool-modal-error" id="modalError" style="display: none; position: absolute; top:0; left:0; right:0; bottom:0; flex-direction: column; align-items: center; justify-content: center; background: white; z-index: 9;">
+                    <p style="margin-bottom: 1rem; color: #666;">Taking longer than expected...</p>
+                    <button id="forceOpenBtn" class="tool-link" style="border:none; cursor: pointer;">
+                        Click to open directly
+                    </button>
                 </div>
                 <iframe id="toolIframe" class="tool-iframe" frameborder="0" allowfullscreen></iframe>
             </div>
