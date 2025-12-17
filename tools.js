@@ -171,6 +171,17 @@ const tools = [
         icon: "monitor",
         screenshot: "screenshots/box-breathing.png"
     },
+    {
+        id: "visual-acuity",
+        name: "Visual Acuity Screen",
+        description: "Digital visual acuity testing chart for bedside eye assessment",
+        category: "Clinical Support",
+        tags: ["ophthalmology", "eyes", "vision", "snellen", "assessment"],
+        url: "https://wmebemvisualacuity.netlify.app",
+        featured: false,
+        icon: "assessment",
+        screenshot: "screenshots/visual-acuity.png"
+    },
 
     // --- SIMULATION TOOLS ---
     {
