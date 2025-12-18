@@ -90,19 +90,9 @@ const tools = [
         tags: ["QRH", "checklist", "emergency", "HALO", "guidelines"],
         url: "https://wmebemhaloqrh.netlify.app",
         featured: false,
+        beta: true,
         icon: "guidelines",
         screenshot: "screenshots/halo.png"
-    },
-    {
-        id: "fluid-sid",
-        name: "Fluid & Electrolyte Resus",
-        description: "Guide for fluid resuscitation strategies and Strong Ion Difference (SID) calculation and interpretation",
-        category: "Clinical Support",
-        tags: ["fluid", "electrolytes", "resuscitation", "SID", "acid-base"],
-        url: "https://wmebemsid.netlify.app/",
-        featured: false,
-        icon: "monitor",
-        screenshot: "screenshots/fluid-sid.png"
     },
     {
         id: "em-obstetrics",
@@ -231,6 +221,17 @@ const tools = [
     },
 
     // --- EDUCATION & ADVISORY ---
+    {
+        id: "fluid-sid",
+        name: "Fluid & Electrolyte Resus",
+        description: "Guide for fluid resuscitation strategies and Strong Ion Difference (SID) calculation and interpretation",
+        category: "Education & Advisory",
+        tags: ["fluid", "electrolytes", "resuscitation", "SID", "acid-base"],
+        url: "https://wmebemsid.netlify.app/",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/fluid-sid.png"
+    },
     {
         id: "dvla-guide",
         name: "DVLA Driving Advice",
