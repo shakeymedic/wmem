@@ -2,15 +2,17 @@
 const toolsGrid = document.getElementById('toolsGrid');
 const searchInput = document.getElementById('searchInput');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const tagFilter = document.getElementById('tagFilter'); // New Dropdown
 const noResults = document.getElementById('noResults');
+const clearSearchBtn = document.getElementById('clearSearchBtn'); // New Button
 
 // Modal Elements
 const toolModal = document.getElementById('toolModal');
 const modalToolName = document.getElementById('modalToolName');
 const toolIframe = document.getElementById('toolIframe');
 const modalLoader = document.getElementById('modalLoader');
-const modalError = document.getElementById('modalError'); // New error container
-const forceOpenBtn = document.getElementById('forceOpenBtn'); // New button
+const modalError = document.getElementById('modalError'); 
+const forceOpenBtn = document.getElementById('forceOpenBtn'); 
 const closeModalBtn = document.getElementById('closeModal');
 const openInNewTabBtn = document.getElementById('openInNewTab');
 const modalBackdrop = document.querySelector('.tool-modal-backdrop');
@@ -20,10 +22,24 @@ const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 
 // State
-let currentFilter = 'all';
+let currentCategory = 'all';
+let currentTag = '';
 let searchTerm = '';
 let currentToolUrl = '';
-let iframeTimeout = null; // Store timeout ID
+let iframeTimeout = null;
+
+// Initialize Fuse.js for Fuzzy Search
+const fuseOptions = {
+    keys: [
+        { name: 'name', weight: 0.4 },
+        { name: 'description', weight: 0.3 },
+        { name: 'tags', weight: 0.2 },
+        { name: 'category', weight: 0.1 }
+    ],
+    threshold: 0.4, // Sensitivity (0.0 = perfect match, 1.0 = match anything)
+    ignoreLocation: true
+};
+let fuse; // Initialized in DOMContentLoaded
 
 // Dark Mode Logic
 if (localStorage.getItem('darkMode') === 'enabled') {
@@ -33,7 +49,6 @@ if (localStorage.getItem('darkMode') === 'enabled') {
 if (darkModeToggle) {
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('darkMode', 'enabled');
         } else {
@@ -42,34 +57,77 @@ if (darkModeToggle) {
     });
 }
 
+// Populate Tag Filter Dropdown
+function populateTagFilter() {
+    const allTags = new Set();
+    tools.forEach(tool => {
+        tool.tags.forEach(tag => allTags.add(tag.toLowerCase()));
+    });
+    
+    // Sort alphabetically
+    const sortedTags = Array.from(allTags).sort();
+    
+    // Clear existing options except first
+    tagFilter.innerHTML = '<option value="">Filter by Tag (Any)</option>';
+    
+    // Add common high-level tags first for convenience
+    const priorityTags = ['paediatrics', 'trauma', 'cardiac', 'resuscitation', 'sedation'];
+    
+    // Add priority tags group
+    const priorityGroup = document.createElement('optgroup');
+    priorityGroup.label = "Common Filters";
+    priorityTags.forEach(tag => {
+        if (sortedTags.includes(tag)) {
+            const option = document.createElement('option');
+            option.value = tag;
+            option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+            priorityGroup.appendChild(option);
+        }
+    });
+    tagFilter.appendChild(priorityGroup);
+
+    // Add all tags group
+    const allGroup = document.createElement('optgroup');
+    allGroup.label = "All Tags";
+    sortedTags.forEach(tag => {
+        if (!priorityTags.includes(tag)) {
+            const option = document.createElement('option');
+            option.value = tag;
+            option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+            allGroup.appendChild(option);
+        }
+    });
+    tagFilter.appendChild(allGroup);
+}
+
 // Modal Functions
 function openModal(toolName, toolUrl) {
+    // Mobile Check - Open in new tab if mobile
+    if (window.innerWidth < 768) {
+        window.open(toolUrl, '_blank', 'noopener,noreferrer');
+        return;
+    }
+
     currentToolUrl = toolUrl;
     modalToolName.textContent = toolName;
     toolModal.classList.add('active');
     document.body.style.overflow = 'hidden';
     
-    // Reset state
     modalLoader.classList.remove('hidden');
     modalError.style.display = 'none';
     
-    // Set 5-second timeout for iframe loading
     if (iframeTimeout) clearTimeout(iframeTimeout);
     iframeTimeout = setTimeout(() => {
-        // If still loading after 5 seconds, show option to open directly
         if (!modalLoader.classList.contains('hidden')) {
             modalLoader.classList.add('hidden');
             modalError.style.display = 'flex';
         }
     }, 5000);
 
-    // Load iframe
     toolIframe.src = toolUrl;
     
-    // Hide loader when iframe loads
     toolIframe.onload = function() {
         if (iframeTimeout) clearTimeout(iframeTimeout);
-        // Only hide if we haven't already shown the error
         if (modalError.style.display === 'none') {
             setTimeout(() => {
                 modalLoader.classList.add('hidden');
@@ -84,7 +142,6 @@ function closeModal() {
     
     if (iframeTimeout) clearTimeout(iframeTimeout);
     
-    // Clear iframe after animation
     setTimeout(() => {
         toolIframe.src = '';
         modalLoader.classList.remove('hidden');
@@ -109,13 +166,10 @@ if (forceOpenBtn) {
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Search shortcut '/'
     if (e.key === '/' && document.activeElement !== searchInput) {
         e.preventDefault();
         searchInput.focus();
     }
-    
-    // Escape to clear search or close modal
     if (e.key === 'Escape') {
         if (toolModal.classList.contains('active')) {
             closeModal();
@@ -125,12 +179,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Prevent modal close when clicking inside modal content
 document.querySelector('.tool-modal-container').addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
-// Icon SVGs for different tool types
+// Icon SVGs (No changes here, keeping standard list)
 const icons = {
     cardiac: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path><path d="M3.5 12h17"></path></svg>`,
     trauma: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>`,
@@ -142,7 +195,6 @@ const icons = {
     assessment: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
 };
 
-// Create tool card HTML
 function createToolCard(tool) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
@@ -175,25 +227,21 @@ function createToolCard(tool) {
     `;
 }
 
-// Render tools to the grid
 function renderTools() {
-    // Logic for "Sectioned" view vs "Grid" view
-    // Only show sections if we are on 'All Tools' and NOT searching
-    const isDefaultView = currentFilter === 'all' && searchTerm === '';
+    // Only show "Sectioned" view if showing 'all', no search text, and no tag filter
+    const isDefaultView = currentCategory === 'all' && searchTerm === '' && currentTag === '';
 
     toolsGrid.innerHTML = '';
     noResults.style.display = 'none';
 
     if (isDefaultView) {
-        // SECTIONED VIEW: Render distinct sections with titles
-        toolsGrid.style.display = 'block'; // Disable the main grid to allow stacking sections
+        // SECTIONED VIEW
+        toolsGrid.style.display = 'block'; 
         toolsGrid.classList.remove('tools-grid-layout');
 
-        // Updated categories list matching tools.js
+        // New Category List
         const categories = [
-            'Resus & Trauma',
-            'Paediatrics',
-            'Clinical Support',
+            'Live Tools',
             'Simulation',
             'Education & Advisory'
         ];
@@ -202,35 +250,44 @@ function renderTools() {
             const categoryTools = tools.filter(t => t.category === category);
             
             if (categoryTools.length > 0) {
-                // 1. Create Section Title
                 const sectionHeader = document.createElement('h3');
                 sectionHeader.className = 'category-section-title';
                 sectionHeader.textContent = category;
+                
+                // Add specific color classes if needed (optional)
+                if(category === 'Live Tools') sectionHeader.style.color = '#dc2626'; // Red
+                if(category === 'Simulation') sectionHeader.style.color = '#7c3aed'; // Purple
+                if(category === 'Education & Advisory') sectionHeader.style.color = '#2563a8'; // Blue
+
                 toolsGrid.appendChild(sectionHeader);
 
-                // 2. Create Grid Container for this section
                 const sectionGrid = document.createElement('div');
-                sectionGrid.className = 'tools-grid-layout'; // Use the grid styling
+                sectionGrid.className = 'tools-grid-layout';
                 sectionGrid.innerHTML = categoryTools.map(tool => createToolCard(tool)).join('');
                 toolsGrid.appendChild(sectionGrid);
             }
         });
         
     } else {
-        // FILTERED/SEARCHED VIEW: Render one mixed grid
-        toolsGrid.style.display = 'grid'; // Enable main grid
+        // FILTERED/SEARCHED VIEW
+        toolsGrid.style.display = 'grid'; 
         toolsGrid.classList.add('tools-grid-layout');
 
-        const filteredTools = tools.filter(tool => {
-            const matchesCategory = currentFilter === 'all' || tool.category === currentFilter;
-            const matchesSearch = searchTerm === '' || 
-                tool.name.toLowerCase().includes(searchTerm) ||
-                tool.description.toLowerCase().includes(searchTerm) ||
-                tool.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
-                tool.category.toLowerCase().includes(searchTerm);
-            
-            return matchesCategory && matchesSearch;
+        // 1. First filtered by Category & Tag
+        let filteredTools = tools.filter(tool => {
+            const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
+            const matchesTag = currentTag === '' || tool.tags.some(t => t.toLowerCase() === currentTag);
+            return matchesCategory && matchesTag;
         });
+
+        // 2. Then filtered by Search (using Fuse.js)
+        if (searchTerm !== '') {
+            const fuseResults = fuse.search(searchTerm);
+            // Fuse returns [{item, refIndex, score}, ...]. Map back to tools.
+            // But we must intersect with previously filtered tools
+            const searchHits = new Set(fuseResults.map(r => r.item.id));
+            filteredTools = filteredTools.filter(tool => searchHits.has(tool.id));
+        }
 
         if (filteredTools.length === 0) {
             toolsGrid.style.display = 'none';
@@ -240,11 +297,8 @@ function renderTools() {
         }
     }
 
-    // Add click handlers to tool cards and links
     setTimeout(() => {
         attachToolClickHandlers();
-        
-        // Stagger animation
         const cards = document.querySelectorAll('.tool-card');
         cards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.05}s`;
@@ -252,10 +306,8 @@ function renderTools() {
     }, 50);
 }
 
-// Attach click handlers to tool cards and links
 function attachToolClickHandlers() {
     const toolLinks = document.querySelectorAll('.tool-link');
-    
     toolLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -266,13 +318,10 @@ function attachToolClickHandlers() {
         });
     });
     
-    // Also allow clicking the card itself to open
     const toolCards = document.querySelectorAll('.tool-card');
     toolCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // Don't trigger if clicking the link itself
             if (e.target.closest('.tool-link')) return;
-            
             const link = card.querySelector('.tool-link');
             const url = link.getAttribute('data-url');
             const name = link.getAttribute('data-name');
@@ -281,71 +330,53 @@ function attachToolClickHandlers() {
     });
 }
 
-// Handle filter button clicks
+// Event Listeners
+
+// Filter Buttons
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove active class from all buttons
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
         button.classList.add('active');
-        
-        // Update current filter
-        currentFilter = button.getAttribute('data-category');
-        
-        // Re-render tools
+        currentCategory = button.getAttribute('data-category');
         renderTools();
     });
 });
 
-// Handle search input
+// Tag Filter
+tagFilter.addEventListener('change', (e) => {
+    currentTag = e.target.value.toLowerCase();
+    renderTools();
+});
+
+// Search Input
 searchInput.addEventListener('input', (e) => {
-    searchTerm = e.target.value.toLowerCase().trim();
+    searchTerm = e.target.value.trim();
     renderTools();
 });
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+// Clear Search Button
+clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchTerm = '';
+    // Reset filters too? Usually clear search means clear text.
+    // Let's keep filters as is, just clear text.
+    renderTools();
+    searchInput.focus();
 });
 
-// Update active nav link on scroll
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= (sectionTop - 100)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Initialize on page load
+// Init
 document.addEventListener('DOMContentLoaded', () => {
+    // Init Fuse
+    fuse = new Fuse(tools, fuseOptions);
+    
+    // Init Tags
+    populateTagFilter();
+    
+    // Initial Render
     renderTools();
 });
 
-// Register Service Worker for PWA
+// Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js');
