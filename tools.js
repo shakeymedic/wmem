@@ -35,6 +35,17 @@ const tools = [
         screenshot: "screenshots/trauma-briefing.png"
     },
     {
+        id: "Back Pain Proforma",
+        name: "Back Pain Proforma",
+        description: "Back Pain Proforma for BHH and GHH",
+        category: "Live Tools",
+        tags: ["documentation"],
+        url: "https://bhhbackpain.netlify.app",
+        featured: true,
+        icon: "Back Pain",
+        screenshot: "screenshots/back-pain.png"
+    },
+    {
         id: "sedation",
         name: "Procedural Sedation Tool",
         description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
