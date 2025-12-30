@@ -24,17 +24,6 @@ const tools = [
         screenshot: "screenshots/major-trauma.png"
     },
     {
-        id: "back-pain-proforma",
-        name: "BHH/GHH Back Pain Assessment",
-        description: "Structured assessment pro forma for low back pain presentations. **NOTE: For use at BHH & GHH Emergency Departments ONLY.**",
-        category: "Live Tools",
-        tags: ["orthopaedics", "back pain", "assessment", "BHH", "GHH", "spinal"],
-        url: "https://INSERT-URL-HERE", 
-        featured: false,
-        icon: "assessment",
-        screenshot: "screenshots/back-pain.png"
-    },
-    {
         id: "trauma-briefing",
         name: "Trauma Briefing & Zero Point",
         description: "Digital aid for the zero point survey and team briefing prior to trauma patient arrival",
