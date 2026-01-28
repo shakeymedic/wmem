@@ -172,6 +172,28 @@ const tools = [
 
     // --- EDUCATION & ADVISORY (Reference & Guidelines) ---
     {
+        id: "bhh-who-sees-who",
+        name: "BHH Who Sees Who",
+        description: "Birmingham Heartlands specific who sees who guideline",
+        category: "Education & Advisory",
+        tags: ["guidelines", "BHH", "referrals", "workflow", "specialty"],
+        url: "https://bhhwhoseeswho.netlify.app",
+        featured: false,
+        icon: "guidelines",
+        screenshot: "screenshots/bhh-who-sees-who.png"
+    },
+    {
+        id: "consultant-ai",
+        name: "Consultant AI Dashboard",
+        description: "Educational site on ways medical consultants can utilise AI in their working lives",
+        category: "Education & Advisory",
+        tags: ["AI", "education", "productivity", "management", "tech"],
+        url: "https://consultantaidashboard.netlify.app",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/consultant-ai.png"
+    },
+    {
         id: "qip-assist",
         name: "QIP Assist",
         description: "Interactive guide to help doctors design, execute and visualize RCEM Quality Improvement Projects",
