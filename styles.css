@@ -192,6 +192,115 @@ body {
 }
 
 /* =========================================
+   3.5 WEEKLY UPDATES SECTION
+   ========================================= */
+.updates-section {
+    background-color: var(--white);
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.updates-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, rgba(37, 99, 168, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(37, 99, 168, 0.1);
+}
+
+.updates-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary-blue);
+}
+
+.updates-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.updates-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.update-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.938rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.update-btn.em-update {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(37, 99, 168, 0.2);
+}
+
+.update-btn.em-update:hover {
+    background-color: var(--primary-blue-dark);
+    transform: translateY(-2px);
+}
+
+.update-btn.icu-update {
+    background-color: #7c3aed;
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(124, 58, 237, 0.2);
+}
+
+.update-btn.icu-update:hover {
+    background-color: #6d28d9;
+    transform: translateY(-2px);
+}
+
+/* Dark Mode Overrides for Updates Section */
+body.dark-mode .updates-section {
+    background-color: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .updates-container {
+    background: rgba(31, 41, 55, 0.8);
+    border-color: #374151;
+}
+
+body.dark-mode .updates-header {
+    color: var(--primary-blue-light);
+}
+
+@media (max-width: 768px) {
+    .updates-container {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .updates-header {
+        justify-content: center;
+    }
+
+    .updates-links {
+        flex-direction: column;
+    }
+
+    .update-btn {
+        justify-content: center;
+    }
+}
+
+/* =========================================
    4. TOOLS SECTION & CONTROLS
    ========================================= */
 .tools-section {
