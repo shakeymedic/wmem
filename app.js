@@ -1,10 +1,12 @@
 // DOM Elements
+const newToolsGrid = document.getElementById('newToolsGrid');
+const newToolsWrapper = document.getElementById('newToolsWrapper');
 const toolsGrid = document.getElementById('toolsGrid');
 const searchInput = document.getElementById('searchInput');
 const filterButtons = document.querySelectorAll('.filter-btn');
-const tagFilter = document.getElementById('tagFilter'); // New Dropdown
+const tagFilter = document.getElementById('tagFilter');
 const noResults = document.getElementById('noResults');
-const clearSearchBtn = document.getElementById('clearSearchBtn'); // New Button
+const clearSearchBtn = document.getElementById('clearSearchBtn');
 
 // Modal Elements
 const toolModal = document.getElementById('toolModal');
@@ -36,10 +38,10 @@ const fuseOptions = {
         { name: 'tags', weight: 0.2 },
         { name: 'category', weight: 0.1 }
     ],
-    threshold: 0.4, // Sensitivity (0.0 = perfect match, 1.0 = match anything)
+    threshold: 0.4,
     ignoreLocation: true
 };
-let fuse; // Initialized in DOMContentLoaded
+let fuse;
 
 // Dark Mode Logic
 if (localStorage.getItem('darkMode') === 'enabled') {
@@ -64,16 +66,12 @@ function populateTagFilter() {
         tool.tags.forEach(tag => allTags.add(tag.toLowerCase()));
     });
     
-    // Sort alphabetically
     const sortedTags = Array.from(allTags).sort();
     
-    // Clear existing options except first
     tagFilter.innerHTML = '<option value="">Filter by Tag (Any)</option>';
     
-    // Add common high-level tags first for convenience
     const priorityTags = ['paediatrics', 'trauma', 'cardiac', 'resuscitation', 'sedation'];
     
-    // Add priority tags group
     const priorityGroup = document.createElement('optgroup');
     priorityGroup.label = "Common Filters";
     priorityTags.forEach(tag => {
@@ -86,7 +84,6 @@ function populateTagFilter() {
     });
     tagFilter.appendChild(priorityGroup);
 
-    // Add all tags group
     const allGroup = document.createElement('optgroup');
     allGroup.label = "All Tags";
     sortedTags.forEach(tag => {
@@ -102,7 +99,6 @@ function populateTagFilter() {
 
 // Modal Functions
 function openModal(toolName, toolUrl) {
-    // Mobile Check - Open in new tab if mobile
     if (window.innerWidth < 768) {
         window.open(toolUrl, '_blank', 'noopener,noreferrer');
         return;
@@ -164,7 +160,6 @@ if (forceOpenBtn) {
     });
 }
 
-// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.key === '/' && document.activeElement !== searchInput) {
         e.preventDefault();
@@ -183,7 +178,7 @@ document.querySelector('.tool-modal-container').addEventListener('click', (e) =>
     e.stopPropagation();
 });
 
-// Icon SVGs (No changes here, keeping standard list)
+// Icon SVGs
 const icons = {
     cardiac: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path><path d="M3.5 12h17"></path></svg>`,
     trauma: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>`,
@@ -195,13 +190,14 @@ const icons = {
     assessment: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
 };
 
-function createToolCard(tool) {
+function createToolCard(tool, isSmall = false) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
     const betaBadge = tool.beta ? '<span class="beta-badge">BETA</span>' : '';
+    const smallClass = isSmall ? 'small-card' : '';
     
     return `
-        <div class="tool-card ${featuredClass}" data-category="${tool.category}" data-tags="${tool.tags.join(' ')}" data-tool-id="${tool.id}">
+        <div class="tool-card ${featuredClass} ${smallClass}" data-category="${tool.category}" data-tags="${tool.tags.join(' ')}" data-tool-id="${tool.id}">
             ${betaBadge}
             <div class="tool-screenshot">
                 <img src="${tool.screenshot}" alt="${tool.name} screenshot" onerror="this.parentElement.classList.add('no-screenshot')">
@@ -227,19 +223,27 @@ function createToolCard(tool) {
     `;
 }
 
+function renderNewTools() {
+    const newTools = tools.filter(t => t.isNew);
+    if (newTools.length > 0 && newToolsWrapper) {
+        newToolsWrapper.style.display = 'block';
+        newToolsGrid.innerHTML = newTools.map(tool => createToolCard(tool, true)).join('');
+    } else if (newToolsWrapper) {
+        newToolsWrapper.style.display = 'none';
+    }
+}
+
 function renderTools() {
-    // Only show "Sectioned" view if showing 'all', no search text, and no tag filter
     const isDefaultView = currentCategory === 'all' && searchTerm === '' && currentTag === '';
 
     toolsGrid.innerHTML = '';
     noResults.style.display = 'none';
 
     if (isDefaultView) {
-        // SECTIONED VIEW
+        if (newToolsWrapper) newToolsWrapper.style.display = 'block';
         toolsGrid.style.display = 'block'; 
         toolsGrid.classList.remove('tools-grid-layout');
 
-        // New Category List
         const categories = [
             'Live Tools',
             'Simulation',
@@ -254,10 +258,9 @@ function renderTools() {
                 sectionHeader.className = 'category-section-title';
                 sectionHeader.textContent = category;
                 
-                // Add specific color classes if needed (optional)
-                if(category === 'Live Tools') sectionHeader.style.color = '#dc2626'; // Red
-                if(category === 'Simulation') sectionHeader.style.color = '#7c3aed'; // Purple
-                if(category === 'Education & Advisory') sectionHeader.style.color = '#2563a8'; // Blue
+                if(category === 'Live Tools') sectionHeader.style.color = '#dc2626';
+                if(category === 'Simulation') sectionHeader.style.color = '#7c3aed';
+                if(category === 'Education & Advisory') sectionHeader.style.color = '#2563a8';
 
                 toolsGrid.appendChild(sectionHeader);
 
@@ -269,22 +272,18 @@ function renderTools() {
         });
         
     } else {
-        // FILTERED/SEARCHED VIEW
+        if (newToolsWrapper) newToolsWrapper.style.display = 'none';
         toolsGrid.style.display = 'grid'; 
         toolsGrid.classList.add('tools-grid-layout');
 
-        // 1. First filtered by Category & Tag
         let filteredTools = tools.filter(tool => {
             const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
             const matchesTag = currentTag === '' || tool.tags.some(t => t.toLowerCase() === currentTag);
             return matchesCategory && matchesTag;
         });
 
-        // 2. Then filtered by Search (using Fuse.js)
         if (searchTerm !== '') {
             const fuseResults = fuse.search(searchTerm);
-            // Fuse returns [{item, refIndex, score}, ...]. Map back to tools.
-            // But we must intersect with previously filtered tools
             const searchHits = new Set(fuseResults.map(r => r.item.id));
             filteredTools = filteredTools.filter(tool => searchHits.has(tool.id));
         }
@@ -312,6 +311,7 @@ function attachToolClickHandlers() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
+            if (link.id === 'clearSearchBtn' || link.id === 'forceOpenBtn') return;
             const url = link.getAttribute('data-url');
             const name = link.getAttribute('data-name');
             openModal(name, url);
@@ -323,16 +323,17 @@ function attachToolClickHandlers() {
         card.addEventListener('click', (e) => {
             if (e.target.closest('.tool-link')) return;
             const link = card.querySelector('.tool-link');
-            const url = link.getAttribute('data-url');
-            const name = link.getAttribute('data-name');
-            openModal(name, url);
+            if (link) {
+                const url = link.getAttribute('data-url');
+                const name = link.getAttribute('data-name');
+                openModal(name, url);
+            }
         });
     });
 }
 
 // Event Listeners
 
-// Filter Buttons
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -342,37 +343,28 @@ filterButtons.forEach(button => {
     });
 });
 
-// Tag Filter
 tagFilter.addEventListener('change', (e) => {
     currentTag = e.target.value.toLowerCase();
     renderTools();
 });
 
-// Search Input
 searchInput.addEventListener('input', (e) => {
     searchTerm = e.target.value.trim();
     renderTools();
 });
 
-// Clear Search Button
 clearSearchBtn.addEventListener('click', () => {
     searchInput.value = '';
     searchTerm = '';
-    // Reset filters too? Usually clear search means clear text.
-    // Let's keep filters as is, just clear text.
     renderTools();
     searchInput.focus();
 });
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-    // Init Fuse
     fuse = new Fuse(tools, fuseOptions);
-    
-    // Init Tags
     populateTagFilter();
-    
-    // Initial Render
+    renderNewTools();
     renderTools();
 });
 
