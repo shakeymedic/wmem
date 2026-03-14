@@ -371,6 +371,39 @@ const tools = [
         featured: false,
         icon: "procedure",
         screenshot: "screenshots/pericardiocentesis.png"
+    },
+    {
+        id: "teg-edu",
+        name: "Viscoelastic Testing (TEG)",
+        description: "Training and education on viscoelastic testing in emergency and critical care",
+        category: "Education & Advisory",
+        tags: ["TEG", "viscoelastic", "haematology", "bleeding", "education"],
+        url: "https://wmebemteg.netlify.app",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/teg.png"
+    },
+    {
+        id: "dog-bites",
+        name: "Dog Bite Management",
+        description: "Guidance on the assessment and management of dog bites in the emergency department",
+        category: "Education & Advisory",
+        tags: ["trauma", "wounds", "bites", "infection", "guidelines"],
+        url: "https://wmebemdogbites.netlify.app",
+        featured: false,
+        icon: "procedure",
+        screenshot: "screenshots/dog-bites.png"
+    },
+    {
+        id: "ai-for-em",
+        name: "AI for EM Clinicians",
+        description: "Educational website teaching emergency medicine clinicians how to use artificial intelligence for portfolios, research, and critical appraisal",
+        category: "Education & Advisory",
+        tags: ["AI", "education", "research", "portfolio", "appraisal"],
+        url: "https://wmebemaiforem.netlify.app",
+        featured: false,
+        icon: "monitor",
+        screenshot: "screenshots/ai-for-em.png"
     }
 ];
 
