@@ -144,6 +144,7 @@ const tools = [
         url: "https://wmebemincident.netlify.app",
         featured: false,
         beta: true,
+        isNew: true,
         icon: "trauma",
         screenshot: "screenshots/incident-game.png"
     },
@@ -380,6 +381,7 @@ const tools = [
         tags: ["TEG", "viscoelastic", "haematology", "bleeding", "education"],
         url: "https://wmebemteg.netlify.app",
         featured: false,
+        isNew: true,
         icon: "monitor",
         screenshot: "screenshots/teg.png"
     },
@@ -391,6 +393,7 @@ const tools = [
         tags: ["trauma", "wounds", "bites", "infection", "guidelines"],
         url: "https://wmebemdogbites.netlify.app",
         featured: false,
+        isNew: true,
         icon: "procedure",
         screenshot: "screenshots/dog-bites.png"
     },
@@ -402,6 +405,7 @@ const tools = [
         tags: ["AI", "education", "research", "portfolio", "appraisal"],
         url: "https://wmebemaiforem.netlify.app",
         featured: false,
+        isNew: true,
         icon: "monitor",
         screenshot: "screenshots/ai-for-em.png"
     }
