@@ -6,8 +6,10 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 
 // ============================================================
 // NEWSLETTER DATA — add new entries at the TOP of this array
-// Each entry: { date, label, links: [{ title, driveId }] }
+// Each entry: { date, label, tags?: [], htmlPath?: string, links: [{ title, driveId }] }
 // driveId is the Google Drive file ID (file must be publicly shared)
+// tags are topic labels (airway, sepsis, trauma, stroke, paeds, tox, cardiac, neuro, resus, safety)
+// htmlPath is the on-site landing page for the issue (searchable)
 // ============================================================
 const updates = [
     {
@@ -75,17 +77,36 @@ const updates = [
 
 // ============================================================
 // RENDER — builds the sidebar timeline from the data above
+// Supports a tag filter (select#archiveTagFilter, optional).
 // ============================================================
-function renderUpdates() {
+function collectAllTags() {
+    const set = new Set();
+    updates.forEach(w => (w.tags || []).forEach(t => set.add(t)));
+    return Array.from(set).sort();
+}
+
+function buildTagFilter() {
+    const sel = document.getElementById("archiveTagFilter");
+    if (!sel) return;
+    sel.innerHTML = `<option value="">All topics</option>` +
+        collectAllTags().map(t => `<option value="${t}">${t}</option>`).join("");
+    sel.addEventListener("change", () => renderUpdates(sel.value));
+}
+
+function renderUpdates(filterTag) {
     const container = document.getElementById("updatesTimeline");
     if (!container) return;
 
-    if (updates.length === 0) {
+    const filtered = filterTag
+        ? updates.filter(w => (w.tags || []).includes(filterTag))
+        : updates;
+
+    if (filtered.length === 0) {
         container.innerHTML = `<p class="empty-update">No updates available yet.</p>`;
         return;
     }
 
-    container.innerHTML = updates.map(week => `
+    container.innerHTML = filtered.map(week => `
         <div class="update-week">
             <div class="update-date">${week.date}</div>
             <div class="update-links">
@@ -96,14 +117,21 @@ function renderUpdates() {
                         ${link.title}
                     </a>
                 `).join("")}
+                ${week.htmlPath ? `<a href="${week.htmlPath}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
+                ${(week.tags && week.tags.length) ? `<div class="update-tags">${week.tags.map(t => `<span class="update-tag">${t}</span>`).join("")}</div>` : ""}
             </div>
         </div>
     `).join("");
 }
 
+function initArchive() {
+    buildTagFilter();
+    renderUpdates();
+}
+
 // Auto-render on DOM ready
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderUpdates);
+    document.addEventListener("DOMContentLoaded", initArchive);
 } else {
-    renderUpdates();
+    initArchive();
 }

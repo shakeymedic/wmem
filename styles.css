@@ -304,6 +304,47 @@ body {
     transform: translateY(-2px);
 }
 
+.archive-filter {
+    margin-bottom: 1rem;
+}
+
+.archive-filter .tag-select {
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+.sidebar-link-html {
+    background-color: transparent;
+    border: 1px dashed var(--border-color);
+    color: var(--primary-blue);
+    font-size: 0.8rem;
+    justify-content: center;
+}
+
+.update-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.update-tag {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--primary-blue-light, #dbeafe);
+    color: var(--primary-blue, #1e40af);
+    font-size: 0.688rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+}
+
+body.dark-mode .update-tag {
+    background-color: rgba(96, 165, 250, 0.15);
+    color: #93c5fd;
+}
+
 .empty-update {
     font-size: 0.813rem;
     color: var(--text-secondary);
