@@ -5,6 +5,7 @@ const ASSETS = [
   '/styles.css',
   '/app.js',
   '/tools.js',
+  '/updates.js',
   '/wmebem_logo.png'
 ];
 
