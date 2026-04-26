@@ -59,28 +59,30 @@ if (darkModeToggle) {
     });
 }
 
-// Populate Tag Filter Dropdown
+// Populate Tag Filter Dropdown dynamically based on frequency
 function populateTagFilter() {
-    const allTags = new Set();
+    const tagCounts = {};
     tools.forEach(tool => {
-        tool.tags.forEach(tag => allTags.add(tag.toLowerCase()));
+        tool.tags.forEach(tag => {
+            const lowerTag = tag.toLowerCase();
+            tagCounts[lowerTag] = (tagCounts[lowerTag] || 0) + 1;
+        });
     });
     
-    const sortedTags = Array.from(allTags).sort();
+    const sortedByFrequency = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a] || a.localeCompare(b));
+    const sortedTags = Object.keys(tagCounts).sort();
     
     tagFilter.innerHTML = '<option value="">Filter by Tag (Any)</option>';
     
-    const priorityTags = ['paediatrics', 'trauma', 'cardiac', 'resuscitation', 'sedation'];
+    const priorityTags = sortedByFrequency.slice(0, 5);
     
     const priorityGroup = document.createElement('optgroup');
     priorityGroup.label = "Common Filters";
     priorityTags.forEach(tag => {
-        if (sortedTags.includes(tag)) {
-            const option = document.createElement('option');
-            option.value = tag;
-            option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-            priorityGroup.appendChild(option);
-        }
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+        priorityGroup.appendChild(option);
     });
     tagFilter.appendChild(priorityGroup);
 
@@ -200,7 +202,7 @@ function createToolCard(tool, isSmall = false) {
         <div class="tool-card ${featuredClass} ${smallClass}" data-category="${tool.category}" data-tags="${tool.tags.join(' ')}" data-tool-id="${tool.id}">
             ${betaBadge}
             <div class="tool-screenshot">
-                <img src="${tool.screenshot}" alt="${tool.name} screenshot" onerror="this.parentElement.classList.add('no-screenshot')">
+                <img src="${tool.screenshot}" alt="${tool.name} screenshot" loading="lazy" onerror="this.parentElement.classList.add('no-screenshot')">
                 <div class="tool-screenshot-overlay" aria-hidden="true">
                     <div class="tool-icon-small">
                         ${icon}
@@ -366,6 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
     populateTagFilter();
     renderNewTools();
     renderTools();
+
+    const yearSpan = document.getElementById('currentYear');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 });
 
 // Service Worker
