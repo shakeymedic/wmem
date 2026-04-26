@@ -31,7 +31,7 @@
                     <a href="#about" class="nav-link">About</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
-                    <button id="darkModeToggle" title="Toggle Dark Mode" class="theme-toggle">
+                    <button id="darkModeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" class="theme-toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
@@ -121,8 +121,7 @@
                             <select id="archiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
                         <div class="updates-timeline" id="updatesTimeline">
-                            <!-- Populated by updates.js -->
-                        </div>
+                            </div>
                     </div>
                 </aside>
             </div>
@@ -219,7 +218,7 @@
                     They do not replace clinical judgement. The treating clinician remains responsible for all patient care decisions.
                     Check local trust guidelines before use.
                 </p>
-                <p>© 2026 WMEBEM. Created by Dr Jake Turner. All rights reserved.</p>
+                <p>© <span id="currentYear">2026</span> WMEBEM. Created by Dr Jake Turner. All rights reserved.</p>
             </div>
         </div>
     </footer>
