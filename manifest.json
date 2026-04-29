@@ -1,6 +1,6 @@
 {
-  "name": "WMEBEM Tools",
-  "short_name": "WMEBEM",
+  "name": "EM Evidence Tools",
+  "short_name": "EM Evidence",
   "start_url": "/#home",
   "display": "standalone",
   "background_color": "#ffffff",
