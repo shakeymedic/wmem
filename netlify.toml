@@ -35,3 +35,17 @@
   from = "/contact"
   to = "/#contact"
   status = 301
+
+  [[redirects]]
+  from = "/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+  conditions = {Host = ["wmebem.co.uk", "www.wmebem.co.uk"]}
+
+[[redirects]]
+  from = "/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+  conditions = {Host = ["wmebem.com", "www.wmebem.com"]}
