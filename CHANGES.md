@@ -23,20 +23,20 @@ This better reflects that it's for real clinical use, not just simulation.
 **New Category Structure:**
 
 #### **Live Tools** (5 tools - for real clinical use)
-1. Cardiac Arrest App (wmebemals)
-2. RSI Management Tool (wmebemrsi)
+1. Cardiac Arrest App (emevidenceals)
+2. RSI Management Tool (emevidencersi)
 3. Procedural Sedation Tool (sedation)
 4. Major Trauma Management (majortrauma)
-5. Post-ROSC Management (wmebemcardiacarrest)
+5. Post-ROSC Management (emevidencecardiacarrest)
 
 #### **Simulation** (2 tools - for training)
-6. Emergency Medicine Simulator (wmebemsim)
-7. Defibrillator Simulator (wmebemdefib)
+6. Emergency Medicine Simulator (emevidencesim)
+7. Defibrillator Simulator (emevidencedefib)
 
 #### **Education & Advisory** (3 tools - guidelines and references)
-8. DVLA Driving Advice (wmebemdvla)
-9. Syncope & TLOC Assessment (wmebemtloc)
-10. Emergency Pericardiocentesis (wmebempericardiocentesis)
+8. DVLA Driving Advice (emevidencedvla)
+9. Syncope & TLOC Assessment (emevidencetloc)
+10. Emergency Pericardiocentesis (emevidencepericardiocentesis)
 
 **Old Categories Removed:**
 - ❌ Documentation

@@ -5,7 +5,7 @@
 ### Option 1: Drag & Drop (Fastest)
 
 1. Go to https://app.netlify.com/drop
-2. Drag the entire `wmebem-website` folder onto the page
+2. Drag the entire `emevidence-website` folder onto the page
 3. Wait 30 seconds for deployment
 4. Done! Your site is live
 
@@ -16,13 +16,13 @@
 After deployment:
 1. Click "Site settings" in Netlify
 2. Click "Change site name"
-3. Choose something like `wmebem` or `wmebem-tools`
-4. Your URL becomes `https://wmebem.netlify.app`
+3. Choose something like `emevidence` or `emevidence-tools`
+4. Your URL becomes `https://emevidence.netlify.app`
 
-### Connect Your Domain (wmebem.co.uk)
+### Connect Your Domain (emevidence.co.uk)
 
 1. In Netlify: Site settings → Domain management → Add custom domain
-2. Enter `wmebem.co.uk`
+2. Enter `emevidence.co.uk`
 3. In Hostinger (your domain registrar):
    - Add DNS record: Type `CNAME`, Name `www`, Value `your-site.netlify.app`
    - Add DNS record: Type `A`, Name `@`, Value (Netlify will provide the IP)
@@ -34,7 +34,7 @@ After deployment:
 ✅ `styles.css` - All styling (blue colours from your logo)
 ✅ `app.js` - Search and filter functionality
 ✅ `tools.js` - Your 10 tools (easy to add more!)
-✅ `wmebem_logo.png` - Your logo
+✅ `emevidence_logo.png` - Your logo
 ✅ `netlify.toml` - Configuration for fast loading
 ✅ `README.md` - Detailed instructions
 

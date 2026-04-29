@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EM Evidence - Educational tools and resources for Emergency Medicine doctors">
-    <title>EM Evidence</title>
+    <meta name="description" content="West Midlands Evidence Based Emergency Medicine - Educational tools and resources for Emergency Medicine doctors">
+    <title>WMEBEM - West Midlands Evidence Based Emergency Medicine</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,26 +13,25 @@
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563a8">
-    <link rel="apple-touch-icon" href="wmebem_logo.png">
+    <link rel="apple-touch-icon" href="emevidence_logo.png">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                    <img src="wmebem_logo.png" alt="EM Evidence Logo" class="logo">
+                    <img src="emevidence_logo.png" alt="WMEBEM Logo" class="logo">
                     <div class="logo-text">
-                        <h1>EM Evidence</h1>
-                        <p>Educational tools and resources</p>
+                        <h1>WMEBEM</h1>
+                        <p>West Midlands Evidence Based Emergency Medicine</p>
                     </div>
                 </div>
                 <nav class="nav">
                     <a href="#home" class="nav-link active">Tools</a>
                     <a href="#about" class="nav-link">About</a>
-                    <a href="#newsletter" class="nav-link">Newsletter</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
-                    <button id="darkModeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" class="theme-toggle">
+                    <button id="darkModeToggle" title="Toggle Dark Mode" class="theme-toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
@@ -62,27 +61,13 @@
 
             <div class="main-layout">
                 <div class="content-column">
-                    
-                    <div class="featured-newsletter-wrapper" id="featuredNewsletterWrapper" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color);">
-                        <h3 class="subsection-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            Latest EM Evidence Rundown
-                            <span style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);" id="latestNewsletterDate"></span>
-                        </h3>
-                        <div class="newsletter-embed-container" style="position: relative; width: 100%; height: 600px; margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; border: 2px solid var(--border-color);">
-                            <iframe id="latestNewsletterFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
-                        </div>
-                        <div class="newsletter-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <a href="#newsletter" class="tool-link" style="padding: 0.75rem 1.5rem; margin-top: 0;">Subscribe for Updates</a>
-                            <a id="latestNewsletterLink" href="#" target="_blank" class="filter-btn" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">Read Full Screen</a>
-                        </div>
-                    </div>
-
                     <div class="new-tools-wrapper" id="newToolsWrapper">
                         <h3 class="subsection-title">
+                            
                             New Resources
                         </h3>
                         <div class="new-tools-grid" id="newToolsGrid">
-                        </div>
+                            </div>
                     </div>
 
                     <div class="search-container">
@@ -116,7 +101,7 @@
                     </div>
 
                     <div class="tools-grid" id="toolsGrid">
-                    </div>
+                        </div>
 
                     <div class="no-results" id="noResults" style="display: none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -136,6 +121,7 @@
                             <select id="archiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
                         <div class="updates-timeline" id="updatesTimeline">
+                            <!-- Populated by updates.js -->
                         </div>
                     </div>
                 </aside>
@@ -146,7 +132,7 @@
     <section class="about-section" id="about">
         <div class="container">
             <div class="about-content">
-                <h2 class="section-title">About EM Evidence</h2>
+                <h2 class="section-title">About WMEBEM</h2>
                 <div class="about-grid">
                     <div class="about-card">
                         <div class="about-icon">
@@ -186,49 +172,16 @@
         </div>
     </section>
 
-    <section class="newsletter-section" id="newsletter" style="background-color: var(--white); padding: 4rem 0;">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Join Our Mailing List</h2>
-                <p class="section-subtitle">Select the updates you wish to receive</p>
-            </div>
-            <div style="max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 2rem; border-radius: 1rem; border: 1px solid var(--border-color);">
-                <form name="newsletter" method="POST" data-netlify="true" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div>
-                        <label for="email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Email Address</label>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem; border: 2px solid var(--border-color); border-radius: 0.5rem; font-size: 1rem;">
-                    </div>
-                    <div>
-                        <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Update Preferences</p>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
-                            <input type="checkbox" name="preferences[]" value="Weekly EM Evidence Updates"> Weekly EM Evidence Updates
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
-                            <input type="checkbox" name="preferences[]" value="Monthly PHEM Evidence Updates"> Monthly PHEM Evidence Updates
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
-                            <input type="checkbox" name="preferences[]" value="Monthly Anaesthetics and ICM Evidence Updates"> Monthly Anaesthetics and ICM Evidence Updates
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); cursor: pointer;">
-                            <input type="checkbox" name="preferences[]" value="Website Updates"> Website Updates
-                        </label>
-                    </div>
-                    <button type="submit" class="tool-link" style="border: none; width: 100%; cursor: pointer;">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="wmebem_logo.png" alt="EM Evidence Logo" class="footer-logo">
-                    <p class="footer-text">EM Evidence</p>
+                    <img src="emevidence_logo.png" alt="WMEBEM Logo" class="footer-logo">
+                    <p class="footer-text">West Midlands Evidence Based Emergency Medicine</p>
                     <p class="footer-text">Educational tools for Emergency Medicine practitioners</p>
-                    <a href="mailto:emevidence999@gmail.com" class="footer-email-link">
+                    <a href="mailto:emevidencegroup@gmail.com" class="footer-email-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        emevidence999@gmail.com
+                        emevidencegroup@gmail.com
                     </a>
                 </div>
                 <div class="footer-section">
@@ -236,7 +189,6 @@
                     <ul class="footer-links">
                         <li><a href="#home">Tools</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -252,11 +204,11 @@
             
             <div class="footer-bottom">
                 <div class="governance-section" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                    <a href="mailto:emevidence999@gmail.com?subject=Urgent%20Clinical%20Correction" class="report-issue-btn">
+                    <a href="mailto:emevidencegroup@gmail.com?subject=Urgent%20Clinical%20Correction" class="report-issue-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         Report Clinical Issue
                     </a>
-                    <a href="mailto:emevidence999@gmail.com?subject=New%20Tool%20Suggestion" class="report-issue-btn" style="background-color: var(--primary-blue);">
+                    <a href="mailto:emevidencegroup@gmail.com?subject=New%20Tool%20Suggestion" class="report-issue-btn" style="background-color: var(--primary-blue);">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
                         Suggest a Tool
                     </a>
@@ -267,7 +219,7 @@
                     They do not replace clinical judgement. The treating clinician remains responsible for all patient care decisions.
                     Check local trust guidelines before use.
                 </p>
-                <p>© <span id="currentYear">2026</span> EM Evidence. Created by Dr Jake Turner. All rights reserved.</p>
+                <p>© 2026 WMEBEM. Created by Dr Jake Turner. All rights reserved.</p>
             </div>
         </div>
     </footer>
