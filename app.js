@@ -311,6 +311,8 @@ function attachToolClickHandlers() {
     const toolLinks = document.querySelectorAll('.tool-link');
     toolLinks.forEach(link => {
         link.addEventListener('click', (e) => {
+            if (!link.hasAttribute('data-url')) return;
+            
             e.preventDefault();
             e.stopPropagation();
             if (link.id === 'clearSearchBtn' || link.id === 'forceOpenBtn') return;
@@ -325,7 +327,7 @@ function attachToolClickHandlers() {
         card.addEventListener('click', (e) => {
             if (e.target.closest('.tool-link')) return;
             const link = card.querySelector('.tool-link');
-            if (link) {
+            if (link && link.hasAttribute('data-url')) {
                 const url = link.getAttribute('data-url');
                 const name = link.getAttribute('data-name');
                 openModal(name, url);
