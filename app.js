@@ -362,12 +362,33 @@ clearSearchBtn.addEventListener('click', () => {
     searchInput.focus();
 });
 
+// Load Latest Newsletter
+function loadLatestNewsletter() {
+    if (typeof updates !== 'undefined' && updates.length > 0) {
+        const latest = updates[0];
+        const emLink = latest.links.find(l => l.title.includes("EM Evidence Rundown"));
+        
+        if (emLink) {
+            const frame = document.getElementById('latestNewsletterFrame');
+            const linkOut = document.getElementById('latestNewsletterLink');
+            const dateText = document.getElementById('latestNewsletterDate');
+            
+            if (frame && linkOut && dateText) {
+                frame.src = `https://drive.google.com/file/d/${emLink.driveId}/preview`;
+                linkOut.href = `https://drive.google.com/file/d/${emLink.driveId}/view?usp=sharing`;
+                dateText.textContent = latest.label;
+            }
+        }
+    }
+}
+
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     fuse = new Fuse(tools, fuseOptions);
     populateTagFilter();
     renderNewTools();
     renderTools();
+    loadLatestNewsletter();
 
     const yearSpan = document.getElementById('currentYear');
     if (yearSpan) {
