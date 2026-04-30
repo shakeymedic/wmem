@@ -14,6 +14,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 const updates = [
   {
     date: "30 April 2026",
+    title: "Anaesthetics & ICU Evidence Rundown",
+    driveId: "1IIfC6NbsyUpFKrh0Og4Kzcjv6co1WJFO",
+    previewUrl: "https://drive.google.com/file/d/1IIfC6NbsyUpFKrh0Og4Kzcjv6co1WJFO/preview",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1IIfC6NbsyUpFKrh0Og4Kzcjv6co1WJFO",
+    tags: []
+  },
+  {
+    date: "30 April 2026",
     title: "PHEM Evidence Rundown",
     driveId: "10L-KCrjHLdpePs0OgkoTxq698d4QpUDy",
     previewUrl: "https://drive.google.com/file/d/10L-KCrjHLdpePs0OgkoTxq698d4QpUDy/preview",
