@@ -12,6 +12,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // htmlPath is the on-site landing page for the issue (searchable)
 // ============================================================
 const updates = [
+  {
+    date: "30 April 2026",
+    title: "EM Evidence Rundown",
+    driveId: "1rH82sJmngV6qVosYVJ6CeTVWe0OYw0RF",
+    previewUrl: "https://drive.google.com/file/d/1rH82sJmngV6qVosYVJ6CeTVWe0OYw0RF/preview",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1rH82sJmngV6qVosYVJ6CeTVWe0OYw0RF",
+    tags: []
+  },
     {
         date: "23 April 2026",
         label: "23 April 2026",
