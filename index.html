@@ -193,7 +193,12 @@
                 <p class="section-subtitle">Select the updates you wish to receive</p>
             </div>
             <div style="max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 2rem; border-radius: 1rem; border: 1px solid var(--border-color);">
-                <form name="newsletter" method="POST" data-netlify="true" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <form name="newsletter" method="POST" data-netlify="true" action="/" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    
+                    <!-- This hidden input is strictly required for Netlify to process the form -->
+                    <input type="hidden" name="form-name" value="newsletter" />
+                    
                     <div>
                         <label for="email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Email Address</label>
                         <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem; border: 2px solid var(--border-color); border-radius: 0.5rem; font-size: 1rem;">
