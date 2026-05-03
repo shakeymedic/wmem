@@ -241,6 +241,17 @@ const tools = [
         screenshot: "screenshots/hyponatraemia.png"
     },
     {
+        id: "AF in the ED",
+        name: "AF in the ED",
+        description: "Guide on managing new AF in the ED",
+        category: "Education & Advisory",
+        tags: ["guidelines", "cardiac"],
+        url: "https://wmebemaf.netlify.app",
+        featured: false,
+        icon: "guidelines",
+        screenshot: "screenshots/af.png"
+    },
+    {
         id: "tloc-tool",
         name: "Syncope & TLOC Assessment",
         description: "Evidence-based risk stratification and investigation guidance for syncope and transient loss of consciousness",
