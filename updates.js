@@ -11,6 +11,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "7 May 2026",
+    label: "7 May 2026",
+    tags: [],
+    links: [
+      { title: "EM Evidence Rundown", driveId: "16UzIEtPgs8vFfsMTUdmmFXauGHKtZY4O" }
+    ]
+  },
+  {
     date: "30 April 2026",
     label: "30 April 2026",
     tags: ["sepsis", "airway", "resus", "cardiac", "trauma", "paeds", "safety"],
