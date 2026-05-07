@@ -374,11 +374,21 @@ function loadLatestNewsletter() {
             const frame = document.getElementById('latestNewsletterFrame');
             const linkOut = document.getElementById('latestNewsletterLink');
             const dateText = document.getElementById('latestNewsletterDate');
+            const audioBtn = document.getElementById('latestNewsletterAudio');
             
             if (frame && linkOut && dateText) {
                 frame.src = `https://drive.google.com/file/d/${emLink.driveId}/preview`;
                 linkOut.href = `https://drive.google.com/file/d/${emLink.driveId}/view?usp=sharing`;
                 dateText.textContent = latest.label;
+            }
+
+            if (audioBtn) {
+                if (emLink.audioId) {
+                    audioBtn.href = `https://drive.google.com/file/d/${emLink.audioId}/view?usp=sharing`;
+                    audioBtn.style.display = "inline-flex";
+                } else {
+                    audioBtn.style.display = "none";
+                }
             }
         }
     }

@@ -4,6 +4,8 @@
 // Schema: { date, label, tags, links: [{ title, driveId }] }
 // driveId: Google Drive file ID — must be set to "Anyone with the link can view"
 
+const audioIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;flex-shrink:0;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+
 const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`;
 
 // ============================================================
@@ -15,7 +17,7 @@ const updates = [
     label: "7 May 2026",
     tags: ["resus", "stroke", "sepsis", "paeds", "airway", "cardiac"],
     links: [
-      { title: "EM Evidence Rundown — Issue 11", driveId: "1PdeIyO3INGr56_VtWhWp0uVvY59Lo183" }
+      { title: "EM Evidence Rundown — Issue 11", driveId: "1PdeIyO3INGr56_VtWhWp0uVvY59Lo183", audioId: "1aBLNMe-dwaTsSnN7SurLuyGjLAnWIppg" }
     ]
   },
   {
@@ -147,6 +149,11 @@ function renderUpdates(filterTag) {
                         ${docIcon}
                         ${link.title}
                     </a>
+                    ${link.audioId ? `<a href="https://drive.google.com/file/d/${link.audioId}/view?usp=sharing"
+                       target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">
+                        ${audioIcon}
+                        Audio summary
+                    </a>` : ""}
                 `).join("")}
                 ${week.htmlPath ? `<a href="${week.htmlPath}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
                 ${(week.tags && week.tags.length) ? `<div class="update-tags">${week.tags.map(t => `<span class="update-tag">${t}</span>`).join("")}</div>` : ""}

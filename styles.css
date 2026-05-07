@@ -324,6 +324,20 @@ body {
     justify-content: center;
 }
 
+.sidebar-link-audio {
+    background-color: transparent;
+    border: 1px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.sidebar-link-audio:hover {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    opacity: 1;
+}
+
 .update-tags {
     display: flex;
     flex-wrap: wrap;
