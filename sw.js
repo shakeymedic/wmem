@@ -6,7 +6,7 @@ const ASSETS = [
   '/app.js',
   '/tools.js',
   '/updates.js',
-  '/wmebem_logo.png'
+  '/emevidence_logo.png'
 ];
 
 self.addEventListener('install', (e) => {

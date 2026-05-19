@@ -1,4 +1,4 @@
-# WMEBEM Website Updates - December 2024
+# EMEvidence Website Updates - December 2024
 
 ## Changes Made
 
@@ -164,7 +164,7 @@ See `screenshots/README.md` for detailed instructions on creating these.
 - Beautiful blue gradient background
 - Large icon centred
 - Still looks very professional
-- Consistent with your WMEBEM branding
+- Consistent with your EMEvidence branding
 
 ### With Screenshots:
 - Eye-catching preview of each tool
@@ -244,8 +244,8 @@ The site will work immediately, with or without screenshots.
 ✅ Maintained all existing functionality  
 ✅ Site still works perfectly without screenshots  
 
-**Your WMEBEM site now has clearer categories and is ready for screenshots!**
+**Your EMEvidence site now has clearer categories and is ready for screenshots!**
 
 ---
 
-Built for WMEBEM by Claude on 10 December 2024
+Built for EMEvidence by Claude on 10 December 2024

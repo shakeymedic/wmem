@@ -1,6 +1,6 @@
 # Screenshots Folder
 
-This folder contains screenshots for your WMEBEM tools.
+This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
@@ -52,7 +52,7 @@ Install a screenshot extension like:
 ## What Happens Without Screenshots?
 
 If a screenshot is missing, the card will display:
-- A gradient background with your WMEBEM blue colours
+- A gradient background with your EMEvidence blue colours
 - The tool's icon in the centre
 - Still looks professional, just not as informative
 
