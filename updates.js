@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "21 May 2026",
+    label: "21 May 2026",
+    tags: ["trauma", "resus", "sepsis", "paeds", "airway", "cardiac"],
+    links: [
+      { title: "EM Evidence Rundown — Issue 13", driveId: "1aQpqLhIllj_R5kIJVaZXL_H4v5BSqaIf" }
+    ]
+  },
+  {
     date: "14 May 2026",
     label: "14 May 2026",
     tags: [],
