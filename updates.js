@@ -17,7 +17,7 @@ const updates = [
     label: "28 May 2026",
     tags: ["sepsis", "stroke", "paeds", "anaphylaxis", "resus", "safety"],
     links: [
-      { title: "EM Evidence Rundown — Issue 14", driveId: "1AI11gBycComEHNf0DOiNHE2KuAQIXSTz" }
+      { title: "EM Evidence Rundown — Issue 14", driveId: "1AI11gBycComEHNf0DOiNHE2KuAQIXSTz", audioId: "1NtmGagPu8mfF1M1BL-QWBn7KQIlev7-q" }
     ]
   },
   {
