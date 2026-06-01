@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "1 June 2026",
+    label: "1 June 2026",
+    tags: ["trauma", "resus", "airway", "phem", "blood", "safety"],
+    links: [
+      { title: "PHEM Evidence Rundown — June 2026", driveId: "1jzGCU4f-KaDL05yaTVaZzW6fNA9ZfRye" }
+    ]
+  },
+  {
     date: "28 May 2026",
     label: "28 May 2026",
     tags: ["sepsis", "stroke", "paeds", "anaphylaxis", "resus", "safety"],
