@@ -1,5 +1,55 @@
 // Tools data - EMEvidence
 const tools = [
+    // --- HIGHLIGHTED APPS ---
+    {
+        id: "halo-qrh",
+        name: "HALO QRH",
+        description: "Quick Reference Handbook for HALO (Halo ring-fixator) procedure management in the emergency department — evidence-based guidance for spinal precautions and MRI compatibility",
+        category: "Live Tools",
+        tags: ["HALO", "spinal", "neurosurgery", "procedures", "QRH", "reference"],
+        url: "https://wmebemhaloqrh.netlify.app/",
+        featured: true,
+        isNew: true,
+        icon: "procedure",
+        screenshot: "screenshots/halo-qrh.png"
+    },
+    {
+        id: "qip-assist",
+        name: "QIP Assist",
+        description: "Quality Improvement Project assistant tool — helps EM clinicians design, track, and present QIP work for portfolio and ARCP requirements",
+        category: "Education & Advisory",
+        tags: ["QIP", "quality improvement", "portfolio", "ARCP", "training"],
+        url: "https://wmebemqipassist.netlify.app/",
+        featured: true,
+        isNew: true,
+        icon: "assessment",
+        screenshot: "screenshots/qip-assist.png"
+    },
+    {
+        id: "em-simulator",
+        name: "EM Simulator App",
+        description: "Interactive emergency medicine simulation cases for training and self-directed learning — resuscitation, majors, and paediatric scenarios",
+        category: "Simulation",
+        tags: ["simulation", "training", "education", "cases", "resuscitation"],
+        url: "https://wmebemsim.netlify.app/",
+        featured: true,
+        isNew: true,
+        icon: "simulation",
+        screenshot: "screenshots/em-simulator.png"
+    },
+    {
+        id: "frcem-revision",
+        name: "FRCEM & MRCEM Revision App",
+        description: "Exam revision tool for FRCEM and MRCEM candidates — practice questions, OSCE preparation, and high-yield topic revision",
+        category: "Education & Advisory",
+        tags: ["FRCEM", "MRCEM", "revision", "exams", "OSCE", "training"],
+        url: "https://frcemosceprep.netlify.app/",
+        featured: true,
+        beta: true,
+        isNew: true,
+        icon: "assessment",
+        screenshot: "screenshots/frcem-revision.png"
+    },
     // --- LIVE TOOLS (For Real Clinical Use) ---
     {
         id: "als-app",
@@ -144,7 +194,6 @@ const tools = [
         url: "https://wmebemincident.netlify.app",
         featured: false,
         beta: true,
-        isNew: true,
         icon: "trauma",
         screenshot: "screenshots/incident-game.png"
     },
@@ -392,7 +441,6 @@ const tools = [
         tags: ["TEG", "viscoelastic", "haematology", "bleeding", "education"],
         url: "https://wmebemteg.netlify.app",
         featured: false,
-        isNew: true,
         icon: "monitor",
         screenshot: "screenshots/teg.png"
     },
@@ -404,7 +452,6 @@ const tools = [
         tags: ["trauma", "wounds", "bites", "infection", "guidelines"],
         url: "https://wmebemdogbites.netlify.app",
         featured: false,
-        isNew: true,
         icon: "procedure",
         screenshot: "screenshots/dog-bites.png"
     },
@@ -416,7 +463,6 @@ const tools = [
         tags: ["AI", "education", "research", "portfolio", "appraisal"],
         url: "https://wmebemaiforem.netlify.app",
         featured: false,
-        isNew: true,
         icon: "monitor",
         screenshot: "screenshots/ai-for-em.png"
     }
