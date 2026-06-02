@@ -367,8 +367,13 @@ clearSearchBtn.addEventListener('click', () => {
 // Load Latest Newsletter
 function loadLatestNewsletter() {
     if (typeof updates !== 'undefined' && updates.length > 0) {
-        const latest = updates[0];
-        const emLink = latest.links.find(l => l.title.includes("EM Evidence Rundown"));
+        // Find the most recent entry that contains an EM Evidence Rundown link
+        let emLink = null;
+        let latest = null;
+        for (const entry of updates) {
+            const found = entry.links.find(l => l.title.includes("EM Evidence Rundown") && !l.title.toLowerCase().includes("anaesthetic") && !l.title.toLowerCase().includes("phem"));
+            if (found) { emLink = found; latest = entry; break; }
+        }
         
         if (emLink) {
             const frame = document.getElementById('latestNewsletterFrame');
