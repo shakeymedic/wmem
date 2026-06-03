@@ -36,7 +36,7 @@ export default async function handler(request, context) {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
-  const apiKey = Deno.env.get("LOOPS_API_KEY");
+  const apiKey = Netlify.env.get("LOOPS_API_KEY");
   if (!apiKey) {
     console.error("LOOPS_API_KEY not set");
     return new Response("Server configuration error", { status: 500 });
@@ -106,4 +106,4 @@ export default async function handler(request, context) {
   }
 }
 
-export const config = { path: "/subscribe" };
+// Route is declared in netlify.toml [[edge_functions]] block
