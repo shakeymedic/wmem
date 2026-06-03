@@ -1,11 +1,9 @@
 [build]
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
 
 [functions]
   node_bundler = "esbuild"
-
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"
 
 [[headers]]
   for = "/*"
@@ -29,11 +27,10 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# ── Route newsletter signups to the serverless function ──────
-[[redirects]]
-  from = "/subscribe"
-  to = "/.netlify/functions/subscribe"
-  status = 200
+# ── Route /subscribe to the edge function ────────────────────
+[[edge_functions]]
+  path = "/subscribe"
+  function = "subscribe"
 
 # ── Simple anchor redirects ───────────────────────────────────
 [[redirects]]
@@ -51,7 +48,7 @@
   to = "/#contact"
   status = 301
 
-# ── Old domain redirects (NO force=true — this was causing the 404) ──
+# ── Old domain redirects ──────────────────────────────────────
 [[redirects]]
   from = "/*"
   to = "https://emevidence.org/:splat"
