@@ -2,7 +2,7 @@
 const tools = [
     // --- HIGHLIGHTED APPS ---
     {
-        id: "halo-qrh",
+        id: "halo-qrh-featured",
         name: "HALO QRH",
         description: "Quick Reference Handbook for HALO (Halo ring-fixator) procedure management in the emergency department — evidence-based guidance for spinal precautions and MRI compatibility",
         category: "Live Tools",
@@ -14,7 +14,7 @@ const tools = [
         screenshot: "screenshots/halo-qrh.png"
     },
     {
-        id: "qip-assist",
+        id: "qip-assist-featured",
         name: "QIP Assist",
         description: "Quality Improvement Project assistant tool — helps EM clinicians design, track, and present QIP work for portfolio and ARCP requirements",
         category: "Education & Advisory",
@@ -26,7 +26,7 @@ const tools = [
         screenshot: "screenshots/qip-assist.png"
     },
     {
-        id: "em-simulator",
+        id: "em-simulator-featured",
         name: "EM Simulator App",
         description: "Interactive emergency medicine simulation cases for training and self-directed learning — resuscitation, majors, and paediatric scenarios",
         category: "Simulation",
@@ -38,7 +38,7 @@ const tools = [
         screenshot: "screenshots/em-simulator.png"
     },
     {
-        id: "frcem-revision",
+        id: "frcem-revision-featured",
         name: "FRCEM & MRCEM Revision App",
         description: "Exam revision tool for FRCEM and MRCEM candidates — practice questions, OSCE preparation, and high-yield topic revision",
         category: "Education & Advisory",

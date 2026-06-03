@@ -30,6 +30,9 @@ let searchTerm = '';
 let currentToolUrl = '';
 let iframeTimeout = null;
 
+// Filter tools for search — exclude the "featured" duplicates at top
+const searchableTools = tools.filter(t => !t.id.endsWith('-featured'));
+
 // Initialize Fuse.js for Fuzzy Search
 const fuseOptions = {
     keys: [
@@ -401,7 +404,7 @@ function loadLatestNewsletter() {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-    fuse = new Fuse(tools, fuseOptions);
+    fuse = new Fuse(searchableTools, fuseOptions);
     populateTagFilter();
     renderNewTools();
     renderTools();

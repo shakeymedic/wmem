@@ -1,7 +1,9 @@
+[build]
+  functions = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
@@ -21,6 +23,13 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# ── Route newsletter signups to the serverless function ──────
+[[redirects]]
+  from = "/subscribe"
+  to = "/.netlify/functions/subscribe"
+  status = 200
+
+# ── Simple anchor redirects ───────────────────────────────────
 [[redirects]]
   from = "/home"
   to = "/#home"
@@ -36,16 +45,15 @@
   to = "/#contact"
   status = 301
 
-  [[redirects]]
+# ── Old domain redirects (NO force=true — this was causing the 404) ──
+[[redirects]]
   from = "/*"
   to = "https://emevidence.org/:splat"
   status = 301
-  force = true
   conditions = {Host = ["wmebem.co.uk", "www.wmebem.co.uk"]}
 
 [[redirects]]
   from = "/*"
   to = "https://emevidence.org/:splat"
   status = 301
-  force = true
   conditions = {Host = ["wmebem.com", "www.wmebem.com"]}

@@ -198,10 +198,10 @@
             </div>
             <div style="max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 2rem; border-radius: 1rem; border: 1px solid var(--border-color);">
                 
-                <form name="newsletter" method="POST" data-netlify="true" action="/" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <form id="newsletterForm" name="newsletter" method="POST" action="/subscribe" style="display: flex; flex-direction: column; gap: 1.5rem;">
                     
-                    <!-- This hidden input is strictly required for Netlify to process the form -->
-                    <input type="hidden" name="form-name" value="newsletter" />
+                    <!-- Honeypot field — hidden from real users, catches bots -->
+                    <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
                     
                     <div>
                         <label for="email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Email Address</label>
@@ -281,6 +281,12 @@
         </div>
     </footer>
 
+    <!-- Subscribe success banner (shown via JS when ?subscribed=true) -->
+    <div id="subscribeSuccessBanner" style="display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:9999; background:#1e3a5f; color:#ffffff; padding:16px 28px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.25); font-size:15px; font-weight:500; text-align:center; max-width:90vw;">
+        ✅ You're subscribed! Check your inbox for a welcome email.
+        <button onclick="document.getElementById('subscribeSuccessBanner').style.display='none'" style="margin-left:16px; background:rgba(255,255,255,0.15); border:none; color:#fff; cursor:pointer; border-radius:6px; padding:4px 10px; font-size:13px;">✕</button>
+    </div>
+
     <div class="tool-modal" id="toolModal">
         <div class="tool-modal-backdrop"></div>
         <div class="tool-modal-container">
@@ -323,5 +329,6 @@
     <script src="tools.js"></script>
     <script src="updates.js"></script>
     <script src="app.js"></script>
+    <script src="subscribe.js"></script>
 </body>
 </html>
