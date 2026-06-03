@@ -3,7 +3,5 @@
   "version": "1.0.0",
   "description": "EM Evidence - Emergency Medicine educational tools and newsletter platform",
   "private": true,
-  "dependencies": {
-    "nodemailer": "^6.9.13"
-  }
+  "dependencies": {}
 }
