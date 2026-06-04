@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "4 June 2026",
+    label: "4 June 2026",
+    tags: [],
+    links: [
+      { title: "EM Evidence Rundown", driveId: "1tx9PB9HtKx2H0C1GAn1dwRcNrj13-3HF" }
+    ]
+  },
+  {
     date: "2 June 2026",
     label: "2 June 2026",
     tags: ["anaesthetics", "icu", "airway", "safety", "resus", "obstetric", "periop"],
