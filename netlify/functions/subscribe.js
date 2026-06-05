@@ -19,7 +19,7 @@ const PROPS = {
 };
 
 async function loopsPost(path, body, apiKey) {
-  const res = await fetch(`https://api.loops.so/v1${path}`, {
+  const res = await fetch(`https://app.loops.so/api/v1${path}`, {
     method:  "POST",
     headers: {
       "Authorization": `Bearer ${apiKey}`,
