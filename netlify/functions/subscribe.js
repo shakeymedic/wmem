@@ -5,7 +5,7 @@
 const WELCOME_ID = "cmpy5ftku03bf0jykghy0jz0f";
 
 const LISTS = {
-  "Weekly EM Evidence Updates":                    "cmpy5zd8u4kzv8j1a9emeip31",
+  "Weekly EM Evidence Updates":                    "cmpy5zd8u04zv0j1a9ame4p3l",
   "Monthly PHEM Evidence Updates":                 "cmpy60jzs05gt0jzi26tj1acx",
   "Monthly Anaesthetics and ICM Evidence Updates": "cmpy6170t05ob0j0cfkut3vio",
   "Website Updates":                               "cmpy61pvr05uz0j0efg7c20v5",
