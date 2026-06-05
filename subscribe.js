@@ -7,7 +7,7 @@
   var LOOPS_ENDPOINT = "https://app.loops.so/api/newsletter-form/cmpy4nf4l2e3d0j1bio5c5g9z";
 
   var LIST_IDS = {
-    "Weekly EM Evidence Updates":                    "cmpy5zd8u4kzv8j1a9emeip31",
+    "Weekly EM Evidence Updates":                    "cmpy5zd8u04zv0j1a9ame4p3l",
     "Monthly PHEM Evidence Updates":                 "cmpy60jzs05gt0jzi26tj1acx",
     "Monthly Anaesthetics and ICM Evidence Updates": "cmpy6170t05ob0j0cfkut3vio",
     "Website Updates":                               "cmpy61pvr05uz0j0efg7c20v5"

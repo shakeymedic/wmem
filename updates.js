@@ -167,27 +167,29 @@ function collectAllTags() {
 }
 
 function buildTagFilter() {
+    // Populate both desktop and mobile filter selects
+    const tags = collectAllTags();
+    const options = `<option value="">All topics</option>` +
+        tags.map(t => `<option value="${t}">${t}</option>`).join("");
+
     const sel = document.getElementById("archiveTagFilter");
-    if (!sel) return;
-    sel.innerHTML = `<option value="">All topics</option>` +
-        collectAllTags().map(t => `<option value="${t}">${t}</option>`).join("");
-    sel.addEventListener("change", () => renderUpdates(sel.value));
-}
-
-function renderUpdates(filterTag) {
-    const container = document.getElementById("updatesTimeline");
-    if (!container) return;
-
-    const filtered = filterTag
-        ? updates.filter(w => (w.tags || []).includes(filterTag))
-        : updates;
-
-    if (filtered.length === 0) {
-        container.innerHTML = `<p class="empty-update">No updates available yet.</p>`;
-        return;
+    if (sel) {
+        sel.innerHTML = options;
+        sel.addEventListener("change", () => renderUpdates(sel.value));
     }
 
-    container.innerHTML = filtered.map(week => `
+    const selMobile = document.getElementById("mobileArchiveTagFilter");
+    if (selMobile) {
+        selMobile.innerHTML = options;
+        selMobile.addEventListener("change", () => renderUpdates(selMobile.value));
+    }
+}
+
+function buildTimelineHTML(filtered) {
+    if (filtered.length === 0) {
+        return `<p class="empty-update">No updates available yet.</p>`;
+    }
+    return filtered.map(week => `
         <div class="update-week">
             <div class="update-date">${week.date}</div>
             <div class="update-links">
@@ -208,6 +210,28 @@ function renderUpdates(filterTag) {
             </div>
         </div>
     `).join("");
+}
+
+function renderUpdates(filterTag) {
+    const filtered = filterTag
+        ? updates.filter(w => (w.tags || []).includes(filterTag))
+        : updates;
+
+    const html = buildTimelineHTML(filtered);
+
+    // Render into desktop sidebar
+    const container = document.getElementById("updatesTimeline");
+    if (container) container.innerHTML = html;
+
+    // Render into mobile inline archive
+    const mobileContainer = document.getElementById("mobileUpdatesTimeline");
+    if (mobileContainer) mobileContainer.innerHTML = html;
+
+    // Sync both filter selects to the current value
+    const selMobile = document.getElementById("mobileArchiveTagFilter");
+    if (selMobile && filterTag !== undefined) selMobile.value = filterTag || "";
+    const sel = document.getElementById("archiveTagFilter");
+    if (sel && filterTag !== undefined) sel.value = filterTag || "";
 }
 
 function initArchive() {

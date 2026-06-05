@@ -1184,6 +1184,11 @@ body.dark-mode .update-tag {
     background: var(--white);
 }
 
+/* Mobile archive: hidden on desktop, shown on mobile */
+.mobile-archive-wrapper {
+    display: none;
+}
+
 /* =========================================
    9. RESPONSIVE DESIGN & DARK MODE
    ========================================= */
@@ -1195,9 +1200,26 @@ body.dark-mode .update-tag {
         position: static;
         margin-top: 2rem;
     }
+    /* On tablets, show mobile archive inline and hide the sidebar */
+    .mobile-archive-wrapper {
+        display: block;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: var(--surface-color, #f8f9fa);
+        border-radius: 0.75rem;
+        border: 1px solid var(--border-color);
+    }
+    .sidebar-column {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
+    /* Shorter newsletter embed on mobile */
+    .newsletter-embed-container {
+        height: 420px !important;
+    }
+
     .header-content {
         flex-direction: column;
         gap: 1rem;
