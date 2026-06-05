@@ -131,18 +131,7 @@ exports.handler = async (event) => {
   const secret = process.env.LOOPS_WEBHOOK_SECRET || "";
   const token  = process.env.GITHUB_TOKEN;
 
-  if (!token) {
-    console.error("GITHUB_TOKEN not set");
-    return { statusCode: 500, body: "Server configuration error" };
-  }
-
-  // Verify signature
-  const valid = await verifySignature(event.body, event.headers, secret);
-  if (secret && !valid) {
-    console.warn("Invalid webhook signature");
-    return { statusCode: 401, body: "Invalid signature" };
-  }
-
+  // Parse body first so we can handle test events before checking token
   let payload;
   try {
     payload = JSON.parse(event.body);
@@ -151,6 +140,25 @@ exports.handler = async (event) => {
   }
 
   const { eventName, contactIdentity, mailingList } = payload;
+
+  // Loops sends testing.testEvent to verify the endpoint — always return 200
+  if (eventName === "testing.testEvent" || !eventName?.startsWith("contact.")) {
+    console.log(`Loops test/ping event received: ${eventName}`);
+    return { statusCode: 200, body: "OK — test event acknowledged" };
+  }
+
+  // Verify signature for real contact events
+  const valid = await verifySignature(event.body, event.headers, secret);
+  if (secret && !valid) {
+    console.warn("Invalid webhook signature");
+    return { statusCode: 401, body: "Invalid signature" };
+  }
+
+  if (!token) {
+    console.error("GITHUB_TOKEN not set — cannot sync subscribers");
+    return { statusCode: 500, body: "Server configuration error: GITHUB_TOKEN missing" };
+  }
+
   const email = contactIdentity?.email?.trim().toLowerCase();
 
   if (!email) {
