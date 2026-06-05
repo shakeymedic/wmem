@@ -89,6 +89,7 @@ exports.handler = async (event) => {
       transactionalId: WELCOME_ID,
       addToAudience:   true,
       dataVariables: {
+        hello: "there",
         preferences: prefs.length > 0 ? prefs.join(", ") : "General updates",
       },
     }, apiKey);
