@@ -17,7 +17,7 @@ const updates = [
     label: "11 June 2026",
     tags: ["sepsis", "stroke", "paeds", "safety", "measles", "defibrillation"],
     links: [
-      { title: "EM Evidence Rundown — Issue 16", driveId: "1rR5Y-54WWvjF7QKfDJXtij1xWZLsh8UB" }
+      { title: "EM Evidence Rundown — Issue 16", driveId: "1rR5Y-54WWvjF7QKfDJXtij1xWZLsh8UB", audioId: "1Vv2BJI33cwI69RdKm_ZtBb3lzV_WXA9a" }
     ]
   },
   {
