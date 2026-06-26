@@ -17,7 +17,7 @@ const updates = [
     label: "25 June 2026",
     tags: [],
     links: [
-      { title: "EM Evidence Rundown", driveId: "1fE0GAv7e5qf9ool7GPRVoJ9BK7FiitZ3" }
+      { title: "EM Evidence Rundown — Issue 18", driveId: "1fE0GAv7e5qf9ool7GPRVoJ9BK7FiitZ3", audioId: "19kqAgAZ0sTkakig11E8rkZJXqEpQikjT" }
     ]
   },
   {
