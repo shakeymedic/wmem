@@ -14,6 +14,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 const updates = [
   {
     date: "29 June 2026",
+    label: "Q2 2026 — PHEM State of the Science",
+    tags: ["quarterly", "ebook", "phem"],
+    links: [
+      { title: "PHEM Evidence — Q2 2026 State of the Science", driveId: "1VGI3L6aBDmPcYKQ5GF7Q8Lp6raFzvkDM" }
+    ]
+  },
+  {
+    date: "29 June 2026",
     label: "29 June 2026",
     tags: [],
     links: [
