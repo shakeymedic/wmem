@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "29 June 2026",
+    label: "29 June 2026",
+    tags: [],
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 1", driveId: "1Fpm_6HfP2KuBWWXsyFihiGu81YUXyg84" }
+    ]
+  },
+  {
     date: "28 June 2026",
     label: "Q2 2026 — EM State of the Science",
     tags: ["quarterly", "ebook"],
