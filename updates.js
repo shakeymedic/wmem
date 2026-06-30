@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "30 June 2026",
+    label: "Q2 2026 — Anaesthetics State of the Science",
+    tags: ["quarterly", "ebook", "anaesthetics"],
+    links: [
+      { title: "Anaesthetics & ICU Evidence — Q2 2026 State of the Science", driveId: "1cvRSi0m_ilBzV9EtNol9ZgsTvobQZbyJ" }
+    ]
+  },
+  {
     date: "29 June 2026",
     label: "Q2 2026 — PHEM State of the Science",
     tags: ["quarterly", "ebook", "phem"],
