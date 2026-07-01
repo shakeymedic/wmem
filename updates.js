@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "1 July 2026",
+    label: "1 July 2026",
+    tags: [],
+    links: [
+      { title: "PHEM Evidence Rundown — Issue 6", driveId: "12X24HPKo21_dEp84Ud_On3G64aA8A0nq" }
+    ]
+  },
+  {
     date: "30 June 2026",
     label: "Q2 2026 — Anaesthetics State of the Science",
     tags: ["quarterly", "ebook", "anaesthetics"],
