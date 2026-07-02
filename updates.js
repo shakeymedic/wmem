@@ -12,6 +12,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // NEWSLETTER DATA — newest entries at TOP
 // ============================================================
 const updates = [
+    {
+        date: "2026-07-01",
+        label: "2026-07-01",
+        links: [
+            { title: "PHEM Evidence Rundown", driveId: "1TCkY5vUHY1PzQ1tad-pC7Ar46r5HKEMX" },
+        ]
+    },
   {
     date: "1 July 2026",
     label: "1 July 2026",
