@@ -13,6 +13,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
     {
+        date: "2026-08-01",
+        label: "PHEM Evidence Rundown — August 2026 (Issue 7)",
+        links: [
+            { title: "PHEM Evidence Rundown August 2026.pdf", driveId: "15wYLNWmWjylh57sfZut_p83geee5jJOS" },
+        ]
+    },
+    {
         date: "2026-07-31",
         label: "EM Evidence Rundown — Issue 23 (31 Jul 2026)",
         links: [
