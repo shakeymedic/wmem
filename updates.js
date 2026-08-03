@@ -13,6 +13,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
     {
+        date: "2026-08-03",
+        label: "Major Trauma Evidence Rundown — August 2026 (Issue 2)",
+        links: [
+            { title: "Major Trauma Evidence Rundown August 2026.pdf", driveId: "14YxbursTYgdawicSEhbXT1AZqWnh8Osa" },
+        ]
+    },
+    {
         date: "2026-08-02",
         label: "Anaesthetics & ICU Evidence Rundown — August 2026 (Issue 7)",
         links: [
