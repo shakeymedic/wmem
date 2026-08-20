@@ -13,6 +13,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
     {
+        date: "2026-08-21",
+        label: "EM Evidence Rundown \u2014 Issue 26 (21 Aug 2026)",
+        links: [
+            { title: "EM Evidence Rundown Issue 26.pdf", driveId: "11K54Ab3l-Y3BX16TfBfaCZ6NuwVjyJho" },
+        ]
+    },
+    {
         date: "2026-08-14",
         label: "EM Evidence Rundown — Issue 25 (14 Aug 2026)",
         links: [
