@@ -17,6 +17,7 @@ const updates = [
         label: "EM Evidence Rundown \u2014 Issue 26 (21 Aug 2026)",
         links: [
             { title: "EM Evidence Rundown Issue 26.pdf", driveId: "11K54Ab3l-Y3BX16TfBfaCZ6NuwVjyJho" },
+            { title: "Audio Summary — Issue 26", driveId: "1a5RGqICEg_x8_EIGIw_9p-gDU10DpKKk", audio: true },
         ]
     },
     {
