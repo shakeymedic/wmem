@@ -13,6 +13,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
     {
+        date: "2026-09-02",
+        label: "Anaesthetics & ICU Evidence Rundown — Issue 8 (September 2026)",
+        links: [
+            { title: "Anaesthetics and ICU Evidence Rundown September 2026.pdf", driveId: "1qHBMqAwAvcCw_ASgx0fpIr8qtBJkd0ci" },
+        ]
+    },
+    {
         date: "2026-09-01",
         label: "PHEM Evidence Rundown \u2014 Issue 8 (September 2026)",
         links: [
