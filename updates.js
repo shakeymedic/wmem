@@ -30,7 +30,7 @@ const updates = [
         date: "2026-09-04",
         label: "EM Evidence Rundown — Issue 28 (4 September 2026)",
         links: [
-            { title: "EM Evidence Rundown Issue 28.pdf", driveId: "1RFDMoaIDkMqHZ0OX6L1je07-qIRDyC29" },
+            { title: "EM Evidence Rundown Issue 28.pdf", driveId: "1KuPITWh2yY4WMy9VfSgmZitprP3SD-gq" },
         ]
     },
     {
