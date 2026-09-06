@@ -1,0 +1,117 @@
+# EM Evidence Newsletter Automation
+#
+# This workflow automatically sends newsletters to subscribers via Loops.so
+# when new issues are added to updates.js.
+#
+# It runs on three triggers:
+#   1. On push to main when updates.js changes (immediate send)
+#   2. Weekly schedule (Monday 8am UK time) to catch any missed EM issues
+#   3. Monthly schedule (1st of each month) to catch PHEM/Anaesthetics issues
+#   4. Manual dispatch via the GitHub Actions UI
+#
+# Required secrets:
+#   LOOPS_API_KEY  — Your Loops.so API key (Content API must be enabled)
+#
+# To set up:
+#   GitHub repo → Settings → Secrets and variables → Actions → New repository secret
+#   Name: LOOPS_API_KEY   Value: <your Loops API key>
+
+name: Send Newsletters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "updates.js"
+
+  schedule:
+    # Weekly: Mondays at 8:00 AM UK time (7:00 AM UTC in summer, 8:00 AM UTC in winter)
+    # Using 7:00 UTC to cover BST/GMT
+    - cron: "0 7 * * 1"
+    # Monthly: 1st of each month at 8:00 AM UK time
+    - cron: "0 7 1 * *"
+
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "Newsletter type to send (em, phem, anaes, or all)"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - em
+          - phem
+          - anaes
+      dry_run:
+        description: "Dry run (preview without sending emails)"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check for new newsletters
+        id: check
+        run: |
+          # On push events, only proceed if updates.js actually changed in this commit
+          if [ "${{ github.event_name }}" = "push" ]; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD -- updates.js)
+            if [ -z "$CHANGED" ]; then
+              echo "updates.js not changed in this commit, skipping"
+              echo "should_run=false" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send newsletters
+        if: steps.check.outputs.should_run == 'true'
+        env:
+          LOOPS_API_KEY: ${{ secrets.LOOPS_API_KEY }}
+        run: |
+          ARGS=""
+
+          # Handle workflow_dispatch inputs
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.dry_run }}" = "true" ]; then
+              ARGS="$ARGS --dry-run"
+            fi
+            if [ "${{ inputs.type }}" != "all" ]; then
+              ARGS="$ARGS --type ${{ inputs.type }}"
+            fi
+          fi
+
+          # Run the sender
+          node scripts/send-newsletter.mjs $ARGS
+
+      - name: Commit updated state
+        if: steps.check.outputs.should_run == 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet state/sent-newsletters.json; then
+            echo "No state changes to commit"
+          else
+            git add state/sent-newsletters.json
+            git commit -m "chore: update sent-newsletter state [skip ci]"
+            git push
+          fi
