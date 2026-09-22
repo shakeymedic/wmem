@@ -27,7 +27,7 @@ const tools = [
     },
     {
         id: "em-simulator-featured",
-        name: "EM Simulator App",
+        name: "Medical Simulation App",
         description: "Interactive emergency medicine simulation cases for training and self-directed learning — resuscitation, majors, and paediatric scenarios",
         category: "Simulation",
         tags: ["simulation", "training", "education", "cases", "resuscitation"],
@@ -174,17 +174,6 @@ const tools = [
     },
 
     // --- SIMULATION (For Training) ---
-    {
-        id: "em-simulator",
-        name: "Emergency Medicine Simulator",
-        description: "Advanced emergency medicine simulation platform for comprehensive scenario-based training and assessment",
-        category: "Simulation",
-        tags: ["simulation", "training", "scenarios", "education"],
-        url: "https://wmebemsim.netlify.app",
-        featured: true,
-        icon: "monitor",
-        screenshot: "screenshots/em-simulator.png"
-    },
     {
         id: "incident-game",
         name: "Major Incident Game",
