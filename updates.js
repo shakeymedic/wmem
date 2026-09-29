@@ -13,6 +13,14 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "29 Sep 2026",
+    label: "Q3 2026 — EM State of the Science",
+    tags: ["quarterly", "ebook"],
+    links: [
+      { title: "EM Evidence \u2014 Q3 2026 State of the Science", driveId: "1EwJ0Oc56jBZ23IZBOR6SundbA0EbuFRY" }
+    ]
+  },
+  {
     date: "25 Sep 2026",
     label: "Issue 31 — EM Evidence Rundown",
     links: [
