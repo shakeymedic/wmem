@@ -13,6 +13,22 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "1 Oct 2026",
+    label: "Q3 2026 — Anaesthetics State of the Science",
+    tags: ["quarterly", "ebook"],
+    links: [
+      { title: "Anaesthetics & ICU Evidence \u2014 Q3 2026 State of the Science", driveId: "1Q6Y1QVhwcLamOCZRwuBS_Cgb_od1T5ZT" }
+    ]
+  },
+  {
+    date: "1 Oct 2026",
+    label: "Q3 2026 — PHEM State of the Science",
+    tags: ["quarterly", "ebook"],
+    links: [
+      { title: "PHEM Evidence \u2014 Q3 2026 State of the Science", driveId: "1yrYjm10aUVXD8LNzH13GMjfyCAHmgCt6" }
+    ]
+  },
+  {
     date: "29 Sep 2026",
     label: "Q3 2026 — EM State of the Science",
     tags: ["quarterly", "ebook"],
