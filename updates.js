@@ -13,6 +13,20 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "2 Oct 2026",
+    label: "Issue 32 — EM Evidence Rundown",
+    links: [
+      { title: "EM Evidence Rundown Issue 32", driveId: "1X4R0SASSIv9ofY-kvSzB3zsALpYLY5ge" }
+    ]
+  },
+  {
+    date: "2 Oct 2026",
+    label: "PHEM Evidence Rundown \u2014 Issue 9 (October 2026)",
+    links: [
+      { title: "PHEM Evidence Rundown October 2026.pdf", driveId: "1stPFnrMGxTVqskTOxGsH3EqNUKN24bVB" }
+    ]
+  },
+  {
     date: "1 Oct 2026",
     label: "Q3 2026 — Anaesthetics State of the Science",
     tags: ["quarterly", "ebook"],
@@ -30,7 +44,7 @@ const updates = [
   },
   {
     date: "29 Sep 2026",
-    label: "Q3 2026 — EM State of the Science",
+    label: "Q3 2026 — EM State of the Science (corrected edition, 2 Oct)",
     tags: ["quarterly", "ebook"],
     links: [
       { title: "EM Evidence \u2014 Q3 2026 State of the Science", driveId: "1EwJ0Oc56jBZ23IZBOR6SundbA0EbuFRY" }
