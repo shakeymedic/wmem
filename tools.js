@@ -171,6 +171,18 @@ const tools = [
         icon: "trauma",
         screenshot: "screenshots/major-incident-triage.png"
     },
+    {
+        id: "uhb-side-room",
+        name: "ED Side-Room Prioritisation (UHB, preliminary)",
+        description: "PRELIMINARY DRAFT (v5, Oct 2026), for IPC review and not yet Trust-approved. Who gets the side room first when rooms run out in UHB EDs: priority ladder, two-patients-one-room rules, suspicion thresholds and de-isolation",
+        category: "Bedside Aids",
+        tags: ["isolation", "side room", "infection control", "IPC", "UHB", "preliminary"],
+        url: "https://uhbsideroom.netlify.app",
+        featured: false,
+        beta: true,
+        icon: "guidelines",
+        screenshot: "screenshots/uhb-side-room.png"
+    },
 
     // --- SIMULATION (For Training) ---
     {
