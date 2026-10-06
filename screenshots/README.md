@@ -35,7 +35,7 @@ Each tool in `tools.js` points at one of these files (77 in total).
 27. `tloc-tool.png` - Syncope & TLOC Assessment
 28. `dvla-guide.png` - DVLA Driving Advice
 29. `omi.png` - OMI / STEMI Education
-30. `fluid-sid.png` - Fluid & Electrolyte Resus
+30. `fluid-sid.png` - Acid–Base & Fluids Sandbox
 31. `hot-joint.png` - Hot Joint Education
 32. `antiemetics.png` - Antiemetics Guidance
 33. `triage.png` - Experimental Triage
