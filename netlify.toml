@@ -1,4 +1,6 @@
 [build]
+  # Checks the newsletter archive; a bad entry fails the deploy and the live site stays as it was
+  command = "node scripts/validate-updates.js"
   functions = "netlify/functions"
 
 [functions]
