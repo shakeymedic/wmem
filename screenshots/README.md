@@ -4,7 +4,7 @@ This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
-Each tool in `tools.js` points at one of these files (41 in total).
+Each tool in `tools.js` points at one of these files (42 in total).
 
 1. `halo-qrh.png` - HALO QRH
 2. `qip-assist.png` - QIP Assist
@@ -47,6 +47,7 @@ Each tool in `tools.js` points at one of these files (41 in total).
 39. `paed-first-seizure.png` - Paediatric First Seizure Assessment
 40. `major-incident-triage.png` - Major Incident Triage Tool
 41. `paeds-guidelines.png` - Paediatric Guidelines 2025–28
+42. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
 
 When you add a tool to `tools.js`, add its file name here too.
 
