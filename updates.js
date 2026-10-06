@@ -1,8 +1,12 @@
 // Evidence Rundown Newsletter Archive
 // This file is the single source of truth for newsletter links on the website.
 // The pipeline updates the `updates` array after each newsletter is sent.
-// Schema: { date, label, tags, links: [{ title, driveId }] }
+// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId? }] }
+//   date:    "2 Oct 2026" (day, short month, year)
+//   label:   descriptive name, e.g. "EM Evidence Rundown — Issue 32" (shown in the Latest banner)
+//   audioId: Drive ID of the audio summary for that issue (not a separate link)
 // driveId: Google Drive file ID — must be set to "Anyone with the link can view"
+// `node scripts/validate-updates.js` checks this file; Netlify runs it before every deploy.
 
 const audioIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;flex-shrink:0;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
 
@@ -13,24 +17,31 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
-    date: "2 Oct 2026",
-    label: "Anaesthetics & ICU Evidence Rundown \u2014 Issue 9 (October 2026)",
+    date: "3 Oct 2026",
+    label: "Major Trauma Evidence Rundown — Issue 7 (October 2026)",
     links: [
-      { title: "Anaesthetics and ICU Evidence Rundown October 2026.pdf", driveId: "1HmBc6BIS8Q_qT8esQ_jfl1PlP2Xq3-DZ" }
+      { title: "Major Trauma Evidence Rundown — Issue 7 (October 2026)", driveId: "16JecnQS-vJ1EB6AHVbgJkyMWYppJyn21" }
+    ]
+  },
+  {
+    date: "2 Oct 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — Issue 9 (October 2026)",
+    links: [
+      { title: "Anaesthetics & ICU Evidence Rundown — October 2026", driveId: "1HmBc6BIS8Q_qT8esQ_jfl1PlP2Xq3-DZ" }
     ]
   },
   {
     date: "2 Oct 2026",
     label: "Issue 32 — EM Evidence Rundown",
     links: [
-      { title: "EM Evidence Rundown Issue 32", driveId: "1X4R0SASSIv9ofY-kvSzB3zsALpYLY5ge" }
+      { title: "EM Evidence Rundown — Issue 32", driveId: "1X4R0SASSIv9ofY-kvSzB3zsALpYLY5ge" }
     ]
   },
   {
     date: "2 Oct 2026",
-    label: "PHEM Evidence Rundown \u2014 Issue 9 (October 2026)",
+    label: "PHEM Evidence Rundown — Issue 9 (October 2026)",
     links: [
-      { title: "PHEM Evidence Rundown October 2026.pdf", driveId: "1stPFnrMGxTVqskTOxGsH3EqNUKN24bVB" }
+      { title: "PHEM Evidence Rundown — October 2026", driveId: "1stPFnrMGxTVqskTOxGsH3EqNUKN24bVB" }
     ]
   },
   {
@@ -38,7 +49,7 @@ const updates = [
     label: "Q3 2026 — Anaesthetics State of the Science",
     tags: ["quarterly", "ebook"],
     links: [
-      { title: "Anaesthetics & ICU Evidence \u2014 Q3 2026 State of the Science", driveId: "1Q6Y1QVhwcLamOCZRwuBS_Cgb_od1T5ZT" }
+      { title: "Anaesthetics & ICU Evidence — Q3 2026 State of the Science", driveId: "1Q6Y1QVhwcLamOCZRwuBS_Cgb_od1T5ZT" }
     ]
   },
   {
@@ -46,7 +57,7 @@ const updates = [
     label: "Q3 2026 — PHEM State of the Science",
     tags: ["quarterly", "ebook"],
     links: [
-      { title: "PHEM Evidence \u2014 Q3 2026 State of the Science", driveId: "1yrYjm10aUVXD8LNzH13GMjfyCAHmgCt6" }
+      { title: "PHEM Evidence — Q3 2026 State of the Science", driveId: "1yrYjm10aUVXD8LNzH13GMjfyCAHmgCt6" }
     ]
   },
   {
@@ -54,230 +65,165 @@ const updates = [
     label: "Q3 2026 — EM State of the Science (corrected edition, 2 Oct)",
     tags: ["quarterly", "ebook"],
     links: [
-      { title: "EM Evidence \u2014 Q3 2026 State of the Science", driveId: "1EwJ0Oc56jBZ23IZBOR6SundbA0EbuFRY" }
+      { title: "EM Evidence — Q3 2026 State of the Science", driveId: "1EwJ0Oc56jBZ23IZBOR6SundbA0EbuFRY" }
     ]
   },
   {
     date: "25 Sep 2026",
     label: "Issue 31 — EM Evidence Rundown",
     links: [
-      { title: "EM Evidence Rundown Issue 31", driveId: "1dRbTDKVK0DVT6hXJxbylLlWfUD9VjK7e" }
+      { title: "EM Evidence Rundown — Issue 31", driveId: "1dRbTDKVK0DVT6hXJxbylLlWfUD9VjK7e" }
     ]
   },
   {
     date: "18 Sep 2026",
     label: "Issue 30 — EM Evidence Rundown",
     links: [
-      { title: "EM Evidence Rundown Issue 30", driveId: "155pCr8AzTgi4cBL9XxyBqxd15DGN21sB" }
+      { title: "EM Evidence Rundown — Issue 30", driveId: "155pCr8AzTgi4cBL9XxyBqxd15DGN21sB" }
     ]
   },
   {
     date: "11 Sep 2026",
     label: "Issue 29 — EM Evidence Rundown",
     links: [
-      { title: "EM Evidence Rundown Issue 29", driveId: "1d9lTpf3_jfbTHz-en64EwDf0hxEx6MNb" }
+      { title: "EM Evidence Rundown — Issue 29", driveId: "1d9lTpf3_jfbTHz-en64EwDf0hxEx6MNb" }
     ]
   },
-    {
-        date: "2026-09-11",
-        label: "EM Evidence Rundown — Issue 29 (11 September 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 29.pdf", driveId: "1CKfa5z9U7N60RUHsXeTMbAowc8N22jp8" },
-        ]
-    },
-    {
-        date: "2026-09-03",
-        label: "Major Trauma Evidence Rundown — Issue 6 (September 2026)",
-        links: [
-            { title: "Major Trauma Evidence Rundown September 2026.pdf", driveId: "1iCgaEgOrvyB8Qjyk3nu7w0OCMEW-fbN0" },
-        ]
-    },
-    {
-        date: "2026-09-04",
-        label: "EM Evidence Rundown — Issue 28 (4 September 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 28.pdf", driveId: "1KuPITWh2yY4WMy9VfSgmZitprP3SD-gq" },
-        ]
-    },
-    {
-        date: "2026-09-02",
-        label: "Anaesthetics & ICU Evidence Rundown — Issue 8 (September 2026)",
-        links: [
-            { title: "Anaesthetics and ICU Evidence Rundown September 2026.pdf", driveId: "1qHBMqAwAvcCw_ASgx0fpIr8qtBJkd0ci" },
-        ]
-    },
-    {
-        date: "2026-09-01",
-        label: "PHEM Evidence Rundown \u2014 Issue 8 (September 2026)",
-        links: [
-            { title: "PHEM Evidence Rundown September 2026.pdf", driveId: "1U7jo6g8KecvA5rebMLPgELCl9cSCq_xh" },
-        ]
-    },
-    {
-        date: "2026-08-28",
-        label: "EM Evidence Rundown — Issue 27 (28 Aug 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 27.pdf", driveId: "1lAIzQi-zjEWYcHTIh3Uv-fiJx2DOzv6-" },
-        ]
-    },
-    {
-        date: "2026-08-21",
-        label: "EM Evidence Rundown \u2014 Issue 26 (21 Aug 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 26.pdf", driveId: "11K54Ab3l-Y3BX16TfBfaCZ6NuwVjyJho" },
-            { title: "Audio Summary — Issue 26", driveId: "1a5RGqICEg_x8_EIGIw_9p-gDU10DpKKk", audio: true },
-        ]
-    },
-    {
-        date: "2026-08-14",
-        label: "EM Evidence Rundown — Issue 25 (14 Aug 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 25.pdf", driveId: "147fZ7CMSuJ67k53Ph9K6rMJxk9s7TumZ" },
-        ]
-    },
-    {
-        date: "2026-08-07",
-        label: "EM Evidence Rundown — Issue 24 (7 Aug 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 24.pdf", driveId: "1qXeXsZmnN2nWNLE42RkqWN1QyLf3cmkb" },
-        ]
-    },
-    {
-        date: "2026-08-03",
-        label: "Major Trauma Evidence Rundown — August 2026 (Issue 2)",
-        links: [
-            { title: "Major Trauma Evidence Rundown August 2026.pdf", driveId: "14YxbursTYgdawicSEhbXT1AZqWnh8Osa" },
-        ]
-    },
-    {
-        date: "2026-08-02",
-        label: "Anaesthetics & ICU Evidence Rundown — August 2026 (Issue 7)",
-        links: [
-            { title: "Anaesthetics and ICU Evidence Rundown August 2026.pdf", driveId: "11cOfjd1M0mcbCXbmqAEtV99oghrsO6yq" },
-        ]
-    },
-    {
-        date: "2026-08-01",
-        label: "PHEM Evidence Rundown — August 2026 (Issue 7)",
-        links: [
-            { title: "PHEM Evidence Rundown August 2026.pdf", driveId: "15wYLNWmWjylh57sfZut_p83geee5jJOS" },
-        ]
-    },
-    {
-        date: "2026-07-31",
-        label: "EM Evidence Rundown — Issue 23 (31 Jul 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 23.pdf", driveId: "1hw8PIizNHMYEK92843VYMg4QQUL-P_W2" },
-        ]
-    },
-    {
-        date: "2026-07-24",
-        label: "EM Evidence Rundown — Issue 22 (24 Jul 2026)",
-        links: [
-            { title: "EM Evidence Rundown Issue 22.pdf", driveId: "1nNNEr6P1Ec0BBNBmb0pCPdT6QdsUULem" },
-        ]
-    },
-    {
-        date: "2026-07-17",
-        label: "2026-07-17",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "1gJHd74ifQhX7x4gdPb36xngicw16k3u0" },
-        ]
-    },
-    {
-        date: "2026-07-10",
-        label: "2026-07-10",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "1VXtCRUFOIBP2NV-vQSbMzVdg3kGO6OC0" },
-        ]
-    },
-    {
-        date: "2026-07-10",
-        label: "2026-07-10",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "103dC_ONpDRMjWoFeWAp1cxYCgF6oLfN0" },
-        ]
-    },
-    {
-        date: "2026-07-10",
-        label: "2026-07-10",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "1e1BwHcYfQ84RvHIQ2pWk4CcvPdysO09d" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "Major Trauma Evidence Rundown", driveId: "1GqYxm0julRX7cc6mRZy0N22NL6ZPHCf4" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "Anaesthetics & ICU Evidence Rundown", driveId: "1D0_qHJy0Bwobm-ZT93cwvBXXpYqiCwfm" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "PHEM Evidence Rundown", driveId: "1Oi5voddIf8tf6V27E0y0gmn7Wms6CpDW" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "1EsnCJ-EhWkiBwfEvLkmOUAPCKipHQf9e" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "Major Trauma Evidence Rundown", driveId: "18bg9jD3d-KiqsSpPOs1D8WlI9zxuptWl" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "Anaesthetics & ICU Evidence Rundown", driveId: "1d8zsIeG7TC2IrvmrYlkqeLpe5WJfOGRR" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "Anaesthetics & ICU Evidence Rundown", driveId: "1-KW4tfjqPZwGwvQh5niaXU5ix7ic6cId" },
-        ]
-    },
-    {
-        date: "2026-07-02",
-        label: "2026-07-02",
-        links: [
-            { title: "EM Evidence Rundown", driveId: "1u6FYysE7G_U-lyJeUu7Jl3_isRz09VYp" },
-        ]
-    },
-    {
-        date: "2026-07-01",
-        label: "2026-07-01",
-        links: [
-            { title: "PHEM Evidence Rundown", driveId: "1TCkY5vUHY1PzQ1tad-pC7Ar46r5HKEMX" },
-        ]
-    },
   {
-    date: "1 July 2026",
-    label: "1 July 2026",
-    tags: [],
+    date: "4 Sep 2026",
+    label: "EM Evidence Rundown — Issue 28 (4 September 2026)",
     links: [
-      { title: "PHEM Evidence Rundown — Issue 6", driveId: "1ERTWQ-yfrX8xEkmMzbbsmHz51r32Tx9N" }
+      { title: "EM Evidence Rundown — Issue 28", driveId: "1KuPITWh2yY4WMy9VfSgmZitprP3SD-gq" }
     ]
   },
   {
-    date: "30 June 2026",
+    date: "3 Sep 2026",
+    label: "Major Trauma Evidence Rundown — Issue 6 (September 2026)",
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 6 (September 2026)", driveId: "1iCgaEgOrvyB8Qjyk3nu7w0OCMEW-fbN0" }
+    ]
+  },
+  {
+    date: "2 Sep 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — Issue 8 (September 2026)",
+    links: [
+      { title: "Anaesthetics & ICU Evidence Rundown — September 2026", driveId: "1qHBMqAwAvcCw_ASgx0fpIr8qtBJkd0ci" }
+    ]
+  },
+  {
+    date: "1 Sep 2026",
+    label: "PHEM Evidence Rundown — Issue 8 (September 2026)",
+    links: [
+      { title: "PHEM Evidence Rundown — September 2026", driveId: "1U7jo6g8KecvA5rebMLPgELCl9cSCq_xh" }
+    ]
+  },
+  {
+    date: "28 Aug 2026",
+    label: "EM Evidence Rundown — Issue 27 (28 Aug 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 27", driveId: "1lAIzQi-zjEWYcHTIh3Uv-fiJx2DOzv6-" }
+    ]
+  },
+  {
+    date: "21 Aug 2026",
+    label: "EM Evidence Rundown — Issue 26 (21 Aug 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 26", driveId: "11K54Ab3l-Y3BX16TfBfaCZ6NuwVjyJho", audioId: "1a5RGqICEg_x8_EIGIw_9p-gDU10DpKKk" }
+    ]
+  },
+  {
+    date: "14 Aug 2026",
+    label: "EM Evidence Rundown — Issue 25 (14 Aug 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 25", driveId: "147fZ7CMSuJ67k53Ph9K6rMJxk9s7TumZ" }
+    ]
+  },
+  {
+    date: "7 Aug 2026",
+    label: "EM Evidence Rundown — Issue 24 (7 Aug 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 24", driveId: "1qXeXsZmnN2nWNLE42RkqWN1QyLf3cmkb" }
+    ]
+  },
+  {
+    date: "3 Aug 2026",
+    label: "Major Trauma Evidence Rundown — August 2026 (Issue 2)",
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 2 (August 2026)", driveId: "14YxbursTYgdawicSEhbXT1AZqWnh8Osa" }
+    ]
+  },
+  {
+    date: "2 Aug 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — August 2026 (Issue 7)",
+    links: [
+      { title: "Anaesthetics & ICU Evidence Rundown — August 2026", driveId: "11cOfjd1M0mcbCXbmqAEtV99oghrsO6yq" }
+    ]
+  },
+  {
+    date: "1 Aug 2026",
+    label: "PHEM Evidence Rundown — August 2026 (Issue 7)",
+    links: [
+      { title: "PHEM Evidence Rundown — August 2026", driveId: "15wYLNWmWjylh57sfZut_p83geee5jJOS" }
+    ]
+  },
+  {
+    date: "31 Jul 2026",
+    label: "EM Evidence Rundown — Issue 23 (31 Jul 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 23", driveId: "1hw8PIizNHMYEK92843VYMg4QQUL-P_W2" }
+    ]
+  },
+  {
+    date: "24 Jul 2026",
+    label: "EM Evidence Rundown — Issue 22 (24 Jul 2026)",
+    links: [
+      { title: "EM Evidence Rundown — Issue 22", driveId: "1nNNEr6P1Ec0BBNBmb0pCPdT6QdsUULem" }
+    ]
+  },
+  {
+    date: "17 Jul 2026",
+    label: "EM Evidence Rundown — Issue 21",
+    links: [
+      { title: "EM Evidence Rundown — Issue 21", driveId: "1gJHd74ifQhX7x4gdPb36xngicw16k3u0" }
+    ]
+  },
+  {
+    date: "10 Jul 2026",
+    label: "EM Evidence Rundown — Issue 20",
+    links: [
+      { title: "EM Evidence Rundown — Issue 20", driveId: "1VXtCRUFOIBP2NV-vQSbMzVdg3kGO6OC0" }
+    ]
+  },
+  {
+    date: "2 Jul 2026",
+    label: "Major Trauma Evidence Rundown — Issue 1 (July 2026)",
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 1 (July 2026)", driveId: "18bg9jD3d-KiqsSpPOs1D8WlI9zxuptWl" }
+    ]
+  },
+  {
+    date: "2 Jul 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — July 2026",
+    links: [
+      { title: "Anaesthetics & ICU Evidence Rundown — July 2026", driveId: "1d8zsIeG7TC2IrvmrYlkqeLpe5WJfOGRR" }
+    ]
+  },
+  {
+    date: "2 Jul 2026",
+    label: "PHEM Evidence Rundown — Issue 6 (July 2026)",
+    links: [
+      { title: "PHEM Evidence Rundown — Issue 6 (July 2026)", driveId: "1TCkY5vUHY1PzQ1tad-pC7Ar46r5HKEMX" }
+    ]
+  },
+  {
+    date: "2 Jul 2026",
+    label: "EM Evidence Rundown — Issue 19",
+    links: [
+      { title: "EM Evidence Rundown — Issue 19", driveId: "1u6FYysE7G_U-lyJeUu7Jl3_isRz09VYp" }
+    ]
+  },
+  {
+    date: "30 Jun 2026",
     label: "Q2 2026 — Anaesthetics State of the Science",
     tags: ["quarterly", "ebook", "anaesthetics"],
     links: [
@@ -285,7 +231,7 @@ const updates = [
     ]
   },
   {
-    date: "29 June 2026",
+    date: "29 Jun 2026",
     label: "Q2 2026 — PHEM State of the Science",
     tags: ["quarterly", "ebook", "phem"],
     links: [
@@ -293,64 +239,60 @@ const updates = [
     ]
   },
   {
-    date: "29 June 2026",
-    label: "29 June 2026",
-    tags: [],
+    date: "29 Jun 2026",
+    label: "Major Trauma Evidence Rundown — Issue 1 (earlier version, 29 June)",
     links: [
-      { title: "Major Trauma Evidence Rundown — Issue 1", driveId: "1Fpm_6HfP2KuBWWXsyFihiGu81YUXyg84" }
+      { title: "Major Trauma Evidence Rundown — Issue 1 (earlier version, 29 June)", driveId: "1Fpm_6HfP2KuBWWXsyFihiGu81YUXyg84" }
     ]
   },
   {
-    date: "28 June 2026",
+    date: "28 Jun 2026",
     label: "Q2 2026 — EM State of the Science",
     tags: ["quarterly", "ebook"],
     links: [
-      { title: "EM Evidence \u2014 Q2 2026 State of the Science", driveId: "1yaVJ-wsa9nQ_T9lKI5v5-R5t7yO2Yc-7" }
+      { title: "EM Evidence — Q2 2026 State of the Science", driveId: "1yaVJ-wsa9nQ_T9lKI5v5-R5t7yO2Yc-7" }
     ]
   },
   {
-    date: "25 June 2026",
-    label: "25 June 2026",
-    tags: [],
+    date: "25 Jun 2026",
+    label: "EM Evidence Rundown — Issue 18",
     links: [
       { title: "EM Evidence Rundown — Issue 18", driveId: "1fE0GAv7e5qf9ool7GPRVoJ9BK7FiitZ3", audioId: "19kqAgAZ0sTkakig11E8rkZJXqEpQikjT" }
     ]
   },
   {
-    date: "18 June 2026",
-    label: "18 June 2026",
-    tags: [],
+    date: "18 Jun 2026",
+    label: "EM Evidence Rundown — Issue 17",
     links: [
       { title: "EM Evidence Rundown — Issue 17", driveId: "1I4zzD50P818UxZCf8dh_8DxaKDK3ROCq", audioId: "1xBcZM9xPGPwFeOQcTQ9K_HhSKH_TP7cK" }
     ]
   },
   {
-    date: "11 June 2026",
-    label: "11 June 2026",
+    date: "11 Jun 2026",
+    label: "EM Evidence Rundown — Issue 16",
     tags: ["sepsis", "stroke", "paeds", "safety", "measles", "defibrillation"],
     links: [
       { title: "EM Evidence Rundown — Issue 16", driveId: "1rR5Y-54WWvjF7QKfDJXtij1xWZLsh8UB", audioId: "1Vv2BJI33cwI69RdKm_ZtBb3lzV_WXA9a" }
     ]
   },
   {
-    date: "4 June 2026",
-    label: "4 June 2026",
-    tags: [],
+    date: "4 Jun 2026",
+    label: "EM Evidence Rundown — Issue 15",
     links: [
       { title: "EM Evidence Rundown — Issue 15", driveId: "1LOdkrfpuixAc_t8KRw6eMYJCpeqbm_mc" }
     ]
   },
   {
-    date: "2 June 2026",
-    label: "2 June 2026",
+    date: "2 Jun 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — June 2026",
     tags: ["anaesthetics", "icu", "airway", "safety", "resus", "obstetric", "periop"],
     links: [
       { title: "Anaesthetics & ICU Evidence Rundown — June 2026", driveId: "1EQ2zhyC7nOurdp8euaRnRlKGWKhGps6x" }
     ]
   },
   {
-    date: "1 June 2026",
-    label: "1 June 2026",
+    date: "1 Jun 2026",
+    label: "PHEM Evidence Rundown — June 2026",
     tags: ["trauma", "resus", "airway", "phem", "blood", "safety"],
     links: [
       { title: "PHEM Evidence Rundown — June 2026", driveId: "1rD57qAhQfUOehCJP_joaN5abYyA4C0ot" }
@@ -358,7 +300,7 @@ const updates = [
   },
   {
     date: "28 May 2026",
-    label: "28 May 2026",
+    label: "EM Evidence Rundown — Issue 14",
     tags: ["sepsis", "stroke", "paeds", "anaphylaxis", "resus", "safety"],
     links: [
       { title: "EM Evidence Rundown — Issue 14", driveId: "1AI11gBycComEHNf0DOiNHE2KuAQIXSTz", audioId: "1NtmGagPu8mfF1M1BL-QWBn7KQIlev7-q" }
@@ -366,7 +308,7 @@ const updates = [
   },
   {
     date: "21 May 2026",
-    label: "21 May 2026",
+    label: "EM Evidence Rundown — Issue 13",
     tags: ["trauma", "resus", "sepsis", "paeds", "airway", "cardiac"],
     links: [
       { title: "EM Evidence Rundown — Issue 13", driveId: "1CONdPGX0_fLnR5O6FS3hz0wfVfIyUbQt", audioId: "1jYIborqVfxbZhPvcGnyzadw3b--DBph0" }
@@ -374,23 +316,22 @@ const updates = [
   },
   {
     date: "14 May 2026",
-    label: "14 May 2026",
-    tags: [],
+    label: "EM Evidence Rundown — Issue 12",
     links: [
-      { title: "EM Evidence Rundown", driveId: "1AnrZgedE4PRxl3Ebfj2oV02mVXiK5bEG", audioId: "1d4vOvcv9OpaOi08BO2epMR8HjLT1lyJd" }
+      { title: "EM Evidence Rundown — Issue 12", driveId: "1AnrZgedE4PRxl3Ebfj2oV02mVXiK5bEG", audioId: "1d4vOvcv9OpaOi08BO2epMR8HjLT1lyJd" }
     ]
   },
   {
     date: "7 May 2026",
-    label: "7 May 2026",
+    label: "EM Evidence Rundown — Issue 11",
     tags: ["resus", "stroke", "sepsis", "paeds", "airway", "cardiac"],
     links: [
       { title: "EM Evidence Rundown — Issue 11", driveId: "1W5u1q4MQ_6xuPqdCAEnUMW-4PqgppbbU", audioId: "1aBLNMe-dwaTsSnN7SurLuyGjLAnWIppg" }
     ]
   },
   {
-    date: "30 April 2026",
-    label: "30 April 2026",
+    date: "30 Apr 2026",
+    label: "EM Evidence Rundown — Issue 10 + Anaesthetics & ICU Evidence Rundown — May 2026 + PHEM Evidence Rundown — May 2026",
     tags: ["sepsis", "airway", "resus", "cardiac", "trauma", "paeds", "safety"],
     links: [
       { title: "EM Evidence Rundown — Issue 10", driveId: "1rH82sJmngV6qVosYVJ6CeTVWe0OYw0RF" },
@@ -399,31 +340,31 @@ const updates = [
     ]
   },
   {
-    date: "23 April 2026",
-    label: "23 April 2026",
+    date: "23 Apr 2026",
+    label: "EM Evidence Rundown — Issue 9",
     tags: ["cardiac", "stroke", "sepsis", "resus", "paeds", "airway"],
     links: [
       { title: "EM Evidence Rundown — Issue 9", driveId: "13U0WNszudqXVOUiwyHzL6xG8sxxezkVR" }
     ]
   },
   {
-    date: "16 April 2026",
-    label: "16 April 2026",
+    date: "16 Apr 2026",
+    label: "EM Evidence Rundown — Issue 7 (Final)",
     tags: ["resus", "airway", "stroke", "sepsis", "paeds", "safety"],
     links: [
       { title: "EM Evidence Rundown — Issue 7 (Final)", driveId: "1JYbAuyVX_i4X--aSPew83yhhVho912cy" }
     ]
   },
   {
-    date: "9 April 2026",
-    label: "9 April 2026",
+    date: "9 Apr 2026",
+    label: "EM Evidence Rundown — Issue 5",
     tags: ["resus", "sepsis", "stroke", "paeds"],
     links: [
       { title: "EM Evidence Rundown — Issue 5", driveId: "1__9-VSlzUVur9-CbZqQpI1pCO5J9hEe-" }
     ]
   },
   {
-    date: "3 April 2026",
+    date: "3 Apr 2026",
     label: "April 2026",
     tags: ["airway", "sepsis", "trauma", "cardiac", "resus", "paeds"],
     links: [
@@ -433,7 +374,7 @@ const updates = [
     ]
   },
   {
-    date: "2 April 2026",
+    date: "2 Apr 2026",
     label: "Early April 2026",
     tags: ["airway", "resus", "trauma"],
     links: [
@@ -442,7 +383,7 @@ const updates = [
     ]
   },
   {
-    date: "16 March 2026",
+    date: "16 Mar 2026",
     label: "Mid March 2026",
     tags: ["resus", "trauma", "airway"],
     links: [
@@ -450,8 +391,8 @@ const updates = [
     ]
   },
   {
-    date: "15 March 2026",
-    label: "15 March 2026",
+    date: "15 Mar 2026",
+    label: "EM Evidence Rundown (v3) + Anaesthetics & ICU Evidence Rundown (v3)",
     tags: ["airway", "sepsis", "cardiac"],
     links: [
       { title: "EM Evidence Rundown (v3)", driveId: "1K5n8VvhZxb9N3EkkoZgOBvDck-7uaBQF" },
@@ -459,8 +400,8 @@ const updates = [
     ]
   },
   {
-    date: "14 March 2026",
-    label: "14 March 2026",
+    date: "14 Mar 2026",
+    label: "EM Evidence Rundown + Anaesthetics & ICU Evidence Rundown",
     tags: ["airway", "sepsis"],
     links: [
       { title: "EM Evidence Rundown", driveId: "1AMQr_qyWtUqGC06oc6OlZh7xJZr0eYha" },
@@ -468,8 +409,8 @@ const updates = [
     ]
   },
   {
-    date: "5 March 2026",
-    label: "5 March 2026",
+    date: "5 Mar 2026",
+    label: "EM Evidence Rundown",
     tags: ["resus", "sepsis", "stroke"],
     links: [
       { title: "EM Evidence Rundown", driveId: "1l_gmMRVScIZh1vnSujOulQc6foDqH2Ek" }
@@ -505,19 +446,31 @@ function buildTagFilter() {
     }
 }
 
+// Show every date as "2 Oct 2026", whatever format the entry was written in
+const SHORT_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function displayDate(s) {
+    const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+    if (iso) return `${+iso[3]} ${SHORT_MONTHS[+iso[2] - 1]} ${iso[1]}`;
+    const long = /^(\d{1,2}) ([A-Za-z]{3})[A-Za-z]* (\d{4})$/.exec(s);
+    if (long) return `${long[1]} ${long[2][0].toUpperCase()}${long[2].slice(1, 3).toLowerCase()} ${long[3]}`;
+    return s;
+}
+
+const displayTitle = t => t.replace(/\.pdf$/i, "");
+
 function buildTimelineHTML(filtered) {
     if (filtered.length === 0) {
         return `<p class="empty-update">No updates available yet.</p>`;
     }
     return filtered.map(week => `
         <div class="update-week">
-            <div class="update-date">${week.date}</div>
+            <div class="update-date">${displayDate(week.date)}</div>
             <div class="update-links">
                 ${week.links.map(link => `
                     <a href="https://drive.google.com/file/d/${link.driveId}/view?usp=sharing"
                        target="_blank" rel="noopener" class="sidebar-link">
                         ${docIcon}
-                        ${link.title}
+                        ${displayTitle(link.title)}
                     </a>
                     ${link.audioId ? `<a href="https://drive.google.com/file/d/${link.audioId}/view?usp=sharing"
                        target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">
