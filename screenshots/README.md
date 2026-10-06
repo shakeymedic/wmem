@@ -4,7 +4,7 @@ This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
-Each tool in `tools.js` points at one of these files (38 in total). None have been added yet, so every card currently shows the blue fallback.
+Each tool in `tools.js` points at one of these files (41 in total).
 
 1. `halo-qrh.png` - HALO QRH
 2. `qip-assist.png` - QIP Assist
@@ -44,6 +44,9 @@ Each tool in `tools.js` points at one of these files (38 in total). None have be
 36. `teg.png` - Viscoelastic Testing (TEG)
 37. `dog-bites.png` - Dog Bite Management
 38. `ai-for-em.png` - AI for EM Clinicians
+39. `paed-first-seizure.png` - Paediatric First Seizure Assessment
+40. `major-incident-triage.png` - Major Incident Triage Tool
+41. `paeds-guidelines.png` - Paediatric Guidelines 2025–28
 
 When you add a tool to `tools.js`, add its file name here too.
 
