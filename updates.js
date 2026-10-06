@@ -17,6 +17,13 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "3 Oct 2026",
+    label: "Major Trauma Evidence Rundown — Issue 7 (October 2026)",
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 7 (October 2026)", driveId: "16JecnQS-vJ1EB6AHVbgJkyMWYppJyn21" }
+    ]
+  },
+  {
     date: "2 Oct 2026",
     label: "Anaesthetics & ICU Evidence Rundown — Issue 9 (October 2026)",
     links: [
@@ -93,7 +100,7 @@ const updates = [
     date: "3 Sep 2026",
     label: "Major Trauma Evidence Rundown — Issue 6 (September 2026)",
     links: [
-      { title: "Major Trauma Evidence Rundown — September 2026", driveId: "1iCgaEgOrvyB8Qjyk3nu7w0OCMEW-fbN0" }
+      { title: "Major Trauma Evidence Rundown — Issue 6 (September 2026)", driveId: "1iCgaEgOrvyB8Qjyk3nu7w0OCMEW-fbN0" }
     ]
   },
   {
@@ -142,7 +149,7 @@ const updates = [
     date: "3 Aug 2026",
     label: "Major Trauma Evidence Rundown — August 2026 (Issue 2)",
     links: [
-      { title: "Major Trauma Evidence Rundown — August 2026", driveId: "14YxbursTYgdawicSEhbXT1AZqWnh8Osa" }
+      { title: "Major Trauma Evidence Rundown — Issue 2 (August 2026)", driveId: "14YxbursTYgdawicSEhbXT1AZqWnh8Osa" }
     ]
   },
   {
@@ -189,30 +196,30 @@ const updates = [
   },
   {
     date: "2 Jul 2026",
-    label: "Major Trauma Evidence Rundown — July 2026",
+    label: "Major Trauma Evidence Rundown — Issue 1 (July 2026)",
     links: [
-      { title: "Major Trauma Evidence Rundown — July 2026", driveId: "1GqYxm0julRX7cc6mRZy0N22NL6ZPHCf4" }
+      { title: "Major Trauma Evidence Rundown — Issue 1 (July 2026)", driveId: "18bg9jD3d-KiqsSpPOs1D8WlI9zxuptWl" }
     ]
   },
   {
     date: "2 Jul 2026",
     label: "Anaesthetics & ICU Evidence Rundown — July 2026",
     links: [
-      { title: "Anaesthetics & ICU Evidence Rundown — July 2026", driveId: "1D0_qHJy0Bwobm-ZT93cwvBXXpYqiCwfm" }
+      { title: "Anaesthetics & ICU Evidence Rundown — July 2026", driveId: "1d8zsIeG7TC2IrvmrYlkqeLpe5WJfOGRR" }
     ]
   },
   {
     date: "2 Jul 2026",
     label: "PHEM Evidence Rundown — Issue 6 (July 2026)",
     links: [
-      { title: "PHEM Evidence Rundown — Issue 6 (July 2026)", driveId: "1Oi5voddIf8tf6V27E0y0gmn7Wms6CpDW" }
+      { title: "PHEM Evidence Rundown — Issue 6 (July 2026)", driveId: "1TCkY5vUHY1PzQ1tad-pC7Ar46r5HKEMX" }
     ]
   },
   {
     date: "2 Jul 2026",
     label: "EM Evidence Rundown — Issue 19",
     links: [
-      { title: "EM Evidence Rundown — Issue 19", driveId: "1EsnCJ-EhWkiBwfEvLkmOUAPCKipHQf9e" }
+      { title: "EM Evidence Rundown — Issue 19", driveId: "1u6FYysE7G_U-lyJeUu7Jl3_isRz09VYp" }
     ]
   },
   {
@@ -233,9 +240,9 @@ const updates = [
   },
   {
     date: "29 Jun 2026",
-    label: "Major Trauma Evidence Rundown — Issue 1",
+    label: "Major Trauma Evidence Rundown — Issue 1 (earlier version, 29 June)",
     links: [
-      { title: "Major Trauma Evidence Rundown — Issue 1", driveId: "1Fpm_6HfP2KuBWWXsyFihiGu81YUXyg84" }
+      { title: "Major Trauma Evidence Rundown — Issue 1 (earlier version, 29 June)", driveId: "1Fpm_6HfP2KuBWWXsyFihiGu81YUXyg84" }
     ]
   },
   {
