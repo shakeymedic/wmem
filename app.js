@@ -292,8 +292,10 @@ function renderTools() {
 
         const categories = [
             'Bedside Aids',
+            'UHB Tools',
             'Simulation',
-            'Education & Advisory'
+            'Education & Advisory',
+            'Journal Club'
         ];
 
         categories.forEach(category => {
@@ -307,6 +309,8 @@ function renderTools() {
                 if(category === 'Bedside Aids') sectionHeader.classList.add('category-bedside');
                 if(category === 'Simulation') sectionHeader.classList.add('category-simulation');
                 if(category === 'Education & Advisory') sectionHeader.classList.add('category-education');
+                if(category === 'UHB Tools') sectionHeader.classList.add('category-uhb');
+                if(category === 'Journal Club') sectionHeader.classList.add('category-journal');
 
                 toolsGrid.appendChild(sectionHeader);
 
