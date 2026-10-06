@@ -1,3 +1,12 @@
+/* Inter, self-hosted (SIL Open Font License, see fonts/LICENSE-Inter.txt) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url('fonts/inter-latin-wght-normal.woff2') format('woff2');
+}
+
 /* =========================================
    1. CORE VARIABLES & BASE STYLES
    ========================================= */
@@ -357,7 +366,7 @@ body {
     letter-spacing: 0.02em;
 }
 
-body.dark-mode .update-tag {
+html.dark-mode .update-tag {
     background-color: rgba(96, 165, 250, 0.15);
     color: #93c5fd;
 }
@@ -588,7 +597,7 @@ body.dark-mode .update-tag {
 
 .tool-card.featured:has(.beta-badge)::after {
     right: 4.5rem;
-    background: rgba(37, 99, 168, 0.1);
+    background: rgba(255, 255, 255, 0.92);
     color: var(--primary-blue);
     box-shadow: none;
     border: 1px solid var(--primary-blue);
@@ -1217,7 +1226,7 @@ body.dark-mode .update-tag {
 @media (max-width: 768px) {
     /* Shorter newsletter embed on mobile */
     .newsletter-embed-container {
-        height: 420px !important;
+        height: 420px;
     }
 
     .header-content {
@@ -1344,7 +1353,7 @@ body.dark-mode .update-tag {
     animation: fadeIn 0.5s ease-out;
 }
 
-body.dark-mode {
+html.dark-mode body {
     --primary-blue: #3b82f6;
     --primary-blue-dark: #60a5fa;
     --white: #1f2937;
@@ -1355,85 +1364,438 @@ body.dark-mode {
     background-color: #111827;
 }
 
-body.dark-mode .tool-card, 
-body.dark-mode .header,
-body.dark-mode .tool-modal-container {
+html.dark-mode .tool-card, 
+html.dark-mode .header,
+html.dark-mode .tool-modal-container {
     background-color: #1f2937;
     border-color: #374151;
 }
 
-body.dark-mode .about-card {
+html.dark-mode .about-card {
     background-color: #1f2937;
     border-color: #374151;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
-body.dark-mode .about-section {
+html.dark-mode .about-section {
     background-color: #111827;
     border-color: #374151;
 }
 
-body.dark-mode .nav-link {
+html.dark-mode .nav-link {
     color: #e5e7eb;
 }
 
-body.dark-mode .search-input {
+html.dark-mode .search-input {
     background-color: #111827;
     color: white;
 }
 
-body.dark-mode .tag-select {
+html.dark-mode .tag-select {
     background-color: #1f2937;
     border-color: #374151;
     color: #e5e7eb;
 }
 
-body.dark-mode .tag-select:focus {
+html.dark-mode .tag-select:focus {
     border-color: var(--primary-blue);
 }
 
-body.dark-mode .filter-btn {
+html.dark-mode .filter-btn {
     background-color: #1f2937;
     color: #e5e7eb;
 }
 
-body.dark-mode .filter-btn:hover {
+html.dark-mode .filter-btn:hover {
     color: var(--primary-blue);
     border-color: var(--primary-blue);
 }
 
-body.dark-mode .filter-btn.active {
+html.dark-mode .filter-btn.active {
     background-color: var(--primary-blue);
     color: white;
 }
 
-body.dark-mode .tool-card:hover {
+html.dark-mode .tool-card:hover {
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
-body.dark-mode .tool-modal-content,
-body.dark-mode .tool-modal-loader,
-body.dark-mode .tool-iframe {
+html.dark-mode .tool-modal-content,
+html.dark-mode .tool-modal-loader,
+html.dark-mode .tool-iframe {
     background-color: #111827;
 }
 
-body.dark-mode .theme-toggle:hover {
+html.dark-mode .theme-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-body.dark-mode .sidebar-widget {
+html.dark-mode .sidebar-widget {
     background-color: #1f2937;
     border-color: #374151;
 }
 
-body.dark-mode .sidebar-link {
+html.dark-mode .sidebar-link {
     background-color: #111827;
     border-color: #374151;
     color: #e5e7eb;
 }
 
-body.dark-mode .sidebar-link:hover {
+html.dark-mode .sidebar-link:hover {
     background-color: var(--primary-blue);
     color: white;
     border-color: var(--primary-blue);
+}
+
+/* =========================================
+   10. ACCESSIBILITY, NEWSLETTER CARD & FORM
+   ========================================= */
+[hidden] {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 10000;
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* Visible focus for keyboard users everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+iframe:focus-visible {
+    outline: 3px solid var(--primary-blue-light);
+    outline-offset: 2px;
+}
+
+.button-reset {
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.no-results-btn {
+    margin-top: 1rem;
+}
+
+/* Latest newsletter card */
+.featured-newsletter-wrapper {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.featured-newsletter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.featured-newsletter-head .subsection-title {
+    margin-bottom: 0.5rem;
+}
+
+.featured-newsletter-date {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.featured-newsletter-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.newsletter-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.newsletter-actions .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+}
+
+.newsletter-actions .tool-link.newsletter-action-primary {
+    margin-top: 0;
+    padding: 0.75rem 1.5rem;
+}
+
+.newsletter-embed-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-top: 1.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.newsletter-embed-container[hidden] {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .newsletter-embed-container {
+        height: 420px;
+    }
+}
+
+.newsletter-embed-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mobile archive sits below the tools and starts collapsed */
+.mobile-archive-wrapper summary {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.mobile-archive-wrapper[open] summary {
+    margin-bottom: 1rem;
+}
+
+.mobile-archive-wrapper .archive-filter {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1200px) {
+    .mobile-archive-wrapper {
+        margin-bottom: 0;
+        margin-top: 2.5rem;
+    }
+}
+
+/* Mailing list form */
+.newsletter-section {
+    background-color: var(--white);
+    padding: 4rem 0;
+}
+
+.newsletter-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9fafb;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+html.dark-mode .newsletter-card {
+    background-color: #111827;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.honeypot {
+    display: none;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-fieldset {
+    border: none;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.newsletter-submit {
+    width: 100%;
+}
+
+.form-privacy {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.form-privacy a {
+    color: var(--primary-blue);
+}
+
+.governance-section {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.report-issue-btn.report-issue-btn-blue {
+    background-color: var(--primary-blue);
+}
+
+/* Subscribe success banner */
+.subscribe-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #1e3a5f;
+    color: #ffffff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    max-width: 90vw;
+}
+
+.subscribe-banner[hidden] {
+    display: none;
+}
+
+.subscribe-banner-close {
+    margin-left: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+}
+
+/* Tool viewer "taking longer than expected" panel */
+.tool-modal-error {
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    z-index: 9;
+}
+
+.tool-modal-error p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+html.dark-mode .tool-modal-error {
+    background: #111827;
+}
+
+/* Respect the device's reduced-motion setting */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Simple content pages (privacy notice, 404) */
+.page-home-link {
+    text-decoration: none;
+}
+
+.page-site-name {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    color: var(--primary-blue) !important;
+}
+
+.prose-page {
+    max-width: 760px;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.prose-page h1 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.prose-page h2 {
+    font-size: 1.25rem;
+    color: var(--primary-blue);
+    margin: 2rem 0 0.75rem;
+}
+
+.prose-page p,
+.prose-page li {
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.prose-page ul {
+    padding-left: 1.25rem;
+}
+
+.prose-page a {
+    color: var(--primary-blue);
+}
+
+.prose-updated {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem;
 }

@@ -98,6 +98,11 @@ async function verifySignature(rawBody, headers, secret) {
 
   if (!sigHeader) return false;
 
+  // Reject events signed more than 5 minutes ago, so an old request can't be replayed
+  let sentAt = Number(timestamp);
+  if (sentAt > 1e12) sentAt = sentAt / 1000; // tolerate milliseconds as well as seconds
+  if (!sentAt || Math.abs(Date.now() / 1000 - sentAt) > 5 * 60) return false;
+
   const enc = new TextEncoder();
   const key = await crypto.subtle.importKey(
     "raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["verify"]
@@ -129,6 +134,9 @@ exports.handler = async (event) => {
   }
 
   const secret = process.env.LOOPS_WEBHOOK_SECRET || "";
+  if (!secret) {
+    console.warn("LOOPS_WEBHOOK_SECRET not set — webhook signatures are NOT being checked");
+  }
   const token  = process.env.GITHUB_TOKEN;
 
   // Parse body first so we can handle test events before checking token
@@ -202,6 +210,7 @@ exports.handler = async (event) => {
         added: new Date().toISOString().slice(0, 10),
       });
       commitMsg = `Add subscriber ${email} to ${LIST_MAP[listId] || listId}`;
+      changed = true;
     } else {
       // Existing subscriber — add list if not already present
       const sub = subs[idx];
@@ -209,9 +218,9 @@ exports.handler = async (event) => {
         sub.lists.push(listId);
         sub.subscribed = true;
         commitMsg = `Add list ${LIST_MAP[listId] || listId} for ${email}`;
+        changed = true;
       }
     }
-    changed = true;
 
   } else if (
     eventName === "contact.mailingList.unsubscribed" && listId && idx !== -1

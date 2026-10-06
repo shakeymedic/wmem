@@ -1,12 +1,23 @@
-const CACHE_NAME = 'emevidence-v1';
+// Bump CACHE_NAME whenever the list of pre-cached files changes; old caches are deleted on activate
+const CACHE_NAME = 'emevidence-v2';
 const ASSETS = [
   '/',
   '/index.html',
+  '/privacy.html',
   '/styles.css',
+  '/theme-init.js',
   '/app.js',
   '/tools.js',
   '/updates.js',
-  '/emevidence_logo.png'
+  '/subscribe.js',
+  '/vendor/fuse.min.js',
+  '/fonts/inter-latin-wght-normal.woff2',
+  '/icons/logo-128.png',
+  '/icons/logo-128.webp',
+  '/icons/logo-256.png',
+  '/icons/logo-256.webp',
+  '/icons/icon-192.png',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', (e) => {
@@ -26,30 +37,37 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
+function putInCache(request, response) {
+  if (response && response.ok) {
+    const clone = response.clone();
+    caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+  }
+  return response;
+}
+
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
 
-  // Network First for core app files — ensures updates are always seen
-  if (
-    url.pathname.endsWith('tools.js') ||
-    url.pathname.endsWith('updates.js') ||
-    url.pathname.endsWith('app.js') ||
-    url.pathname.endsWith('index.html') ||
-    url.pathname === '/'
-  ) {
+  // Only handle our own GET requests; Drive, Loops and the tool sites go straight to the network
+  if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
+
+  // Fonts and images rarely change: serve from cache, refresh in the background
+  if (/\.(png|jpe?g|webp|svg|ico|woff2)$/.test(url.pathname)) {
     e.respondWith(
-      fetch(e.request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone));
-          return response;
-        })
-        .catch(() => caches.match(e.request))
+      caches.match(e.request).then((cached) => {
+        const network = fetch(e.request)
+          .then((res) => putInCache(e.request, res))
+          .catch(() => cached);
+        return cached || network;
+      })
     );
-  } else {
-    // Cache First for images and other static assets
-    e.respondWith(
-      caches.match(e.request).then((response) => response || fetch(e.request))
-    );
+    return;
   }
+
+  // Pages, scripts and styles: network first so updates are seen straight away; cache when offline
+  e.respondWith(
+    fetch(e.request)
+      .then((res) => putInCache(e.request, res))
+      .catch(() => caches.match(e.request, { ignoreSearch: true }))
+  );
 });

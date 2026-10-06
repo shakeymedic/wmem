@@ -21,7 +21,7 @@ const modalBackdrop = document.querySelector('.tool-modal-backdrop');
 
 // Theme Elements
 const darkModeToggle = document.getElementById('darkModeToggle');
-const body = document.body;
+const rootEl = document.documentElement;
 
 // State
 let currentCategory = 'all';
@@ -29,9 +29,17 @@ let currentTag = '';
 let searchTerm = '';
 let currentToolUrl = '';
 let iframeTimeout = null;
+let lastFocusedBeforeModal = null;
 
-// Filter tools for search — exclude the "featured" duplicates at top
-const searchableTools = tools.filter(t => !t.id.endsWith('-featured'));
+// Text from tools.js and updates.js goes into innerHTML, so escape it
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
 // Initialize Fuse.js for Fuzzy Search
 const fuseOptions = {
@@ -41,24 +49,28 @@ const fuseOptions = {
         { name: 'tags', weight: 0.2 },
         { name: 'category', weight: 0.1 }
     ],
-    threshold: 0.4,
+    threshold: 0.3,
     ignoreLocation: true
 };
-let fuse;
+let fuse = null;
 
-// Dark Mode Logic
-if (localStorage.getItem('darkMode') === 'enabled') {
-    body.classList.add('dark-mode');
+// Plain substring search, used if Fuse.js fails to load so the tool list still works
+function simpleSearch(term) {
+    const q = term.toLowerCase();
+    return tools
+        .filter(t => [t.name, t.description, t.category, ...t.tags].some(v => v.toLowerCase().includes(q)))
+        .map(item => ({ item }));
 }
 
+// Dark Mode Logic (theme-init.js has already applied the saved or device setting)
 if (darkModeToggle) {
+    darkModeToggle.setAttribute('aria-pressed', String(rootEl.classList.contains('dark-mode')));
     darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-        }
+        const isDark = rootEl.classList.toggle('dark-mode');
+        darkModeToggle.setAttribute('aria-pressed', String(isDark));
+        try {
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+        } catch (e) { /* storage blocked */ }
     });
 }
 
@@ -103,16 +115,15 @@ function populateTagFilter() {
 }
 
 // Modal Functions
-function openModal(toolName, toolUrl) {
-    if (window.innerWidth < 768) {
-        window.open(toolUrl, '_blank', 'noopener,noreferrer');
-        return;
-    }
-
+function openModal(toolName, toolUrl, opener) {
+    lastFocusedBeforeModal = opener || document.activeElement;
     currentToolUrl = toolUrl;
     modalToolName.textContent = toolName;
+    toolIframe.title = toolName;
     toolModal.classList.add('active');
+    toolModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    closeModalBtn.focus();
     
     modalLoader.classList.remove('hidden');
     modalError.style.display = 'none';
@@ -139,9 +150,13 @@ function openModal(toolName, toolUrl) {
 
 function closeModal() {
     toolModal.classList.remove('active');
+    toolModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    
+
     if (iframeTimeout) clearTimeout(iframeTimeout);
+    if (lastFocusedBeforeModal && document.contains(lastFocusedBeforeModal)) {
+        lastFocusedBeforeModal.focus();
+    }
     
     setTimeout(() => {
         toolIframe.src = '';
@@ -166,9 +181,26 @@ if (forceOpenBtn) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) {
+    const typing = ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName);
+    if (e.key === '/' && !typing && !toolModal.classList.contains('active')) {
         e.preventDefault();
         searchInput.focus();
+    }
+    // Keep keyboard focus inside the open tool viewer
+    if (e.key === 'Tab' && toolModal.classList.contains('active')) {
+        const focusable = [openInNewTabBtn, closeModalBtn, toolIframe];
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        } else if (!toolModal.contains(document.activeElement)) {
+            e.preventDefault();
+            first.focus();
+        }
     }
     if (e.key === 'Escape') {
         if (toolModal.classList.contains('active')) {
@@ -176,6 +208,13 @@ document.addEventListener('keydown', (e) => {
         } else if (document.activeElement === searchInput) {
             searchInput.blur();
         }
+    }
+});
+
+// Focus that leaves the tool's own page (e.g. tabbing out of the iframe) comes back to the viewer
+document.addEventListener('focusin', (e) => {
+    if (toolModal.classList.contains('active') && !toolModal.contains(e.target)) {
+        openInNewTabBtn.focus();
     }
 });
 
@@ -200,12 +239,14 @@ function createToolCard(tool, isSmall = false) {
     const featuredClass = tool.featured ? 'featured' : '';
     const betaBadge = tool.beta ? '<span class="beta-badge">BETA</span>' : '';
     const smallClass = isSmall ? 'small-card' : '';
-    
+    const name = escapeHtml(tool.name);
+    const newTab = tool.openInNewTab ? 'true' : 'false';
+
     return `
-        <div class="tool-card ${featuredClass} ${smallClass}" data-category="${tool.category}" data-tags="${tool.tags.join(' ')}" data-tool-id="${tool.id}">
+        <div class="tool-card ${featuredClass} ${smallClass}" data-category="${escapeHtml(tool.category)}" data-tags="${escapeHtml(tool.tags.join(' '))}" data-tool-id="${escapeHtml(tool.id)}">
             ${betaBadge}
             <div class="tool-screenshot">
-                <img src="${tool.screenshot}" alt="${tool.name} screenshot" loading="lazy" onerror="this.parentElement.classList.add('no-screenshot')">
+                <img src="${escapeHtml(tool.screenshot)}" alt="" loading="lazy">
                 <div class="tool-screenshot-overlay" aria-hidden="true">
                     <div class="tool-icon-small">
                         ${icon}
@@ -213,12 +254,12 @@ function createToolCard(tool, isSmall = false) {
                 </div>
             </div>
             <div class="tool-card-content">
-                <h3 class="tool-name">${tool.name}</h3>
-                <p class="tool-description">${tool.description}</p>
-                <span class="tool-category">${tool.category}</span>
-                <a href="#" class="tool-link" data-url="${tool.url}" data-name="${tool.name}">
+                <h3 class="tool-name">${name}</h3>
+                <p class="tool-description">${escapeHtml(tool.description)}</p>
+                <span class="tool-category">${escapeHtml(tool.category)}</span>
+                <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener" class="tool-link" data-url="${escapeHtml(tool.url)}" data-name="${name}" data-new-tab="${newTab}" aria-label="Launch ${name}">
                     Launch Tool
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
@@ -250,7 +291,7 @@ function renderTools() {
         toolsGrid.classList.remove('tools-grid-layout');
 
         const categories = [
-            'Live Tools',
+            'Bedside Aids',
             'Simulation',
             'Education & Advisory'
         ];
@@ -263,7 +304,7 @@ function renderTools() {
                 sectionHeader.className = 'category-section-title';
                 sectionHeader.textContent = category;
                 
-                if(category === 'Live Tools') sectionHeader.style.color = '#dc2626';
+                if(category === 'Bedside Aids') sectionHeader.style.color = '#dc2626';
                 if(category === 'Simulation') sectionHeader.style.color = '#7c3aed';
                 if(category === 'Education & Advisory') sectionHeader.style.color = '#2563a8';
 
@@ -288,7 +329,7 @@ function renderTools() {
         });
 
         if (searchTerm !== '') {
-            const fuseResults = fuse.search(searchTerm);
+            const fuseResults = fuse ? fuse.search(searchTerm) : simpleSearch(searchTerm);
             const searchHits = new Set(fuseResults.map(r => r.item.id));
             filteredTools = filteredTools.filter(tool => searchHits.has(tool.id));
         }
@@ -302,7 +343,6 @@ function renderTools() {
     }
 
     setTimeout(() => {
-        attachToolClickHandlers();
         const cards = document.querySelectorAll('.tool-card');
         cards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.05}s`;
@@ -310,41 +350,49 @@ function renderTools() {
     }, 50);
 }
 
-function attachToolClickHandlers() {
-    const toolLinks = document.querySelectorAll('.tool-link');
-    toolLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            if (!link.hasAttribute('data-url')) return;
-            
-            e.preventDefault();
-            e.stopPropagation();
-            if (link.id === 'clearSearchBtn' || link.id === 'forceOpenBtn') return;
-            const url = link.getAttribute('data-url');
-            const name = link.getAttribute('data-name');
-            openModal(name, url);
-        });
-    });
-    
-    const toolCards = document.querySelectorAll('.tool-card');
-    toolCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            if (e.target.closest('.tool-link')) return;
-            const link = card.querySelector('.tool-link');
-            if (link && link.hasAttribute('data-url')) {
-                const url = link.getAttribute('data-url');
-                const name = link.getAttribute('data-name');
-                openModal(name, url);
-            }
-        });
-    });
+// Opens a tool in the in-page viewer on larger screens; on phones, for tools that
+// can't be framed, or when the user asks for a new tab, the link's own target="_blank" applies
+function handleToolActivation(link, e) {
+    const wantsNewTab = e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1;
+    if (wantsNewTab || link.dataset.newTab === 'true' || window.innerWidth < 768) return false;
+    e.preventDefault();
+    openModal(link.dataset.name, link.dataset.url, link);
+    return true;
 }
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.tool-card .tool-link[data-url]');
+    if (link) {
+        handleToolActivation(link, e);
+        return;
+    }
+    // Clicking anywhere else on a card acts like its Launch Tool link
+    const card = e.target.closest('.tool-card');
+    if (card && !e.target.closest('a, button')) {
+        const cardLink = card.querySelector('.tool-link[data-url]');
+        if (cardLink && !handleToolActivation(cardLink, e)) {
+            window.open(cardLink.dataset.url, '_blank', 'noopener');
+        }
+    }
+});
+
+// Show the icon fallback when a screenshot is missing
+document.addEventListener('error', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('.tool-screenshot')) {
+        e.target.parentElement.classList.add('no-screenshot');
+    }
+}, true);
 
 // Event Listeners
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+        });
         button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
         currentCategory = button.getAttribute('data-category');
         renderTools();
     });
@@ -368,43 +416,86 @@ clearSearchBtn.addEventListener('click', () => {
 });
 
 // Load Latest Newsletter
-function loadLatestNewsletter() {
-    if (typeof updates !== 'undefined' && updates.length > 0) {
-        // Find the most recent entry that contains an EM Evidence Rundown link
-        let emLink = null;
-        let latest = null;
-        for (const entry of updates) {
-            const found = entry.links.find(l => l.title.includes("EM Evidence Rundown") && !l.title.toLowerCase().includes("anaesthetic") && !l.title.toLowerCase().includes("phem"));
-            if (found) { emLink = found; latest = entry; break; }
-        }
-        
-        if (emLink) {
-            const frame = document.getElementById('latestNewsletterFrame');
-            const linkOut = document.getElementById('latestNewsletterLink');
-            const dateText = document.getElementById('latestNewsletterDate');
-            const audioBtn = document.getElementById('latestNewsletterAudio');
-            
-            if (frame && linkOut && dateText) {
-                frame.src = `https://drive.google.com/file/d/${emLink.driveId}/preview`;
-                linkOut.href = `https://drive.google.com/file/d/${emLink.driveId}/view?usp=sharing`;
-                dateText.textContent = latest.label;
-            }
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-            if (audioBtn) {
-                if (emLink.audioId) {
-                    audioBtn.href = `https://drive.google.com/file/d/${emLink.audioId}/view?usp=sharing`;
-                    audioBtn.style.display = "inline-flex";
-                } else {
-                    audioBtn.style.display = "none";
-                }
-            }
+// Accepts "2026-10-02", "2 Oct 2026" or "2 October 2026"; returns a timestamp or NaN
+function parseEntryDate(s) {
+    let m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+    if (m) return Date.UTC(+m[1], +m[2] - 1, +m[3]);
+    m = /^(\d{1,2}) ([A-Za-z]{3})[A-Za-z]* (\d{4})$/.exec(s || '');
+    if (m) return Date.UTC(+m[3], MONTHS.indexOf(m[2].toLowerCase()), +m[1]);
+    return NaN;
+}
+
+function isWeeklyEmRundown(link) {
+    const t = link.title.toLowerCase();
+    return t.includes('em evidence rundown') && !t.includes('anaesthetic') && !t.includes('phem');
+}
+
+function loadLatestNewsletter() {
+    if (typeof updates === 'undefined' || updates.length === 0) return;
+
+    // Newest weekly EM issue by date, so the order of updates.js doesn't matter
+    let latest = null;
+    let emLink = null;
+    let latestTime = -Infinity;
+    updates.forEach((entry, index) => {
+        const found = entry.links.find(isWeeklyEmRundown);
+        if (!found) return;
+        const time = parseEntryDate(entry.date);
+        // Undated entries rank by position (earlier in the file = newer)
+        const rank = isNaN(time) ? -index : time;
+        if (latest === null || rank > latestTime) {
+            latest = entry;
+            emLink = found;
+            latestTime = rank;
         }
+    });
+    if (!emLink) return;
+
+    const linkOut = document.getElementById('latestNewsletterLink');
+    const dateText = document.getElementById('latestNewsletterDate');
+    const titleText = document.getElementById('latestNewsletterTitle');
+    const audioBtn = document.getElementById('latestNewsletterAudio');
+    const previewBtn = document.getElementById('latestNewsletterPreviewBtn');
+    const embed = document.getElementById('latestNewsletterEmbed');
+
+    if (linkOut) linkOut.href = `https://drive.google.com/file/d/${encodeURIComponent(emLink.driveId)}/view?usp=sharing`;
+    if (dateText) dateText.textContent = latest.date;
+    if (titleText) titleText.textContent = latest.label;
+
+    if (audioBtn) {
+        if (emLink.audioId) {
+            audioBtn.href = `https://drive.google.com/file/d/${encodeURIComponent(emLink.audioId)}/view?usp=sharing`;
+            audioBtn.hidden = false;
+        } else {
+            audioBtn.hidden = true;
+        }
+    }
+
+    // The Drive viewer is only loaded on request
+    if (previewBtn && embed) {
+        previewBtn.addEventListener('click', () => {
+            const opening = embed.hidden;
+            if (opening && !embed.querySelector('iframe')) {
+                const frame = document.createElement('iframe');
+                frame.src = `https://drive.google.com/file/d/${encodeURIComponent(emLink.driveId)}/preview`;
+                frame.title = `${latest.label} (PDF preview)`;
+                frame.loading = 'lazy';
+                embed.appendChild(frame);
+            }
+            embed.hidden = !opening;
+            previewBtn.setAttribute('aria-expanded', String(opening));
+            previewBtn.textContent = opening ? 'Hide preview' : 'Preview here';
+        });
     }
 }
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-    fuse = new Fuse(searchableTools, fuseOptions);
+    if (typeof Fuse !== 'undefined') {
+        fuse = new Fuse(tools, fuseOptions);
+    }
     populateTagFilter();
     renderNewTools();
     renderTools();
