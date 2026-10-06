@@ -18,7 +18,7 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `screenshots/` | Tool card images; see [screenshots/README.md](screenshots/README.md) for the file list |
 | `newsletters/` | Reserved for on-site HTML versions of each issue; see [newsletters/README.md](newsletters/README.md) |
 | `netlify/functions/` | `subscribe.js` (sign-up via the Loops API) and `loops-webhook.js` (syncs subscribers to the newsletter pipeline repo) |
-| `netlify/edge-functions/subscribe.js` | An edge version of the sign-up function; not currently routed to any path |
+| `netlify/edge-functions/subscribe.js` | An edge version of the sign-up function; not currently routed to any path (its EM list ID and Loops URL differ from `netlify/functions/subscribe.js`) |
 | `scripts/validate-updates.js` | Checks the newsletter archive before each deploy |
 | `EMAIL_AUTOMATION_SETUP.md` | How the sign-up emails, Loops and the subscriber sheet are set up |
 
