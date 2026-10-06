@@ -1,87 +1,54 @@
-# Screenshots Folder
+# EM Evidence website
 
-This folder contains screenshots for your EMEvidence tools.
+Source for [emevidence.org](https://emevidence.org): a static site listing EM Evidence's clinical and educational tools, the archive of Evidence Rundown newsletters, and the newsletter sign-up form.
 
-## Required Screenshots
+It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of this repository. There is no framework or bundler; the pages are plain HTML, CSS and JavaScript.
 
-You need to add the following screenshot files to this folder:
+## What's where
 
-1. `als-app.png` - Cardiac Arrest App
-2. `rsi-tool.png` - RSI Management Tool
-3. `sedation.png` - Procedural Sedation Tool
-4. `major-trauma.png` - Major Trauma Management
-5. `rosc-management.png` - Post-ROSC Management
-6. `em-simulator.png` - Emergency Medicine Simulator
-7. `defib-sim.png` - Defibrillator Simulator
-8. `dvla-guide.png` - DVLA Driving Advice
-9. `tloc-tool.png` - Syncope & TLOC Assessment
-10. `pericardiocentesis.png` - Emergency Pericardiocentesis
+| File | What it does |
+| --- | --- |
+| `index.html` | The single page: tools, latest newsletter, archive and sign-up |
+| `tools.js` | The list of tools shown as cards (name, description, category, tags, URL, screenshot) |
+| `updates.js` | The newsletter archive (the `updates` array) and the code that draws the archive sidebar |
+| `app.js` | Search, filters, tool cards and the "Latest newsletter" panel |
+| `subscribe.js` | Sign-up form; posts straight to Loops from the browser |
+| `styles.css` | All styling |
+| `sw.js`, `manifest.json` | Service worker and web app manifest |
+| `screenshots/` | Tool card images; see [screenshots/README.md](screenshots/README.md) for the file list |
+| `newsletters/` | Reserved for on-site HTML versions of each issue; see [newsletters/README.md](newsletters/README.md) |
+| `netlify/functions/` | `subscribe.js` (sign-up via the Loops API) and `loops-webhook.js` (syncs subscribers to the newsletter pipeline repo) |
+| `netlify/edge-functions/subscribe.js` | An edge version of the sign-up function; not currently routed to any path |
+| `scripts/validate-updates.js` | Checks the newsletter archive before each deploy |
+| `EMAIL_AUTOMATION_SETUP.md` | How the sign-up emails, Loops and the subscriber sheet are set up |
 
-## How to Create Screenshots
+## Adding a newsletter issue
 
-### Method 1: Take Screenshots from Your Browser
+The newsletter pipeline adds a new object to the top of the `updates` array in `updates.js`. To add one by hand, copy the newest entry and change it:
 
-1. Open each tool in your browser
-2. Press F11 for fullscreen (or use your browser's fullscreen mode)
-3. Take a screenshot:
-   - **Windows**: Windows Key + Shift + S
-   - **Mac**: Cmd + Shift + 4
-4. Save the screenshot with the correct filename (see list above)
-5. Place it in this `screenshots` folder
+```js
+{
+  date: "9 Oct 2026",
+  label: "EM Evidence Rundown — Issue 33",
+  links: [
+    { title: "EM Evidence Rundown — Issue 33", driveId: "<Google Drive file ID>", audioId: "<optional audio summary ID>" }
+  ]
+},
+```
 
-### Method 2: Use Browser Extensions
+- Newest entries go at the top.
+- The Drive file must be shared as "Anyone with the link can view".
+- If an issue is re-uploaded, replace the `driveId` in the existing entry rather than adding a second entry.
+- The "Latest newsletter" panel shows the newest link whose title contains "EM Evidence Rundown".
 
-Install a screenshot extension like:
-- **Full Page Screen Capture** (Chrome/Edge)
-- **Awesome Screenshot** (Firefox/Chrome)
+### The archive check
 
-### Method 3: Use Online Tools
+`node scripts/validate-updates.js` checks `updates.js` for missing titles or labels, labels that are only a date, unreadable dates, entries out of order, Drive IDs that are malformed or used twice, and two links for the same issue or month. Netlify runs it as the build command, so if it finds a problem the deploy fails and the live site stays as it was. The Netlify deploy log lists each problem.
 
-1. Go to https://www.screenshotmachine.com/
-2. Enter your tool URL
-3. Download the screenshot
-4. Rename and save to this folder
+## Adding a tool
 
-## Recommended Screenshot Settings
+Copy an existing object in `tools.js`, change its details, and add a screenshot to `screenshots/` with the file name you gave it. Cards without a screenshot show a blue fallback with the tool's icon.
 
-- **Size**: 1200px wide × 800px tall (will be cropped to fit)
-- **Format**: PNG or JPG
-- **Quality**: High quality for clear display
-- **Content**: Show the main interface of each tool
+## Deploying
 
-## What Happens Without Screenshots?
-
-If a screenshot is missing, the card will display:
-- A gradient background with your EMEvidence blue colours
-- The tool's icon in the centre
-- Still looks professional, just not as informative
-
-## Tips for Good Screenshots
-
-✅ **Do:**
-- Capture the tool at desktop resolution (not mobile)
-- Show the main screen/interface
-- Make sure no patient data is visible
-- Use a clean, uncluttered view
-
-❌ **Don't:**
-- Include browser chrome (address bar, bookmarks, etc.)
-- Show any real patient information
-- Use low-resolution images
-- Include your desktop background
-
-## Quick Batch Process
-
-If you want to do them all at once:
-
-1. Open each tool in a separate browser tab
-2. Use a browser extension to capture all tabs
-3. Rename files according to the list above
-4. Move all files to this folder
-5. Redeploy your site to Netlify
-
-That's it! Your tool cards will now show beautiful screenshots.
-
----
-
-**Note:** The website will work perfectly even without screenshots - they just enhance the visual appeal and help users recognize the tools quickly.
+Push to `main`; Netlify builds and publishes automatically. To check the archive locally first, run `node scripts/validate-updates.js` (Node 18 or later).

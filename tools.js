@@ -254,7 +254,7 @@ const tools = [
         featured: false,
         beta: true,
         icon: "guidelines",
-        screenshot: "screenshots/halo.png"
+        screenshot: "screenshots/halo-qrh.png"
     },
     {
         id: "limping-child",
