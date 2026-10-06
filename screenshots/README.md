@@ -4,7 +4,7 @@ This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
-Each tool in `tools.js` points at one of these files (77 in total).
+Each tool in `tools.js` points at one of these files (78 in total).
 
 1. `em-simulator.png` - Medical Simulation App
 2. `frcem-revision.png` - FRCEM & MRCEM Revision App
@@ -83,6 +83,7 @@ Each tool in `tools.js` points at one of these files (77 in total).
 75. `admission-rates.png` - The Admission Lottery?
 76. `andromeda-shock-2.png` - ANDROMEDA-SHOCK-2
 77. `em-pharmacotherapy-2024.png` - EM Pharmacotherapy 2024
+78. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
 
 When you add a tool to `tools.js`, add its file name here too.
 
