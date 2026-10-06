@@ -304,9 +304,9 @@ function renderTools() {
                 sectionHeader.className = 'category-section-title';
                 sectionHeader.textContent = category;
                 
-                if(category === 'Bedside Aids') sectionHeader.style.color = '#dc2626';
-                if(category === 'Simulation') sectionHeader.style.color = '#7c3aed';
-                if(category === 'Education & Advisory') sectionHeader.style.color = '#2563a8';
+                if(category === 'Bedside Aids') sectionHeader.classList.add('category-bedside');
+                if(category === 'Simulation') sectionHeader.classList.add('category-simulation');
+                if(category === 'Education & Advisory') sectionHeader.classList.add('category-education');
 
                 toolsGrid.appendChild(sectionHeader);
 

@@ -149,7 +149,7 @@ body {
    ========================================= */
 .hero {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-    color: var(--white);
+    color: #ffffff;
     padding: 3rem 0;
     position: relative;
     overflow: hidden;
@@ -311,7 +311,7 @@ body {
 
 .sidebar-link:hover {
     background-color: var(--primary-blue);
-    color: var(--white);
+    color: #ffffff;
     border-color: var(--primary-blue);
     transform: translateY(-2px);
 }
@@ -338,7 +338,6 @@ body {
     border: 1px solid var(--primary-blue);
     color: var(--primary-blue);
     font-size: 0.8rem;
-    opacity: 0.85;
 }
 
 .sidebar-link-audio:hover {
@@ -358,8 +357,8 @@ body {
     display: inline-block;
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
-    background-color: var(--primary-blue-light, #dbeafe);
-    color: var(--primary-blue, #1e40af);
+    background-color: #dbeafe;
+    color: #1e4a7d;
     font-size: 0.688rem;
     font-weight: 500;
     text-transform: lowercase;
@@ -452,7 +451,7 @@ html.dark-mode .update-tag {
 .filter-btn.active {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
-    color: var(--white);
+    color: #ffffff;
 }
 
 .tag-filter-container {
@@ -570,7 +569,7 @@ html.dark-mode .update-tag {
     top: 1rem;
     right: 1rem;
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: var(--white);
+    color: #ffffff;
     padding: 0.375rem 0.75rem;
     border-radius: 1.5rem;
     font-size: 0.75rem;
@@ -586,7 +585,7 @@ html.dark-mode .update-tag {
     top: 1rem;
     right: 1rem;
     background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
-    color: var(--white);
+    color: #ffffff;
     padding: 0.375rem 1rem;
     border-radius: 1.5rem;
     font-size: 0.75rem;
@@ -658,7 +657,7 @@ html.dark-mode .update-tag {
 .tool-icon-small svg {
     width: 20px;
     height: 20px;
-    color: var(--white);
+    color: #ffffff;
 }
 
 .tool-screenshot.no-screenshot {
@@ -748,8 +747,8 @@ html.dark-mode .update-tag {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, #2563eb 0%, #1e4a7d 100%);
+    color: #ffffff;
     text-decoration: none;
     border-radius: 0.625rem;
     font-weight: 600;
@@ -889,7 +888,7 @@ html.dark-mode .update-tag {
 }
 
 .about-icon svg {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .about-card h3 {
@@ -905,8 +904,8 @@ html.dark-mode .update-tag {
 }
 
 .footer {
-    background-color: var(--primary-blue-dark);
-    color: var(--white);
+    background-color: #1e4a7d;
+    color: #ffffff;
     padding: 3rem 0 1.5rem;
 }
 
@@ -917,7 +916,8 @@ html.dark-mode .update-tag {
     margin-bottom: 2rem;
 }
 
-.footer-section h4 {
+.footer-section h4,
+.footer-section .footer-heading {
     font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -944,7 +944,7 @@ html.dark-mode .update-tag {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.5rem;
-    color: var(--white);
+    color: #ffffff;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -964,7 +964,7 @@ html.dark-mode .update-tag {
 }
 
 .footer-links a {
-    color: var(--white);
+    color: #ffffff;
     text-decoration: none;
     opacity: 0.9;
     transition: opacity 0.2s ease;
@@ -1086,7 +1086,7 @@ html.dark-mode .update-tag {
     justify-content: space-between;
     padding: 1rem 1.5rem;
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-    color: var(--white);
+    color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -1120,7 +1120,7 @@ html.dark-mode .update-tag {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.5rem;
-    color: var(--white);
+    color: #ffffff;
     cursor: pointer;
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
@@ -1798,4 +1798,46 @@ html.dark-mode .tool-modal-error {
 .prose-updated {
     color: var(--text-secondary) !important;
     font-size: 0.9rem;
+}
+
+/* =========================================
+   11. CONTRAST FIXES (found by an axe audit of the live site)
+   ========================================= */
+.category-bedside { color: #dc2626; }
+.category-simulation { color: #7c3aed; }
+.category-education { color: #2563a8; }
+
+html.dark-mode .category-bedside { color: #f87171; }
+html.dark-mode .category-simulation { color: #a78bfa; }
+html.dark-mode .category-education { color: #60a5fa; }
+
+.footer-section .footer-heading {
+    color: #ffffff;
+}
+
+.footer-bottom a {
+    color: #ffffff;
+}
+
+/* White text needs a darker blue than the dark theme's accent to stay readable */
+html.dark-mode .filter-btn.active,
+html.dark-mode .report-issue-btn.report-issue-btn-blue {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+html.dark-mode .footer {
+    background-color: #0b1626;
+    border-top: 1px solid #374151;
+}
+
+html.dark-mode .update-tag {
+    background-color: #1e3a5f;
+    color: #dbeafe;
+}
+
+@media (max-width: 1200px) {
+    html.dark-mode .mobile-archive-wrapper {
+        background: #1f2937;
+    }
 }
