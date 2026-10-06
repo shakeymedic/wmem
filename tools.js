@@ -172,6 +172,28 @@ const tools = [
         icon: "assessment",
         screenshot: "screenshots/visual-acuity.png"
     },
+    {
+        id: "paed-first-seizure",
+        name: "Paediatric First Seizure Assessment",
+        description: "Structured assessment and documentation tool for children presenting with a first seizure, referencing NICE CG137 / NG217 and RCPCH guidance, with red-flag prompts and a pre-populated EPR note",
+        category: "Live Tools",
+        tags: ["paediatrics", "seizure", "epilepsy", "NICE", "RCPCH", "documentation", "red flags"],
+        url: "https://paedfirstseizure.netlify.app",
+        featured: false,
+        icon: "assessment",
+        screenshot: "screenshots/paed-first-seizure.png"
+    },
+    {
+        id: "major-incident-triage",
+        name: "Major Incident Triage Tool",
+        description: "Offline-capable app for triaging and documenting casualties in a major incident (TST and MITT), with patient handover by QR code, METHANE reporting and casualty register export",
+        category: "Live Tools",
+        tags: ["major incident", "triage", "TST", "MITT", "METHANE", "handover", "offline"],
+        url: "https://majorincident.netlify.app",
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/major-incident-triage.png"
+    },
 
     // --- SIMULATION (For Training) ---
     {
@@ -210,6 +232,17 @@ const tools = [
     },
 
     // --- EDUCATION & ADVISORY (Reference & Guidelines) ---
+    {
+        id: "paeds-guidelines",
+        name: "Paediatric Guidelines 2025–28",
+        description: "Searchable collection of paediatric guidelines, scores and calculators, with offline use, favourites and dark mode",
+        category: "Education & Advisory",
+        tags: ["paediatrics", "guidelines", "reference", "scores", "calculators", "offline"],
+        url: "https://paedsguide.netlify.app",
+        featured: false,
+        icon: "guidelines",
+        screenshot: "screenshots/paeds-guidelines.png"
+    },
     {
         id: "bhh-who-sees-who",
         name: "BHH Who Sees Who",
