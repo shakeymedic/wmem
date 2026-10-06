@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emevidence.org/sitemap.xml

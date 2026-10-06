@@ -16,7 +16,7 @@
   function showBanner() {
     var banner = document.getElementById("subscribeSuccessBanner");
     if (!banner) { return; }
-    banner.style.display    = "block";
+    banner.hidden           = false;
     banner.style.opacity    = "1";
     banner.style.transition = "";
     setTimeout(function () {
@@ -26,7 +26,7 @@
     setTimeout(function () {
       banner.style.opacity    = "0";
       banner.style.transition = "opacity 0.5s";
-      setTimeout(function () { banner.style.display = "none"; }, 500);
+      setTimeout(function () { banner.hidden = true; }, 500);
     }, 10000);
   }
 
@@ -35,6 +35,7 @@
     if (!el) {
       el = document.createElement("p");
       el.className = "form-msg";
+      el.setAttribute("role", "alert");
       var btn = form.querySelector("button[type='submit']");
       form.insertBefore(el, btn);
     }
@@ -55,6 +56,13 @@
     if (params.get("subscribed") === "true") {
       showBanner();
       window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    var bannerClose = document.getElementById("subscribeBannerClose");
+    if (bannerClose) {
+      bannerClose.addEventListener("click", function () {
+        document.getElementById("subscribeSuccessBanner").hidden = true;
+      });
     }
 
     // Wire up the form

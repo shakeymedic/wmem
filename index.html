@@ -3,24 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EM Evidence - Educational tools and resources for Emergency Medicine doctors">
-    <title>EM Evidence</title>
+    <title>EM Evidence: emergency medicine evidence summaries and clinical tools</title>
+    <meta name="description" content="Weekly EM Evidence Rundown newsletters, monthly PHEM and Anaesthetics &amp; ICU summaries, and free interactive tools for emergency medicine clinicians, built by UK EM doctors.">
+    <link rel="canonical" href="https://emevidence.org/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EM Evidence">
+    <meta property="og:title" content="EM Evidence: emergency medicine evidence summaries and clinical tools">
+    <meta property="og:description" content="Weekly evidence summaries and free interactive tools for emergency medicine clinicians.">
+    <meta property="og:url" content="https://emevidence.org/">
+    <meta property="og:image" content="https://emevidence.org/icons/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="EM Evidence logo with the text: weekly evidence summaries and clinical tools for emergency medicine">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "EM Evidence",
+        "url": "https://emevidence.org/",
+        "inLanguage": "en-GB",
+        "description": "Evidence summaries and interactive tools for emergency medicine clinicians.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "EM Evidence",
+            "url": "https://emevidence.org/",
+            "logo": "https://emevidence.org/icons/logo-256.png",
+            "email": "emevidence999@gmail.com",
+            "founder": { "@type": "Person", "name": "Dr Jake Turner" }
+        }
+    }
+    </script>
+
+    <script src="theme-init.js"></script>
+    <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-    
+
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563a8">
-    <link rel="apple-touch-icon" href="emevidence_logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#home">Skip to tools</a>
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                    <img src="emevidence_logo.png" alt="EM Evidence Logo" class="logo">
+                    <picture>
+                        <source srcset="icons/logo-128.webp" type="image/webp">
+                        <img src="icons/logo-128.png" alt="EM Evidence logo" class="logo" width="60" height="60">
+                    </picture>
                     <div class="logo-text">
                         <h1>EM Evidence</h1>
                         <p>Educational tools and resources</p>
@@ -32,8 +68,8 @@
                     <a href="#newsletter" class="nav-link">Newsletter</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
-                    <button id="darkModeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" class="theme-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="darkModeToggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode" class="theme-toggle">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                     </button>
@@ -63,31 +99,23 @@
             <div class="main-layout">
                 <div class="content-column">
                     
-                    <div class="featured-newsletter-wrapper" id="featuredNewsletterWrapper" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-color);">
-                        <h3 class="subsection-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            Latest EM Evidence Rundown
-                            <span style="font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);" id="latestNewsletterDate"></span>
-                        </h3>
-                        <div class="newsletter-embed-container" style="position: relative; width: 100%; height: 600px; margin-bottom: 1.5rem; border-radius: 0.5rem; overflow: hidden; border: 2px solid var(--border-color);">
-                            <iframe id="latestNewsletterFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
+                    <div class="featured-newsletter-wrapper" id="featuredNewsletterWrapper">
+                        <div class="featured-newsletter-head">
+                            <h3 class="subsection-title">Latest EM Evidence Rundown</h3>
+                            <span class="featured-newsletter-date" id="latestNewsletterDate"></span>
                         </div>
-                        <div class="newsletter-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <a href="#newsletter" class="tool-link" style="padding: 0.75rem 1.5rem; margin-top: 0;">Subscribe for Updates</a>
-                            <a id="latestNewsletterLink" href="#" target="_blank" class="filter-btn" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">Read Full Screen</a>
-                            <a id="latestNewsletterAudio" href="#" target="_blank" class="filter-btn" style="display: none; align-items: center; justify-content: center; text-decoration: none; background-color: var(--primary-blue);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.4rem;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                                Listen to Summary
+                        <p class="featured-newsletter-title" id="latestNewsletterTitle"></p>
+                        <div class="newsletter-actions">
+                            <a id="latestNewsletterLink" href="#" target="_blank" rel="noopener" class="tool-link newsletter-action-primary">Read this issue</a>
+                            <button type="button" id="latestNewsletterPreviewBtn" class="filter-btn" aria-expanded="false" aria-controls="latestNewsletterEmbed">Preview here</button>
+                            <a id="latestNewsletterAudio" href="#" target="_blank" rel="noopener" class="filter-btn newsletter-audio-btn" hidden>
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                Listen to summary
                             </a>
+                            <a href="#newsletter" class="filter-btn">Subscribe</a>
                         </div>
-                    </div>
-
-                    <!-- Mobile-only archive — hidden on desktop (sidebar shows it there) -->
-                    <div class="mobile-archive-wrapper" id="mobileArchiveWrapper">
-                        <h3 class="subsection-title" style="margin-bottom: 1rem;">Evidence Rundown Archive</h3>
-                        <div class="archive-filter" style="margin-bottom: 1rem;">
-                            <select id="mobileArchiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
-                        </div>
-                        <div class="updates-timeline" id="mobileUpdatesTimeline"></div>
+                        <!-- The Google Drive viewer only loads when asked for: it is several MB and sets Google cookies -->
+                        <div class="newsletter-embed-container" id="latestNewsletterEmbed" hidden></div>
                     </div>
 
                     <div class="new-tools-wrapper" id="newToolsWrapper">
@@ -104,24 +132,26 @@
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <path d="m21 21-4.35-4.35"></path>
                             </svg>
-                            <input 
-                                type="text" 
-                                id="searchInput" 
-                                class="search-input" 
+                            <label for="searchInput" class="visually-hidden">Search tools</label>
+                            <input
+                                type="search"
+                                id="searchInput"
+                                class="search-input"
                                 placeholder="Search tools... (Press '/')"
+                                autocomplete="off"
                             >
                         </div>
 
                         <div class="controls-row">
-                            <div class="filter-buttons">
-                                <button class="filter-btn active" data-category="all">All Tools</button>
-                                <button class="filter-btn" data-category="Live Tools">Live Tools</button>
-                                <button class="filter-btn" data-category="Simulation">Simulation</button>
-                                <button class="filter-btn" data-category="Education & Advisory">Education & Advisory</button>
+                            <div class="filter-buttons" role="group" aria-label="Filter tools by category">
+                                <button type="button" class="filter-btn active" data-category="all" aria-pressed="true">All Tools</button>
+                                <button type="button" class="filter-btn" data-category="Bedside Aids" aria-pressed="false">Bedside Aids</button>
+                                <button type="button" class="filter-btn" data-category="Simulation" aria-pressed="false">Simulation</button>
+                                <button type="button" class="filter-btn" data-category="Education &amp; Advisory" aria-pressed="false">Education &amp; Advisory</button>
                             </div>
 
                             <div class="tag-filter-container">
-                                <select id="tagFilter" class="tag-select">
+                                <select id="tagFilter" class="tag-select" aria-label="Filter tools by tag">
                                     <option value="">Filter by Tag (Any)</option>
                                 </select>
                             </div>
@@ -131,18 +161,27 @@
                     <div class="tools-grid" id="toolsGrid">
                     </div>
 
-                    <div class="no-results" id="noResults" style="display: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="no-results" id="noResults" style="display: none;" role="status">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
                         <h3>No tools found</h3>
                         <p>Try adjusting your search or filter criteria</p>
-                        <button id="clearSearchBtn" class="tool-link" style="margin-top: 1rem; cursor: pointer; border:none;">Clear Search</button>
+                        <button type="button" id="clearSearchBtn" class="tool-link button-reset no-results-btn">Clear Search</button>
                     </div>
+
+                    <!-- Mobile-only archive, below the tools and collapsed. Hidden on desktop, where the sidebar shows it -->
+                    <details class="mobile-archive-wrapper" id="mobileArchiveWrapper">
+                        <summary class="subsection-title">Evidence Rundown archive: all past issues</summary>
+                        <div class="archive-filter">
+                            <select id="mobileArchiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
+                        </div>
+                        <div class="updates-timeline" id="mobileUpdatesTimeline"></div>
+                    </details>
                 </div>
 
-                <aside class="sidebar-column">
+                <aside class="sidebar-column" aria-label="Evidence Rundown archive">
                     <div class="sidebar-widget">
                         <h3 class="widget-title">Evidence Rundown Archive</h3>
                         <div class="archive-filter">
@@ -199,39 +238,40 @@
         </div>
     </section>
 
-    <section class="newsletter-section" id="newsletter" style="background-color: var(--white); padding: 4rem 0;">
+    <section class="newsletter-section" id="newsletter">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Join Our Mailing List</h2>
                 <p class="section-subtitle">Select the updates you wish to receive</p>
             </div>
-            <div style="max-width: 600px; margin: 0 auto; background-color: #f9fafb; padding: 2rem; border-radius: 1rem; border: 1px solid var(--border-color);">
-                
-                <form id="newsletterForm" name="newsletter" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    
+            <div class="newsletter-card">
+
+                <form id="newsletterForm" name="newsletter" class="newsletter-form" novalidate>
+
                     <!-- Honeypot field — hidden from real users, catches bots -->
-                    <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off">
-                    
+                    <input type="text" name="_honeypot" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
                     <div>
-                        <label for="email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Email Address</label>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem; border: 2px solid var(--border-color); border-radius: 0.5rem; font-size: 1rem;">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" required autocomplete="email" class="form-input">
                     </div>
-                    <div>
-                        <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">Update Preferences</p>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
+                    <fieldset class="form-fieldset">
+                        <legend class="form-label">Update Preferences</legend>
+                        <label class="checkbox-label">
                             <input type="checkbox" name="preferences[]" value="Weekly EM Evidence Updates"> Weekly EM Evidence Updates
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
+                        <label class="checkbox-label">
                             <input type="checkbox" name="preferences[]" value="Monthly PHEM Evidence Updates"> Monthly PHEM Evidence Updates
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); cursor: pointer;">
+                        <label class="checkbox-label">
                             <input type="checkbox" name="preferences[]" value="Monthly Anaesthetics and ICM Evidence Updates"> Monthly Anaesthetics and ICM Evidence Updates
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); cursor: pointer;">
+                        <label class="checkbox-label">
                             <input type="checkbox" name="preferences[]" value="Website Updates"> Website Updates
                         </label>
-                    </div>
-                    <button type="submit" class="tool-link" style="border: none; width: 100%; cursor: pointer;">Subscribe</button>
+                    </fieldset>
+                    <button type="submit" class="tool-link button-reset newsletter-submit">Subscribe</button>
+                    <p class="form-privacy">We use Loops to send our emails, and every email has an unsubscribe link. See our <a href="privacy.html">privacy notice</a>.</p>
                 </form>
             </div>
         </div>
@@ -241,7 +281,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="emevidence_logo.png" alt="EM Evidence Logo" class="footer-logo">
+                    <picture>
+                        <source srcset="icons/logo-256.webp" type="image/webp">
+                        <img src="icons/logo-256.png" alt="EM Evidence logo" class="footer-logo" width="80" height="80" loading="lazy">
+                    </picture>
                     <p class="footer-text">EM Evidence</p>
                     <p class="footer-text">Educational tools for Emergency Medicine practitioners</p>
                     <a href="mailto:emevidence999@gmail.com" class="footer-email-link">
@@ -256,6 +299,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#newsletter">Newsletter</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -269,12 +313,12 @@
             </div>
             
             <div class="footer-bottom">
-                <div class="governance-section" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <div class="governance-section">
                     <a href="mailto:emevidence999@gmail.com?subject=Urgent%20Clinical%20Correction" class="report-issue-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         Report Clinical Issue
                     </a>
-                    <a href="mailto:emevidence999@gmail.com?subject=New%20Tool%20Suggestion" class="report-issue-btn" style="background-color: var(--primary-blue);">
+                    <a href="mailto:emevidence999@gmail.com?subject=New%20Tool%20Suggestion" class="report-issue-btn report-issue-btn-blue">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
                         Suggest a Tool
                     </a>
@@ -290,29 +334,29 @@
         </div>
     </footer>
 
-    <!-- Subscribe success banner (shown via JS when ?subscribed=true) -->
-    <div id="subscribeSuccessBanner" style="display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:9999; background:#1e3a5f; color:#ffffff; padding:16px 28px; border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.25); font-size:15px; font-weight:500; text-align:center; max-width:90vw;">
+    <!-- Subscribe success banner (shown by subscribe.js) -->
+    <div id="subscribeSuccessBanner" class="subscribe-banner" role="status" hidden>
         ✅ You're subscribed! Check your inbox for a welcome email.
-        <button onclick="document.getElementById('subscribeSuccessBanner').style.display='none'" style="margin-left:16px; background:rgba(255,255,255,0.15); border:none; color:#fff; cursor:pointer; border-radius:6px; padding:4px 10px; font-size:13px;">✕</button>
+        <button type="button" id="subscribeBannerClose" class="subscribe-banner-close" aria-label="Dismiss">✕</button>
     </div>
 
-    <div class="tool-modal" id="toolModal">
+    <div class="tool-modal" id="toolModal" aria-hidden="true">
         <div class="tool-modal-backdrop"></div>
-        <div class="tool-modal-container">
+        <div class="tool-modal-container" role="dialog" aria-modal="true" aria-labelledby="modalToolName">
             <div class="tool-modal-header">
                 <div class="tool-modal-title">
                     <span id="modalToolName">Tool Name</span>
                 </div>
                 <div class="tool-modal-actions">
-                    <button class="tool-modal-btn" id="openInNewTab" title="Open in new tab">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button type="button" class="tool-modal-btn" id="openInNewTab" title="Open in new tab" aria-label="Open in new tab">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                             <polyline points="15 3 21 3 21 9"></polyline>
                             <line x1="10" y1="14" x2="21" y2="3"></line>
                         </svg>
                     </button>
-                    <button class="tool-modal-btn tool-modal-close" id="closeModal" title="Close">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button type="button" class="tool-modal-btn tool-modal-close" id="closeModal" title="Close" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
@@ -324,20 +368,21 @@
                     <div class="loader-spinner"></div>
                     <p>Loading tool...</p>
                 </div>
-                <div class="tool-modal-error" id="modalError" style="display: none; position: absolute; top:0; left:0; right:0; bottom:0; flex-direction: column; align-items: center; justify-content: center; background: white; z-index: 9;">
-                    <p style="margin-bottom: 1rem; color: #666;">Taking longer than expected...</p>
-                    <button id="forceOpenBtn" class="tool-link" style="border:none; cursor: pointer;">
+                <div class="tool-modal-error" id="modalError" style="display: none;">
+                    <p>Taking longer than expected...</p>
+                    <button type="button" id="forceOpenBtn" class="tool-link button-reset">
                         Click to open directly
                     </button>
                 </div>
-                <iframe id="toolIframe" class="tool-iframe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="toolIframe" class="tool-iframe" title="Tool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
+    <script src="vendor/fuse.min.js"></script>
     <script src="tools.js"></script>
     <script src="updates.js"></script>
     <script src="app.js"></script>
-    <script src="subscribe.js?v=2"></script>
+    <script src="subscribe.js"></script>
 </body>
 </html>

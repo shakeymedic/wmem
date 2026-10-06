@@ -1,17 +1,26 @@
 [build]
   functions = "netlify/functions"
-  edge_functions = "netlify/edge-functions"
 
 [functions]
   node_bundler = "esbuild"
 
+# ── Security headers ──────────────────────────────────────────
+# The Content-Security-Policy lists every outside service the site uses:
+#   app.loops.so            mailing-list sign-up (subscribe.js)
+#   ingesteer…nsvcs.net     Netlify Real User Monitoring
+#   drive.google.com        newsletter PDF preview
+#   *.netlify.app           the tools, opened in the in-page viewer
+# A tool hosted anywhere else needs adding to frame-src (or openInNewTab: true in tools.js).
 [[headers]]
   for = "/*"
   [headers.values]
-    X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://app.loops.so https://ingesteer.services-prod.nsvcs.net; frame-src https://drive.google.com https://*.netlify.app; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'"
 
+# ── Caching ───────────────────────────────────────────────────
+# File names don't change between releases, so pages, scripts and styles are
+# re-checked on every visit (cheap: unchanged files return 304 Not Modified).
 [[headers]]
   for = "*.js"
   [headers.values]
@@ -20,12 +29,102 @@
 [[headers]]
   for = "*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.png"
   [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Rename the font file if it is ever replaced
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# ── Old domains → emevidence.org ──────────────────────────────
+[[redirects]]
+  from = "https://wmebem.co.uk/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.wmebem.co.uk/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://wmebem.com/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.wmebem.com/*"
+  to = "https://emevidence.org/:splat"
+  status = 301
+  force = true
+
+# ── Repo files that aren't part of the website ────────────────
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/EMAIL_AUTOMATION_SETUP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/newsletters/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/screenshots/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
 
 # ── Simple anchor redirects ───────────────────────────────────
 [[redirects]]
@@ -42,16 +141,3 @@
   from = "/contact"
   to = "/#contact"
   status = 301
-
-# ── Old domain redirects ──────────────────────────────────────
-[[redirects]]
-  from = "/*"
-  to = "https://emevidence.org/:splat"
-  status = 301
-  conditions = {Host = ["wmebem.co.uk", "www.wmebem.co.uk"]}
-
-[[redirects]]
-  from = "/*"
-  to = "https://emevidence.org/:splat"
-  status = 301
-  conditions = {Host = ["wmebem.com", "www.wmebem.com"]}

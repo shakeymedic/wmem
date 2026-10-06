@@ -1,32 +1,8 @@
 // Tools data - EMEvidence
 const tools = [
-    // --- HIGHLIGHTED APPS ---
+    // --- HIGHLIGHTED APPS (isNew: true puts a tool in the Highlighted Apps row) ---
     {
-        id: "halo-qrh-featured",
-        name: "HALO QRH",
-        description: "Quick Reference Handbook for HALO (Halo ring-fixator) procedure management in the emergency department — evidence-based guidance for spinal precautions and MRI compatibility",
-        category: "Live Tools",
-        tags: ["HALO", "spinal", "neurosurgery", "procedures", "QRH", "reference"],
-        url: "https://wmebemhaloqrh.netlify.app/",
-        featured: true,
-        isNew: true,
-        icon: "procedure",
-        screenshot: "screenshots/halo-qrh.png"
-    },
-    {
-        id: "qip-assist-featured",
-        name: "QIP Assist",
-        description: "Quality Improvement Project assistant tool — helps EM clinicians design, track, and present QIP work for portfolio and ARCP requirements",
-        category: "Education & Advisory",
-        tags: ["QIP", "quality improvement", "portfolio", "ARCP", "training"],
-        url: "https://wmebemqipassist.netlify.app/",
-        featured: true,
-        isNew: true,
-        icon: "assessment",
-        screenshot: "screenshots/qip-assist.png"
-    },
-    {
-        id: "em-simulator-featured",
+        id: "em-simulator",
         name: "Medical Simulation App",
         description: "Interactive emergency medicine simulation cases for training and self-directed learning — resuscitation, majors, and paediatric scenarios",
         category: "Simulation",
@@ -34,11 +10,11 @@ const tools = [
         url: "https://wmebemsim.netlify.app/",
         featured: true,
         isNew: true,
-        icon: "simulation",
+        icon: "monitor",
         screenshot: "screenshots/em-simulator.png"
     },
     {
-        id: "frcem-revision-featured",
+        id: "frcem-revision",
         name: "FRCEM & MRCEM Revision App",
         description: "Exam revision tool for FRCEM and MRCEM candidates — practice questions, OSCE preparation, and high-yield topic revision",
         category: "Education & Advisory",
@@ -50,12 +26,12 @@ const tools = [
         icon: "assessment",
         screenshot: "screenshots/frcem-revision.png"
     },
-    // --- LIVE TOOLS (For Real Clinical Use) ---
+    // --- BEDSIDE AIDS (Cognitive aids for use at the bedside) ---
     {
         id: "als-app",
         name: "Cardiac Arrest App",
         description: "Real-time tool for managing and documenting actual cardiac arrest resuscitations in the emergency department",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["resuscitation", "cardiac", "ALS", "documentation", "real-time"],
         url: "https://wmebemals.netlify.app",
         featured: true,
@@ -66,7 +42,7 @@ const tools = [
         id: "major-trauma",
         name: "Major Trauma Management",
         description: "Complete app to run and document major trauma cases including primary and secondary survey protocols",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["trauma", "ATLS", "primary survey", "secondary survey", "documentation"],
         url: "https://majortrauma.netlify.app",
         featured: true,
@@ -77,7 +53,7 @@ const tools = [
         id: "trauma-briefing",
         name: "Trauma Briefing & Zero Point",
         description: "Digital aid for the zero point survey and team briefing prior to trauma patient arrival",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["trauma", "briefing", "leadership", "zero point", "team"],
         url: "https://wmebemtraumabriefing.netlify.app",
         featured: true,
@@ -85,21 +61,21 @@ const tools = [
         screenshot: "screenshots/trauma-briefing.png"
     },
     {
-        id: "Back Pain Proforma",
+        id: "back-pain-proforma",
         name: "Back Pain Proforma",
         description: "Back Pain Proforma for BHH and GHH",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["documentation"],
         url: "https://bhhbackpain.netlify.app",
         featured: true,
-        icon: "Back Pain",
+        icon: "assessment",
         screenshot: "screenshots/back-pain.png"
     },
     {
         id: "sedation",
         name: "Procedural Sedation Tool",
         description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["sedation", "procedures", "safety", "documentation", "monitoring"],
         url: "https://sedation.netlify.app",
         featured: true,
@@ -110,7 +86,7 @@ const tools = [
         id: "rsi-tool",
         name: "RSI Management Tool",
         description: "Structured tool to assist with planning, execution, and documentation of rapid sequence intubation in the ED",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["RSI", "airway", "intubation", "safety", "checklist"],
         url: "https://wmebemrsi.netlify.app",
         featured: true,
@@ -121,7 +97,7 @@ const tools = [
         id: "rosc-management",
         name: "Post-ROSC Management",
         description: "Dedicated tool for the receipt and management of post-return of spontaneous circulation patients in the ED",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["cardiac", "resuscitation", "ROSC", "critical care"],
         url: "https://wmebemcardiacarrest.netlify.app",
         featured: false,
@@ -132,7 +108,7 @@ const tools = [
         id: "em-obstetrics",
         name: "Obstetric Emergencies",
         description: "Real-time cognitive aid for managing obstetric emergencies including PPH, eclampsia, and maternal resuscitation",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["obstetrics", "pregnancy", "emergency", "PPH", "resuscitation"],
         url: "https://emobstetrics.netlify.app",
         featured: true,
@@ -143,7 +119,7 @@ const tools = [
         id: "sedation-agitated",
         name: "Agitated Patient Sedation",
         description: "Protocol for the safe sedation and management of patients with acute behavioural disturbance",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["sedation", "mental health", "agitated", "ABD", "safety"],
         url: "https://wmebemsedationagitated.netlify.app",
         featured: false,
@@ -154,7 +130,7 @@ const tools = [
         id: "paeds-trauma-imaging",
         name: "Paeds Trauma Imaging",
         description: "Decision support tool for CT imaging in paediatric trauma based on latest Royal College of Radiology advice",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["paediatrics", "trauma", "imaging", "radiology", "CT"],
         url: "https://wmebempaedstraumaimaging.netlify.app",
         featured: false,
@@ -165,7 +141,7 @@ const tools = [
         id: "visual-acuity",
         name: "Visual Acuity Screen",
         description: "Digital visual acuity testing chart for bedside eye assessment",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["ophthalmology", "eyes", "vision", "assessment"],
         url: "https://wmebemvisualacuity.netlify.app",
         featured: false,
@@ -176,7 +152,7 @@ const tools = [
         id: "paed-first-seizure",
         name: "Paediatric First Seizure Assessment",
         description: "Structured assessment and documentation tool for children presenting with a first seizure, referencing NICE CG137 / NG217 and RCPCH guidance, with red-flag prompts and a pre-populated EPR note",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["paediatrics", "seizure", "epilepsy", "NICE", "RCPCH", "documentation", "red flags"],
         url: "https://paedfirstseizure.netlify.app",
         featured: false,
@@ -185,9 +161,10 @@ const tools = [
     },
     {
         id: "major-incident-triage",
+        openInNewTab: true,
         name: "Major Incident Triage Tool",
         description: "Offline-capable app for triaging and documenting casualties in a major incident (TST and MITT), with patient handover by QR code, METHANE reporting and casualty register export",
-        category: "Live Tools",
+        category: "Bedside Aids",
         tags: ["major incident", "triage", "TST", "MITT", "METHANE", "handover", "offline"],
         url: "https://majorincident.netlify.app",
         featured: false,
@@ -267,6 +244,7 @@ const tools = [
     },
     {
         id: "qip-assist",
+        isNew: true,
         name: "QIP Assist",
         description: "Interactive guide to help doctors design, execute and visualize RCEM Quality Improvement Projects",
         category: "Education & Advisory",
@@ -279,6 +257,7 @@ const tools = [
     },
     {
         id: "halo-qrh",
+        isNew: true,
         name: "HALO QRH",
         description: "Digital Quick Reference Handbook (QRH) for High Acuity Low Occurrence emergency situations",
         category: "Education & Advisory",
@@ -312,7 +291,7 @@ const tools = [
         screenshot: "screenshots/hyponatraemia.png"
     },
     {
-        id: "AF in the ED",
+        id: "af-in-the-ed",
         name: "AF in the ED",
         description: "Guide on managing new AF in the ED",
         category: "Education & Advisory",

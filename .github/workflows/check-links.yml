@@ -1,0 +1,21 @@
+name: Check links
+
+# Weekly check that every tool and newsletter link opens for the public.
+# A failed run means a link is broken: the log lists which ones.
+on:
+  schedule:
+    - cron: "0 7 * * 1"   # Mondays 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node scripts/check-links.js
