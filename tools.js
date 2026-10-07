@@ -263,7 +263,6 @@ const tools = [
         tags: ["QIP", "audit", "governance", "education", "management"],
         url: "https://wmebemqipassist.netlify.app",
         featured: false,
-        beta: true,
         icon: "guidelines",
         screenshot: "screenshots/qip-assist.png"
     },
@@ -276,7 +275,6 @@ const tools = [
         tags: ["resuscitation", "guidelines", "checklist", "HALO"],
         url: "https://wmebemhaloqrh.netlify.app",
         featured: false,
-        beta: true,
         icon: "guidelines",
         screenshot: "screenshots/halo-qrh.png"
     },
