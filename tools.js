@@ -539,17 +539,6 @@ const tools = [
         screenshot: "screenshots/uhb-pe.png"
     },
     {
-        id: "bhh-halo-handbook",
-        name: "BHH HALO Handbook",
-        description: "Birmingham Heartlands resus area handbook for High Acuity, Low Occurrence procedures, with a team brief script and procedure pages",
-        category: "UHB Tools",
-        tags: ["HALO", "procedures", "resus", "BHH", "handbook"],
-        url: "https://wmebemhalo.netlify.app",
-        featured: false,
-        icon: "procedure",
-        screenshot: "screenshots/bhh-halo-handbook.png"
-    },
-    {
         id: "bhh-handover",
         name: "BHH ED Handover",
         description: "Structured daily ED handover prompt for Birmingham Heartlands, with handover teaching, alerts and night handover (landscape screen format)",
