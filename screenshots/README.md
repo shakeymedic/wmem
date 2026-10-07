@@ -4,7 +4,7 @@ This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
-Each tool in `tools.js` points at one of these files (78 in total).
+Each tool in `tools.js` points at one of these files (77 in total).
 
 1. `em-simulator.png` - Medical Simulation App
 2. `frcem-revision.png` - FRCEM & MRCEM Revision App
@@ -52,38 +52,37 @@ Each tool in `tools.js` points at one of these files (78 in total).
 44. `paeds-halo-qrh.png` - HALO QRH (Paediatrics)
 45. `bhh-mhp.png` - BHH Major Haemorrhage Procedure
 46. `uhb-pe.png` - UHB PE Guideline
-47. `bhh-halo-handbook.png` - BHH HALO Handbook
-48. `bhh-handover.png` - BHH ED Handover
-49. `niv-hamilton-t1.png` - NIV Training: Hamilton T1
-50. `regional-anaesthesia.png` - Regional Anaesthesia Guide
-51. `head-injury.png` - Head Injury Pathway
-52. `obs-gynae.png` - Obstetric & Gynae Emergencies
-53. `heat-illness.png` - Heat-Related Illness
-54. `aortic-dissection.png` - Acute Aortic Dissection
-55. `delirium.png` - Delirium in the ED
-56. `hypothermia.png` - Hypothermia
-57. `dka.png` - Diabetic Ketoacidosis
-58. `ketoacidosis.png` - Ketoacidosis in the ED
-59. `lactate.png` - Lactic Acidosis
-60. `blood-gas-analysers.png` - How Blood Gas Analysers Work
-61. `vq-mismatch.png` - V/Q Mismatch Explorer
-62. `pocus-guide.png` - POCUS Guide for EM Registrars
-63. `confidentiality.png` - Confidentiality in EM
-64. `risk-communication.png` - Risk Communication Tool
-65. `bayesian.png` - Bayesian vs Frequentist Reasoning
-66. `wellness-hub.png` - EM Wellness Hub
-67. `abc-sepsis.png` - ABC-Sepsis Trial
-68. `espb.png` - ESP Block for Rib Fractures
-69. `colles.png` - Nerve Blocks for Colles' Fractures
-70. `furosemide.png` - IV Furosemide in Heart Failure
-71. `ketamine-propofol.png` - Ketamine vs Propofol for RSI in TBI
-72. `mannitol-hts.png` - Mannitol vs Hypertonic Saline
-73. `neurocardiac.png` - The Neurocardiac Axis in TBI
-74. `nibp-iabp.png` - NIBP vs Invasive BP
-75. `admission-rates.png` - The Admission Lottery?
-76. `andromeda-shock-2.png` - ANDROMEDA-SHOCK-2
-77. `em-pharmacotherapy-2024.png` - EM Pharmacotherapy 2024
-78. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
+47. `bhh-handover.png` - BHH ED Handover
+48. `niv-hamilton-t1.png` - NIV Training: Hamilton T1
+49. `regional-anaesthesia.png` - Regional Anaesthesia Guide
+50. `head-injury.png` - Head Injury Pathway
+51. `obs-gynae.png` - Obstetric & Gynae Emergencies
+52. `heat-illness.png` - Heat-Related Illness
+53. `aortic-dissection.png` - Acute Aortic Dissection
+54. `delirium.png` - Delirium in the ED
+55. `hypothermia.png` - Hypothermia
+56. `dka.png` - Diabetic Ketoacidosis
+57. `ketoacidosis.png` - Ketoacidosis in the ED
+58. `lactate.png` - Lactic Acidosis
+59. `blood-gas-analysers.png` - How Blood Gas Analysers Work
+60. `vq-mismatch.png` - V/Q Mismatch Explorer
+61. `pocus-guide.png` - POCUS Guide for EM Registrars
+62. `confidentiality.png` - Confidentiality in EM
+63. `risk-communication.png` - Risk Communication Tool
+64. `bayesian.png` - Bayesian vs Frequentist Reasoning
+65. `wellness-hub.png` - EM Wellness Hub
+66. `abc-sepsis.png` - ABC-Sepsis Trial
+67. `espb.png` - ESP Block for Rib Fractures
+68. `colles.png` - Nerve Blocks for Colles' Fractures
+69. `furosemide.png` - IV Furosemide in Heart Failure
+70. `ketamine-propofol.png` - Ketamine vs Propofol for RSI in TBI
+71. `mannitol-hts.png` - Mannitol vs Hypertonic Saline
+72. `neurocardiac.png` - The Neurocardiac Axis in TBI
+73. `nibp-iabp.png` - NIBP vs Invasive BP
+74. `admission-rates.png` - The Admission Lottery?
+75. `andromeda-shock-2.png` - ANDROMEDA-SHOCK-2
+76. `em-pharmacotherapy-2024.png` - EM Pharmacotherapy 2024
+77. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
 
 When you add a tool to `tools.js`, add its file name here too.
 
@@ -91,13 +90,13 @@ When you add a tool to `tools.js`, add its file name here too.
 
 ### Method 1: Take Screenshots from Your Browser
 
-1. Open each tool in your browser
-2. Press F11 for fullscreen (or use your browser's fullscreen mode)
-3. Take a screenshot:
+0. Open each tool in your browser
+1. Press F11 for fullscreen (or use your browser's fullscreen mode)
+2. Take a screenshot:
    - **Windows**: Windows Key + Shift + S
    - **Mac**: Cmd + Shift + 4
-4. Save the screenshot with the correct filename (see list above)
-5. Place it in this `screenshots` folder
+3. Save the screenshot with the correct filename (see list above)
+4. Place it in this `screenshots` folder
 
 ### Method 2: Use Browser Extensions
 
@@ -107,10 +106,10 @@ Install a screenshot extension like:
 
 ### Method 3: Use Online Tools
 
-1. Go to https://www.screenshotmachine.com/
-2. Enter your tool URL
-3. Download the screenshot
-4. Rename and save to this folder
+0. Go to https://www.screenshotmachine.com/
+1. Enter your tool URL
+2. Download the screenshot
+3. Rename and save to this folder
 
 ## Recommended Screenshot Settings
 
@@ -144,11 +143,11 @@ If a screenshot is missing, the card will display:
 
 If you want to do them all at once:
 
-1. Open each tool in a separate browser tab
-2. Use a browser extension to capture all tabs
-3. Rename files according to the list above
-4. Move all files to this folder
-5. Commit them to this repository; Netlify redeploys the site automatically
+0. Open each tool in a separate browser tab
+1. Use a browser extension to capture all tabs
+2. Rename files according to the list above
+3. Move all files to this folder
+4. Commit them to this repository; Netlify redeploys the site automatically
 
 That's it! Your tool cards will now show beautiful screenshots.
 
