@@ -258,7 +258,7 @@ const tools = [
         id: "qip-assist",
         isNew: true,
         name: "QIP Assist",
-        description: "Interactive guide to help doctors design, execute and visualize RCEM Quality Improvement Projects",
+        description: "Interactive guide to help doctors design, execute and visualise RCEM Quality Improvement Projects",
         category: "Education & Advisory",
         tags: ["QIP", "audit", "governance", "education", "management"],
         url: "https://wmebemqipassist.netlify.app",
@@ -380,7 +380,7 @@ const tools = [
     {
         id: "triage-app",
         name: "Experimental Triage",
-        description: "Experimental digital triage support tool for initial patient assessment and categorization",
+        description: "Experimental digital triage support tool for initial patient assessment and categorisation",
         category: "Education & Advisory",
         tags: ["triage", "assessment", "experimental"],
         url: "https://wmebemtriage.netlify.app",
@@ -425,7 +425,7 @@ const tools = [
     {
         id: "dvla-poster",
         name: "DVLA Advice Poster",
-        description: "Quick-reference visual poster summarizing common DVLA driving restrictions for ED patients",
+        description: "Quick-reference visual poster summarising common DVLA driving restrictions for ED patients",
         category: "Education & Advisory",
         tags: ["DVLA", "legal", "poster", "reference"],
         url: "https://dvlaemposter.netlify.app",
