@@ -87,11 +87,13 @@ async function writeSubscribers(subscribers, sha, message, token) {
 }
 
 // ── Webhook signature verification ─────────────────────────────────────────
-// Loops uses HMAC-SHA256; signature is in Webhook-Signature header as
-// "v1,<base64>" or comma-separated list of such values.
+// Loops uses HMAC-SHA256 (https://loops.so/docs/webhooks). The Webhook-Signature
+// header holds one or more space-separated "v1,<base64>" values. The signing
+// secret looks like "whsec_<base64>": the HMAC key is the base64-decoded part
+// after the prefix, not the secret text itself.
 
 async function verifySignature(rawBody, headers, secret) {
-  if (!secret) return true; // skip if secret not configured (dev mode)
+  if (!secret) return false;
 
   const sigHeader = headers["webhook-signature"] || headers["Webhook-Signature"] || "";
   const timestamp = headers["webhook-timestamp"] || headers["Webhook-Timestamp"] || "";
@@ -104,17 +106,20 @@ async function verifySignature(rawBody, headers, secret) {
   if (!sentAt || Math.abs(Date.now() / 1000 - sentAt) > 5 * 60) return false;
 
   const enc = new TextEncoder();
+  const keyBytes = Buffer.from(secret.replace(/^whsec_/, ""), "base64");
+  if (!keyBytes.length) return false;
   const key = await crypto.subtle.importKey(
-    "raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["verify"]
+    "raw", keyBytes, { name: "HMAC", hash: "SHA-256" }, false, ["verify"]
   );
 
   // Loops signs: "<webhook-id>.<timestamp>.<body>"
   const webhookId = headers["webhook-id"] || headers["Webhook-Id"] || "";
   const toSign = `${webhookId}.${timestamp}.${rawBody}`;
 
-  const signatures = sigHeader.split(" ");
+  const signatures = sigHeader.trim().split(/\s+/);
   for (const sig of signatures) {
-    const b64 = sig.startsWith("v1,") ? sig.slice(3) : sig;
+    if (!sig.startsWith("v1,")) continue;
+    const b64 = sig.slice(3);
     try {
       const sigBytes = Buffer.from(b64, "base64");
       const valid = await crypto.subtle.verify(
@@ -134,9 +139,6 @@ exports.handler = async (event) => {
   }
 
   const secret = process.env.LOOPS_WEBHOOK_SECRET || "";
-  if (!secret) {
-    console.warn("LOOPS_WEBHOOK_SECRET not set — webhook signatures are NOT being checked");
-  }
   const token  = process.env.GITHUB_TOKEN;
 
   // Parse body first so we can handle test events before checking token
@@ -155,9 +157,13 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: "OK — test event acknowledged" };
   }
 
-  // Verify signature for real contact events
+  // Verify signature for real contact events; without a secret nothing can be trusted
+  if (!secret) {
+    console.error("LOOPS_WEBHOOK_SECRET not set — refusing unsigned subscriber changes");
+    return { statusCode: 500, body: "Server configuration error: LOOPS_WEBHOOK_SECRET missing" };
+  }
   const valid = await verifySignature(event.body, event.headers, secret);
-  if (secret && !valid) {
+  if (!valid) {
     console.warn("Invalid webhook signature");
     return { statusCode: 401, body: "Invalid signature" };
   }

@@ -595,7 +595,7 @@ html.dark-mode .update-tag {
 }
 
 .tool-card.featured:has(.beta-badge)::after {
-    right: 4.5rem;
+    right: 5.5rem;
     background: rgba(255, 255, 255, 0.92);
     color: var(--primary-blue);
     box-shadow: none;
