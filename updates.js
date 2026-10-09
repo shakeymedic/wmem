@@ -17,6 +17,20 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "9 Oct 2026",
+    label: "Issue 33 \u2014 EM Evidence Rundown",
+    links: [
+      { title: "EM Evidence Rundown Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X" }
+    ]
+  },
+  {
+    date: "9 Oct 2026",
+    label: "Major Trauma Evidence Rundown \u2014 Issue 7 (October 2026)",
+    links: [
+      { title: "Major Trauma Evidence Rundown October 2026.pdf", driveId: "16JecnQS-vJ1EB6AHVbgJkyMWYppJyn21" }
+    ]
+  },
+  {
     date: "3 Oct 2026",
     label: "Major Trauma Evidence Rundown — Issue 7 (October 2026)",
     links: [
