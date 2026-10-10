@@ -451,8 +451,8 @@ const tools = [
     },
     {
         id: "dvla-poster",
-        name: "DVLA Fitness to Drive: A3 Poster",
-        description: "Printable A3 at-a-glance poster of common DVLA driving rules for the ED. For more detail and discharge letters, use the DVLA Decision Tool",
+        name: "DVLA Fitness to Drive: A3 Posters",
+        description: "Two printable A3 posters for the ED: a simple one listing the diagnoses that should prompt a check of the DVLA guidance, and a detailed one showing the Group 1 and Group 2 action for common conditions. For discharge advice letters, use the DVLA Decision Tool",
         category: "Education & Advisory",
         group: "Law, risk & evidence",
         tags: ["DVLA", "legal", "poster", "reference"],
