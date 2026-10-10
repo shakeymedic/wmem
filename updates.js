@@ -5,6 +5,8 @@
 //   date:    "2 Oct 2026" (day, short month, year)
 //   label:   descriptive name, e.g. "EM Evidence Rundown — Issue 32" (shown in the Latest banner)
 //   audioId: Drive ID of the audio summary for that issue (not a separate link)
+//   audioBytes, audioSeconds: the MP3's size and length; with these the audio is also a podcast episode (scripts/build-podcast.js)
+//   spotifyEpisodeId: the episode's ID on Spotify, once Spotify has picked it up from the podcast feed
 //   htmlPath: the issue's page on this site, e.g. "/newsletters/em/issue-32.html" (made by
 //            scripts/build-issue-pages.py). On the entry when it has one PDF; on each link when
 //            an entry holds several issues.
@@ -24,7 +26,7 @@ const updates = [
     label: "Issue 33 \u2014 EM Evidence Rundown",
     htmlPath: "/newsletters/em/issue-33.html",
     links: [
-      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X", audioId: "1_iDS3cavpFjys9uRbx7C5kmpdjkp-WTX" }
+      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X", audioId: "1_iDS3cavpFjys9uRbx7C5kmpdjkp-WTX", audioBytes: 5131479, audioSeconds: 641 }
     ]
   },
   {
