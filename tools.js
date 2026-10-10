@@ -556,6 +556,17 @@ const tools = [
         screenshot: "screenshots/bhh-mhp.png"
     },
     {
+        id: "mts-major-trauma",
+        name: "MTS Major Trauma Admission Tool",
+        description: "Admission documentation for Major Trauma Service patients: zero point survey, ATMIST handover, specialty attendance, primary survey and timings, with an initial note to copy into the record",
+        category: "UHB Tools",
+        tags: ["trauma", "major trauma", "documentation", "ATMIST", "primary survey"],
+        url: "https://mtsmajortraumatool.netlify.app",
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/mts-major-trauma.png"
+    },
+    {
         id: "uhb-pe",
         name: "UHB PE Guideline",
         description: "Interactive version of the University Hospitals Birmingham pulmonary embolism guideline (CG062): diagnosis, Wells score, thrombolysis, low-risk PE and anticoagulation",
