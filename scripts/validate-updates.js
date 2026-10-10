@@ -34,7 +34,16 @@ function parseDate(s) {
 
 const DRIVE_ID = /^[A-Za-z0-9_-]{25,}$/;
 const ENTRY_KEYS = new Set(["date", "label", "tags", "htmlPath", "links"]);
-const LINK_KEYS = new Set(["title", "driveId", "audioId"]);
+const LINK_KEYS = new Set(["title", "driveId", "audioId", "htmlPath"]);
+const HTML_PATH = /^\/newsletters\/[a-z]+\/[a-z0-9-]+\.html$/;
+const pages = new Map();
+// An issue page must be a file in this repo, so a "Read on site" link can never 404
+function checkPage(where, p) {
+    if (typeof p !== "string" || !HTML_PATH.test(p)) return errors.push(`${where}: htmlPath "${p}" should look like "/newsletters/em/issue-32.html"`);
+    if (pages.has(p)) return errors.push(`${where}: htmlPath ${p} is already used by ${pages.get(p)}`);
+    pages.set(p, where);
+    if (!fs.existsSync(path.join(__dirname, "..", p))) errors.push(`${where}: htmlPath ${p} does not exist (run scripts/build-issue-pages.py, or remove htmlPath)`);
+}
 
 const errors = [];
 const seen = new Map();
@@ -65,10 +74,19 @@ ctx.updates.forEach((entry, i) => {
 
     if (!Array.isArray(entry.links) || entry.links.length === 0) return errors.push(`${where}: has no links`);
 
+    if (entry.htmlPath !== undefined) {
+        checkPage(where, entry.htmlPath);
+        if (entry.links.length > 1) errors.push(`${where}: has several PDFs, so put htmlPath on each link rather than on the entry`);
+    }
+
     entry.links.forEach((link, j) => {
         const lw = `${where}, link ${j + 1}`;
         for (const k of Object.keys(link)) {
             if (!LINK_KEYS.has(k)) errors.push(`${lw}: unknown field "${k}"${k === "audio" ? ' (put the audio file\'s ID in "audioId" on the issue\'s own link instead)' : ""}`);
+        }
+        if (link.htmlPath !== undefined) {
+            checkPage(lw, link.htmlPath);
+            if (entry.links.length === 1) errors.push(`${lw}: put htmlPath on the entry when it has only one PDF`);
         }
         if (typeof link.title !== "string" || !link.title.trim()) errors.push(`${lw}: missing title`);
         else {
@@ -87,6 +105,9 @@ ctx.updates.forEach((entry, i) => {
         }
     });
 });
+
+// Two htmlPath lines in one entry would pass the checks above (the second silently wins)
+if (/\n[ \t]*htmlPath:[^\n]*\n[ \t]*htmlPath:/.test(src)) errors.push("An entry has htmlPath twice; keep one");
 
 if (errors.length) fail(errors);
 console.log(`updates.js OK: ${ctx.updates.length} newsletter entries checked.`);

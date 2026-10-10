@@ -73,7 +73,7 @@
                     const series = seriesOf(u);
                     // With one PDF, the title is the link: a second button with the same words added nothing
                     const single = u.links.length === 1;
-                    const extras = u.htmlPath || u.links.some(l => l.audioId);
+                    const extras = u.htmlPath || u.links.some(l => l.audioId || l.htmlPath);
                     return `
                     <article class="archive-issue archive-series-${series.key}">
                         <div class="archive-issue-meta">
@@ -88,6 +88,7 @@
                             ${u.links.map(l => `
                                 ${single ? "" : `<a href="${driveUrl(l.driveId)}" target="_blank" rel="noopener" class="sidebar-link">${docIcon}${escapeText(displayTitle(l.title))}</a>`}
                                 ${l.audioId ? `<a href="${driveUrl(l.audioId)}" target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">${audioIcon}Audio summary</a>` : ""}
+                                ${l.htmlPath ? `<a href="${escapeText(l.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site<span class="visually-hidden">: ${escapeText(displayTitle(l.title))}</span> →</a>` : ""}
                             `).join("")}
                             ${u.htmlPath ? `<a href="${escapeText(u.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
                         </div>` : ""}

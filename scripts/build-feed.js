@@ -31,15 +31,17 @@ const items = ctx.updates.map(entry => {
     const date = toDate(entry.date);
     const series = ctx.seriesOf(entry).name;
     const main = entry.links[0];
+    const page = entry.htmlPath || main.htmlPath;
     const links = entry.links.map(l =>
         `<p><a href="${esc(drive(l.driveId))}">${esc(l.title.replace(/\.pdf$/i, ""))}</a>` +
-        (l.audioId ? ` · <a href="${esc(drive(l.audioId))}">Audio summary</a>` : "") + `</p>`
+        (l.audioId ? ` · <a href="${esc(drive(l.audioId))}">Audio summary</a>` : "") +
+        (l.htmlPath ? ` · <a href="${esc(SITE + l.htmlPath)}">Read on emevidence.org</a>` : "") + `</p>`
     ).join("");
     const description = `<p>${esc(series)}.</p>${links}` +
         (entry.htmlPath ? `<p><a href="${esc(SITE + entry.htmlPath)}">Read on emevidence.org</a></p>` : "");
     return `    <item>
       <title>${esc(entry.label)}</title>
-      <link>${esc(entry.htmlPath ? SITE + entry.htmlPath : drive(main.driveId))}</link>
+      <link>${esc(page ? SITE + page : drive(main.driveId))}</link>
       <guid isPermaLink="false">${esc(main.driveId)}</guid>
       ${date ? `<pubDate>${date.toUTCString()}</pubDate>` : ""}
       <category>${esc(series)}</category>
