@@ -322,7 +322,7 @@ const icons = {
 };
 
 // Bump when screenshots are replaced, so browsers fetch the new files instead of a stale or failed cached copy
-const SCREENSHOT_VERSION = '2026-10-10';
+const SCREENSHOT_VERSION = '2026-10-10b';
 
 // "Reviewed Oct 2026" line for tools with a lastReviewed date ("2026-10-07"); flagged once the two-yearly review is overdue
 const REVIEW_STALE_DAYS = 730;
