@@ -1,4 +1,13 @@
 // Tools data - EMEvidence
+//
+// Each entry: id, name, description, category, tags, url, icon, screenshot, plus optional
+//   featured: true      blue border and "Featured" badge
+//   isNew: true         also shown in the Highlighted Apps row
+//   beta: true          BETA badge
+//   openInNewTab: true  for tools that can't be framed (X-Frame-Options) or live outside *.netlify.app
+//   lastReviewed: "2026-10-07"   date the clinical content was last checked; shown on the card,
+//                                and flagged "Review due" once it is more than a year old
+//   reviewedBy: "J Turner"       optional, shown in the tooltip
 const tools = [
     // --- HIGHLIGHTED APPS (isNew: true puts a tool in the Highlighted Apps row) ---
     {

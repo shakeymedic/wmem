@@ -438,7 +438,7 @@ function buildTagFilter() {
     // Populate both desktop and mobile filter selects
     const tags = collectAllTags();
     const options = `<option value="">All topics</option>` +
-        tags.map(t => `<option value="${t}">${t}</option>`).join("");
+        tags.map(t => `<option value="${escapeText(t)}">${escapeText(t)}</option>`).join("");
 
     const sel = document.getElementById("archiveTagFilter");
     if (sel) {
@@ -465,6 +465,31 @@ function displayDate(s) {
 
 const displayTitle = t => t.replace(/\.pdf$/i, "");
 
+// Titles come from the newsletter pipeline, so escape them before they go into innerHTML
+const escapeText = v => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+// Which series an entry belongs to, worked out from its label (the pipeline doesn't record it)
+// Order here is the display order; the tests run most-specific first (see seriesOf)
+const SERIES = [
+    { key: "em", name: "EM Evidence Rundown", test: /.*/ },
+    { key: "phem", name: "PHEM Evidence Rundown", test: /\bphem\b|pre-?hospital/i },
+    { key: "anaes", name: "Anaesthetics & ICU Evidence Rundown", test: /anaesth|\bicu\b|\bicm\b/i },
+    { key: "trauma", name: "Major Trauma Evidence Rundown", test: /major trauma/i },
+    { key: "quarterly", name: "Quarterly State of the Science", test: /state of the science|\bq[1-4]\b|quarterly|ebook/i }
+];
+const SERIES_MATCH_ORDER = ["quarterly", "phem", "anaes", "trauma", "em"];
+function seriesOf(entry) {
+    const text = [entry.label, ...(entry.links || []).map(l => l.title), ...(entry.tags || [])].join(" ");
+    const key = SERIES_MATCH_ORDER.find(k => SERIES.find(s => s.key === k).test.test(text));
+    return SERIES.find(s => s.key === key);
+}
+
+// Year of an entry, from either date format; null if unreadable
+function entryYear(entry) {
+    const m = /(\d{4})/.exec(entry.date || "");
+    return m ? +m[1] : null;
+}
+
 function buildTimelineHTML(filtered) {
     if (filtered.length === 0) {
         return `<p class="empty-update">No updates available yet.</p>`;
@@ -477,7 +502,7 @@ function buildTimelineHTML(filtered) {
                     <a href="https://drive.google.com/file/d/${link.driveId}/view?usp=sharing"
                        target="_blank" rel="noopener" class="sidebar-link">
                         ${docIcon}
-                        ${displayTitle(link.title)}
+                        ${escapeText(displayTitle(link.title))}
                     </a>
                     ${link.audioId ? `<a href="https://drive.google.com/file/d/${link.audioId}/view?usp=sharing"
                        target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">
@@ -485,8 +510,8 @@ function buildTimelineHTML(filtered) {
                         Audio summary
                     </a>` : ""}
                 `).join("")}
-                ${week.htmlPath ? `<a href="${week.htmlPath}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
-                ${(week.tags && week.tags.length) ? `<div class="update-tags">${week.tags.map(t => `<span class="update-tag">${t}</span>`).join("")}</div>` : ""}
+                ${week.htmlPath ? `<a href="${escapeText(week.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
+                ${(week.tags && week.tags.length) ? `<div class="update-tags">${week.tags.map(t => `<span class="update-tag">${escapeText(t)}</span>`).join("")}</div>` : ""}
             </div>
         </div>
     `).join("");
@@ -515,6 +540,7 @@ function renderUpdates(filterTag) {
 }
 
 function initArchive() {
+    if (!document.getElementById("updatesTimeline") && !document.getElementById("mobileUpdatesTimeline")) return;
     buildTagFilter();
     renderUpdates();
 }

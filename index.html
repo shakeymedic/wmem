@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EM Evidence: emergency medicine evidence summaries and clinical tools</title>
     <meta name="description" content="Weekly EM Evidence Rundown newsletters, monthly PHEM and Anaesthetics &amp; ICU summaries, and free interactive tools for emergency medicine clinicians, built by UK EM doctors.">
     <link rel="canonical" href="https://emevidence.org/">
+    <link rel="alternate" type="application/rss+xml" title="EM Evidence newsletters" href="/feed.xml">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="EM Evidence">
@@ -48,7 +49,7 @@
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 </head>
 <body>
-    <a class="skip-link" href="#home">Skip to tools</a>
+    <a class="skip-link" href="#searchInput">Skip to tool search</a>
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -65,7 +66,8 @@
                 <nav class="nav">
                     <a href="#home" class="nav-link active">Tools</a>
                     <a href="#about" class="nav-link">About</a>
-                    <a href="#newsletter" class="nav-link">Newsletter</a>
+                    <a href="newsletters/" class="nav-link">Newsletters</a>
+                    <a href="#newsletter" class="nav-link">Subscribe</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
                     <button id="darkModeToggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode" class="theme-toggle">
@@ -85,7 +87,7 @@
             <div class="hero-content">
                 <div class="hero-badge">Evidence-Based Emergency Medicine</div>
                 <h2 class="hero-title">Emergency Medicine Educational Tools</h2>
-                <p class="hero-subtitle">Interactive simulation, documentation, and clinical decision support tools designed by EM Doctors for real-world emergency department use</p>
+                <p class="hero-subtitle">Weekly evidence summaries and free cognitive aids, simulators and guides, built by UK emergency medicine doctors</p>
             </div>
         </div>
     </section>
@@ -94,7 +96,7 @@
         <div class="tools-container">
             <div class="section-header">
                 <h2 class="section-title">Available Tools</h2>
-                <p class="section-subtitle">Interactive simulation and documentation tools for emergency medicine practice</p>
+                <p class="section-subtitle">Search, or browse by section. Each tool opens in its own window.</p>
             </div>
 
             <div class="main-layout">
@@ -117,14 +119,6 @@
                         </div>
                         <!-- The Google Drive viewer only loads when asked for: it is several MB and sets Google cookies -->
                         <div class="newsletter-embed-container" id="latestNewsletterEmbed" hidden></div>
-                    </div>
-
-                    <div class="new-tools-wrapper" id="newToolsWrapper">
-                        <h3 class="subsection-title">
-                            Highlighted Apps
-                        </h3>
-                        <div class="new-tools-grid" id="newToolsGrid">
-                        </div>
                     </div>
 
                     <div class="search-container">
@@ -161,6 +155,14 @@
                         </div>
                     </div>
 
+                    <div class="new-tools-wrapper" id="newToolsWrapper">
+                        <h3 class="subsection-title">
+                            Highlighted Apps
+                        </h3>
+                        <div class="new-tools-grid" id="newToolsGrid">
+                        </div>
+                    </div>
+
                     <div class="tools-grid" id="toolsGrid">
                     </div>
 
@@ -170,13 +172,17 @@
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
                         <h3>No tools found</h3>
-                        <p>Try adjusting your search or filter criteria</p>
-                        <button type="button" id="clearSearchBtn" class="tool-link button-reset no-results-btn">Clear Search</button>
+                        <p>Try another word, or a shorter one. If we don't have a tool for this, tell us.</p>
+                        <div class="no-results-actions">
+                            <button type="button" id="clearSearchBtn" class="tool-link button-reset no-results-btn">Clear Search</button>
+                            <a id="suggestToolLink" href="mailto:emevidence999@gmail.com?subject=New%20Tool%20Suggestion" class="filter-btn">Suggest a tool</a>
+                        </div>
                     </div>
 
                     <!-- Mobile-only archive, below the tools and collapsed. Hidden on desktop, where the sidebar shows it -->
                     <details class="mobile-archive-wrapper" id="mobileArchiveWrapper">
                         <summary class="subsection-title">Evidence Rundown archive: all past issues</summary>
+                        <p class="widget-link-row"><a href="newsletters/">Browse by series and year →</a></p>
                         <div class="archive-filter">
                             <select id="mobileArchiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
@@ -187,6 +193,7 @@
                 <aside class="sidebar-column" aria-label="Evidence Rundown archive">
                     <div class="sidebar-widget">
                         <h3 class="widget-title">Evidence Rundown Archive</h3>
+                        <p class="widget-link-row"><a href="newsletters/">All issues by series and year →</a></p>
                         <div class="archive-filter">
                             <select id="archiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
@@ -233,7 +240,7 @@
                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                             </svg>
                         </div>
-                        <h3>For EM Doctors</h3>
+                        <h3>For EM doctors</h3>
                         <p>Created by emergency medicine practitioners for training and clinical practice</p>
                     </div>
                 </div>
@@ -302,7 +309,9 @@
                     <ul class="footer-links">
                         <li><a href="#home">Tools</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="newsletters/">Newsletter archive</a></li>
+                        <li><a href="#newsletter">Subscribe</a></li>
+                        <li><a href="feed.xml">RSS feed</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="privacy.html">Privacy</a></li>
                     </ul>
