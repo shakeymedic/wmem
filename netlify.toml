@@ -119,6 +119,12 @@
   status = 404
   force = true
 
+[[redirects]]
+  from = "/TOOL_REVIEWS.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # ── Simple anchor redirects ───────────────────────────────────
 [[redirects]]
   from = "/home"
