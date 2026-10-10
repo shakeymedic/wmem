@@ -56,6 +56,7 @@ let fuse = null;
 // Sections of the default tool list, in display order
 const CATEGORIES = [
     { name: 'Bedside Aids', className: 'category-bedside', summary: 'Documentation, checklists and decision aids for use during patient care' },
+    { name: 'Paediatrics', className: 'category-paediatrics', summary: 'Assessment tools, guidelines and quick references for children and young people' },
     { name: 'UHB Tools', className: 'category-uhb', summary: 'For University Hospitals Birmingham sites (BHH, GHH, QEHB, Solihull)' },
     { name: 'Simulation', className: 'category-simulation', summary: 'Simulators and games for training' },
     { name: 'Education & Advisory', className: 'category-education', summary: 'Guides, infographics and reference material' },

@@ -1963,12 +1963,14 @@ html.dark-mode .tool-modal-error {
 .category-education { color: #2563a8; }
 .category-uhb { color: #005eb8; }
 .category-journal { color: #b45309; }
+.category-paediatrics { color: #0f766e; }
 
 html.dark-mode .category-bedside { color: #f87171; }
 html.dark-mode .category-simulation { color: #a78bfa; }
 html.dark-mode .category-education { color: #60a5fa; }
 html.dark-mode .category-uhb { color: #7cb6ff; }
 html.dark-mode .category-journal { color: #fbbf24; }
+html.dark-mode .category-paediatrics { color: #2dd4bf; }
 
 .footer-section .footer-heading {
     color: #ffffff;
