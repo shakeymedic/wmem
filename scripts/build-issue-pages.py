@@ -974,6 +974,7 @@ def page_html(p, body, n_images):
     <meta name="twitter:card" content="summary_large_image">
 
     <script src="/theme-init.js"></script>
+    <script src="/analytics.js" defer></script>
     <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css">
     <link rel="manifest" href="/manifest.json">
