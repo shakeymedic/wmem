@@ -13,6 +13,7 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `tools.js` | The list of tools shown as cards (name, description, category, tags, URL, screenshot) |
 | `updates.js` | The newsletter archive (the `updates` array) and the code that draws the archive sidebar |
 | `app.js` | Search, filters, tool cards, the tool viewer and the "Latest newsletter" card |
+| `audio.js` | The "Play audio summary" buttons: opens Google Drive's audio player on the page for an issue's `audioId` |
 | `subscribe.js` | Sign-up form; posts straight to Loops from the browser |
 | `theme-init.js` | Applies dark mode before the page paints (saved choice, else the device setting) |
 | `styles.css` | All styling |

@@ -668,7 +668,9 @@ function loadLatestNewsletter() {
 
     if (audioBtn) {
         if (emLink.audioId) {
-            audioBtn.href = `https://drive.google.com/file/d/${encodeURIComponent(emLink.audioId)}/view?usp=sharing`;
+            // audio.js opens the player in #latestNewsletterAudioPanel when this is clicked
+            audioBtn.dataset.audioId = emLink.audioId;
+            audioBtn.dataset.audioTitle = latest.label;
             audioBtn.hidden = false;
         } else {
             audioBtn.hidden = true;

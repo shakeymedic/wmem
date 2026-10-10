@@ -7,7 +7,7 @@
 # The Content-Security-Policy lists every outside service the site uses:
 #   app.loops.so            mailing-list sign-up (subscribe.js)
 #   ingesteer…nsvcs.net     Netlify Real User Monitoring
-#   drive.google.com        newsletter PDF preview
+#   drive.google.com        newsletter PDF preview and the audio summary player
 #   emevidence.goatcounter.com  cookie-free visitor counts (analytics.js)
 #   *.netlify.app           the tools, opened in the in-page viewer
 # A tool hosted anywhere else needs adding to frame-src (or openInNewTab: true in tools.js).
