@@ -60,6 +60,7 @@ Each issue's audio summary is also a podcast episode. `scripts/build-podcast.js`
 - Show title, description, owner email, category and artwork are in `podcast/show.json`; the artwork is `podcast/cover.jpg` (square, 1400 to 3000 px, JPEG or PNG). The owner email must be one Jake can read: Spotify, Apple, Amazon and YouTube send ownership codes to it.
 - The audio is served from Google Drive's direct-download link (`drive.google.com/uc?export=download&id=…`), which answers with `audio/mpeg`, the right length and seeking (checked 10 Oct 2026). Spotify copies each episode's audio to its own servers when it reads the feed; other apps stream from Drive.
 - Episodes from the old Spotify for Creators feed are kept in `podcast/imported-episodes.json`, written once by `node scripts/import-podcast-feed.js <old feed URL>`. They keep their original `guid`, so apps don't show them as new. Their audio still points at Spotify; copy it to Drive and update `enclosureUrl` before the old account is deleted.
+- `spotifyShowId` in `podcast/show.json` is the show's ID on Spotify (the 22 characters after `/show/` in its link). The pipeline's `spotify_episode.py` uses it to find each new episode.
 - `spotifyEpisodeId` on a link is the episode's ID on Spotify (the 22 characters after `/episode/`). Spotify only has it after reading the feed, so it is added after the issue is published.
 - Never change an episode's `audioId` once it is in the feed: the `guid` is built from it, and a new one makes apps show the episode again as new.
 
