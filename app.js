@@ -21,8 +21,6 @@ const openInNewTabBtn = document.getElementById('openInNewTab');
 const modalBackdrop = document.querySelector('.tool-modal-backdrop');
 
 // Theme Elements
-const darkModeToggle = document.getElementById('darkModeToggle');
-const rootEl = document.documentElement;
 
 // State
 let currentCategory = 'all';
@@ -172,56 +170,34 @@ function searchTools(term) {
         .map(([id]) => ({ item: tools.find(t => t.id === id) }));
 }
 
-// Dark Mode Logic (theme-init.js has already applied the saved or device setting)
-if (darkModeToggle) {
-    darkModeToggle.setAttribute('aria-pressed', String(rootEl.classList.contains('dark-mode')));
-    darkModeToggle.addEventListener('click', () => {
-        const isDark = rootEl.classList.toggle('dark-mode');
-        darkModeToggle.setAttribute('aria-pressed', String(isDark));
-        try {
-            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-        } catch (e) { /* storage blocked */ }
-    });
-}
+// Dark mode: theme-init.js applies the saved setting and wires the button
 
-// Populate Tag Filter Dropdown dynamically based on frequency
+// Tag filter lists only tags shared by several tools: with 230 tags the full list was too long to use,
+// and search already matches every tag
+const TAG_FILTER_MIN_TOOLS = 3;
 function populateTagFilter() {
     const tagCounts = {};
+    const tagLabels = {};
     tools.forEach(tool => {
         tool.tags.forEach(tag => {
             const lowerTag = tag.toLowerCase();
             tagCounts[lowerTag] = (tagCounts[lowerTag] || 0) + 1;
+            // Keep the written form ("DVLA", "acid-base") rather than forcing a case
+            if (!tagLabels[lowerTag] || tag !== lowerTag) tagLabels[lowerTag] = tag;
         });
     });
-    
-    const sortedByFrequency = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a] || a.localeCompare(b));
-    const sortedTags = Object.keys(tagCounts).sort();
-    
-    tagFilter.innerHTML = '<option value="">Filter by Tag (Any)</option>';
-    
-    const priorityTags = sortedByFrequency.slice(0, 5);
-    
-    const priorityGroup = document.createElement('optgroup');
-    priorityGroup.label = "Common Filters";
-    priorityTags.forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-        priorityGroup.appendChild(option);
-    });
-    tagFilter.appendChild(priorityGroup);
 
-    const allGroup = document.createElement('optgroup');
-    allGroup.label = "All Tags";
-    sortedTags.forEach(tag => {
-        if (!priorityTags.includes(tag)) {
+    tagFilter.innerHTML = '<option value="">Filter by topic (any)</option>';
+    Object.keys(tagCounts)
+        .filter(tag => tagCounts[tag] >= TAG_FILTER_MIN_TOOLS)
+        .sort((a, b) => a.localeCompare(b))
+        .forEach(tag => {
             const option = document.createElement('option');
             option.value = tag;
-            option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-            allGroup.appendChild(option);
-        }
-    });
-    tagFilter.appendChild(allGroup);
+            const label = tagLabels[tag];
+            option.textContent = `${label.charAt(0).toUpperCase() + label.slice(1)} (${tagCounts[tag]})`;
+            tagFilter.appendChild(option);
+        });
 }
 
 // Modal Functions
@@ -360,6 +336,10 @@ function reviewedLabel(tool) {
 }
 const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+const ARROW_ICON = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+// Tools that can't open in the on-page viewer say so with the usual "external" arrow
+const NEW_TAB_ICON = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+
 function createToolCard(tool, isSmall = false) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
@@ -385,12 +365,9 @@ function createToolCard(tool, isSmall = false) {
                 <p class="tool-description">${escapeHtml(tool.description)}</p>
                 <span class="tool-category">${escapeHtml(tool.category)}</span>
                 ${reviewed}
-                <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener" class="tool-link" data-url="${escapeHtml(tool.url)}" data-name="${name}" data-new-tab="${newTab}" aria-label="Launch Tool: ${name}">
+                <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener" class="tool-link" data-url="${escapeHtml(tool.url)}" data-name="${name}" data-new-tab="${newTab}" aria-label="Launch Tool: ${name}${tool.openInNewTab ? ' (opens in a new tab)' : ''}">
                     Launch Tool
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                    ${tool.openInNewTab ? NEW_TAB_ICON : ARROW_ICON}
                 </a>
             </div>
         </div>
@@ -435,6 +412,26 @@ function updateToolsHeading(isDefaultView, count) {
     }
 }
 
+// Education & Advisory is long, so it is split under sub-headings (the group field in tools.js);
+// a tool without a group goes under "Other"
+const EDUCATION_GROUPS = [
+    'Resus, cardiac & procedures',
+    'Acid–base, metabolic & drugs',
+    'Trauma, environment & other presentations',
+    'Law, risk & evidence',
+    'Training, AI & wellbeing'
+];
+function renderSectionBody(categoryName, categoryTools) {
+    const grid = list => `<div class="tools-grid-layout">${list.map(tool => createToolCard(tool)).join('')}</div>`;
+    if (categoryName !== 'Education & Advisory') return grid(categoryTools);
+    const names = [...EDUCATION_GROUPS, 'Other'];
+    return names.map(groupName => {
+        const list = categoryTools.filter(t => (EDUCATION_GROUPS.includes(t.group) ? t.group : 'Other') === groupName);
+        if (list.length === 0) return '';
+        return `<h3 class="tool-group-title">${escapeHtml(groupName)} <span class="tool-group-count">${list.length}</span></h3>${grid(list)}`;
+    }).join('');
+}
+
 function renderTools() {
     const isDefaultView = currentCategory === 'all' && searchTerm === '' && currentTag === '';
 
@@ -459,7 +456,9 @@ function renderTools() {
         toolsGrid.appendChild(controls);
 
         CATEGORIES.forEach(({ name, className, summary }) => {
-            const categoryTools = tools.filter(t => t.category === name);
+            // Featured tools first, otherwise the order in tools.js
+            const categoryTools = tools.filter(t => t.category === name)
+                .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
             if (categoryTools.length === 0) return;
 
             // Native <details>: keyboard and screen-reader support come for free
@@ -478,7 +477,7 @@ function renderTools() {
                     <span class="category-section-count">${count}</span>
                     <svg class="category-section-chevron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </summary>
-                <div class="tools-grid-layout">${categoryTools.map(tool => createToolCard(tool)).join('')}</div>
+                ${renderSectionBody(name, categoryTools)}
             `;
             section.addEventListener('toggle', () => saveOpenSections(sections));
             sections.push(section);
