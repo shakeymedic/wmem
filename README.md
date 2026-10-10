@@ -25,6 +25,7 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `netlify.toml` | Build command, security and caching headers, and redirects (including the old wmebem domains) |
 | `scripts/validate-updates.js` | Checks the newsletter archive before each deploy |
 | `scripts/build-feed.js` | Writes `feed.xml` (RSS) from the archive during each deploy; the file is not committed |
+| `scripts/review-due.js`, `TOOL_REVIEWS.md` | Lists the tools due their two-yearly review, and how the monthly review routine works |
 | `scripts/check-links.js` | Checks every tool and Drive link opens for the public; run weekly by `.github/workflows/check-links.yml` |
 
 ## Adding a newsletter issue

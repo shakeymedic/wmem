@@ -324,8 +324,8 @@ const icons = {
 // Bump when screenshots are replaced, so browsers fetch the new files instead of a stale or failed cached copy
 const SCREENSHOT_VERSION = '2026-10-10';
 
-// "Reviewed Oct 2026" line for tools with a lastReviewed date ("2026-10-07"); flagged when over a year old
-const REVIEW_STALE_DAYS = 365;
+// "Reviewed Oct 2026" line for tools with a lastReviewed date ("2026-10-07"); flagged once the two-yearly review is overdue
+const REVIEW_STALE_DAYS = 730;
 function reviewedLabel(tool) {
     const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(tool.lastReviewed || '');
     if (!m) return '';

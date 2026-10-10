@@ -6,8 +6,9 @@
 //   beta: true          BETA badge
 //   group: "…"          Education & Advisory only: the sub-heading the tool sits under (see EDUCATION_GROUPS in app.js)
 //   openInNewTab: true  for tools that can't be framed (X-Frame-Options) or live outside *.netlify.app
-//   lastReviewed: "2026-10-07"   date the clinical content was last checked; shown on the card,
-//                                and flagged "Review due" once it is more than a year old
+//   lastReviewed: "2026-10-07"   date the content was last checked; shown on the card, and flagged
+//                                "Review due" once it is more than two years old (every tool is reviewed
+//                                every two years; `node scripts/review-due.js` lists what is due)
 //   reviewedBy: "J Turner"       optional, shown in the tooltip
 const tools = [
     // --- HIGHLIGHTED APPS (isNew: true puts a tool in the Highlighted Apps row) ---
