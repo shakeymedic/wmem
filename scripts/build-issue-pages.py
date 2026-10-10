@@ -894,6 +894,21 @@ def extract(pdf_path):
 # ─────────────────────────────────────────────────────────────
 # Checks
 # ─────────────────────────────────────────────────────────────
+# Text left off the web pages although it is in the PDF: named people's contact details (Jake asked
+# on 10 Oct 2026 for Emma Arber's email to be removed entirely). Applied to the page and to the
+# pdftotext reference alike, so the check still compares like with like.
+REDACT = [
+    re.compile(r"\s*Contact:\s*Emma\.?\s*arber@uhb\.nhs\.uk\s+for\s+enrolment\s+queries\.", re.I),
+    re.compile(r"\s*Emma\.?\s*arber@uhb\.nhs\.uk", re.I),
+]
+
+
+def redact(text):
+    for rx in REDACT:
+        text = rx.sub("", text)
+    return text
+
+
 def alnum(s):
     return re.sub(r"[^0-9a-zà-ÿ]", "", s.replace("\u00ad", "").lower())
 
@@ -903,7 +918,7 @@ def coverage(pdf_path, body_html):
     Returns (chars, ngrams): how closely the counts of letters and digits match (1.0 = exactly,
     so nothing was dropped or doubled), and the share of the PDF's 8-character runs that appear on
     the page in the same order (low = text jumbled)."""
-    ref = alnum(subprocess.run(["pdftotext", "-q", str(pdf_path), "-"], capture_output=True, text=True).stdout)
+    ref = alnum(redact(subprocess.run(["pdftotext", "-q", str(pdf_path), "-"], capture_output=True, text=True).stdout))
     body_html = re.sub(r'<li value="(\d+)">', r"\1", body_html)  # list numbers the browser draws
     page = alnum(html.unescape(re.sub(r"<[^>]+>", "", body_html)))
     if not ref:
@@ -1073,6 +1088,7 @@ def main():
         try:
             pdf = fetch_pdf(p["drive_id"], cache)
             body, n_images = extract(pdf)
+            body = redact(body)
             cov, rev = coverage(pdf, body)
             if looks_garbled(body) or cov < MIN_CHARS or rev < MIN_NGRAMS:
                 skipped.append((p, f"text did not come out cleanly (match {cov:.4f}, order {rev:.3f})"))
