@@ -128,7 +128,13 @@
   force = true
 
 [[redirects]]
-  from = "/podcast/*.json"
+  from = "/podcast/show.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/podcast/imported-episodes.json"
   to = "/404.html"
   status = 404
   force = true
