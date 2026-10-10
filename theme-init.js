@@ -8,3 +8,16 @@
         document.documentElement.classList.add('dark-mode');
     }
 }());
+
+// Wires the dark-mode button on whichever page has one
+document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.getElementById('darkModeToggle');
+    if (!toggle) return;
+    var root = document.documentElement;
+    toggle.setAttribute('aria-pressed', String(root.classList.contains('dark-mode')));
+    toggle.addEventListener('click', function () {
+        var isDark = root.classList.toggle('dark-mode');
+        toggle.setAttribute('aria-pressed', String(isDark));
+        try { localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled'); } catch (e) { /* storage blocked */ }
+    });
+});
