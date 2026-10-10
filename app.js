@@ -667,8 +667,11 @@ function loadLatestNewsletter() {
     if (titleText) titleText.textContent = latest.label;
 
     if (audioBtn) {
-        if (emLink.audioId) {
-            audioBtn.href = `https://drive.google.com/file/d/${encodeURIComponent(emLink.audioId)}/view?usp=sharing`;
+        if (emLink.audioId || emLink.spotifyEpisodeId) {
+            // audio.js opens the player in #latestNewsletterAudioPanel when this is clicked
+            audioBtn.dataset.audioId = emLink.audioId || "";
+            if (emLink.spotifyEpisodeId) audioBtn.dataset.spotifyId = emLink.spotifyEpisodeId;
+            audioBtn.dataset.audioTitle = latest.label;
             audioBtn.hidden = false;
         } else {
             audioBtn.hidden = true;

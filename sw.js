@@ -8,6 +8,7 @@ const ASSETS = [
   '/theme-init.js',
   '/app.js',
   '/tools.js',
+  '/audio.js',
   '/updates.js',
   '/subscribe.js',
   '/vendor/fuse.min.js',

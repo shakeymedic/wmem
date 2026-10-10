@@ -106,6 +106,7 @@ def plan_pages(updates):
                 "display_date": f"{d} {LONG_MONTHS[mo - 1]} {y}",
                 "series": series, "series_name": series_name,
                 "drive_id": link["driveId"], "audio_id": link.get("audioId"),
+                "spotify_id": link.get("spotifyEpisodeId"),
                 "existing": (entry.get("htmlPath") if single else link.get("htmlPath")),
             })
     return pages
@@ -129,7 +130,7 @@ def set_html_paths(done):
             else:
                 src = src[:m.end(1)] + f'{m[2]}htmlPath: "{p["path"]}",\n' + src[m.end(1):]
         else:
-            m = re.search(r'(\{ title: "[^"\n]*", driveId: "' + did + r'"(?:, audioId: "[^"]*")?)(?:, htmlPath: "[^"]*")?( \})', src)
+            m = re.search(r'(\{ title: "[^"\n]*", driveId: "' + did + r'"(?:, audioId: "[^"]*")?(?:, spotifyEpisodeId: "[^"]*")?)(?:, htmlPath: "[^"]*")?( \})', src)
             if not m:
                 raise SystemExit(f"Could not find the link for {p['drive_id']} in updates.js")
             src = src[:m.start()] + m[1] + f', htmlPath: "{p["path"]}"' + m[2] + src[m.end():]
@@ -951,6 +952,18 @@ def drive_download(i):
     return f"https://drive.google.com/uc?export=download&id={i}"
 
 
+def audio_button(i, title, spotify_id=None):
+    """Opens the audio player under the buttons (audio.js): Spotify's if the issue has an episode, else Drive's."""
+    spotify = f'data-spotify-id="{esc(spotify_id)}" ' if spotify_id else ""
+    return (f'\n                <button type="button" class="issue-btn issue-btn-secondary" data-audio-id="{esc(i or "")}" {spotify}'
+            f'data-audio-title="{esc(title)}" data-audio-panel="issueAudio" data-audio-label="Play the audio summary" '
+            f'aria-expanded="false" aria-controls="issueAudio"><span class="audio-btn-text">Play the audio summary</span></button>')
+
+
+AUDIO_PANEL = '\n            <div class="issue-audio" id="issueAudio" hidden></div>'
+AUDIO_SCRIPT = '\n    <script src="/audio.js" defer></script>'
+
+
 def page_html(p, body, n_images):
     title = p["title"]
     date = p["display_date"]
@@ -959,10 +972,9 @@ def page_html(p, body, n_images):
     if p["series"] == "quarterly":
         desc = (f"{title}, {date}: the full text of this quarterly State of the Science edition from EM Evidence. "
                 f"Read online or download the PDF.")
-    audio = ""
-    if p["audio_id"]:
-        audio = (f'\n                <a class="issue-btn issue-btn-secondary" href="{drive_view(p["audio_id"])}" target="_blank" rel="noopener">'
-                 f'Listen to the audio summary</a>')
+    audio = audio_panel = audio_script = ""
+    if p["audio_id"] or p.get("spotify_id"):
+        audio, audio_panel, audio_script = audio_button(p["audio_id"], title, p.get("spotify_id")), AUDIO_PANEL, AUDIO_SCRIPT
     figures = ""
     if n_images:
         figures = " This issue has figures or images that only appear in the PDF."
@@ -989,7 +1001,7 @@ def page_html(p, body, n_images):
     <meta name="twitter:card" content="summary_large_image">
 
     <script src="/theme-init.js"></script>
-    <script src="/analytics.js" defer></script>
+    <script src="/analytics.js" defer></script>{audio_script}
     <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css">
     <link rel="manifest" href="/manifest.json">
@@ -1036,7 +1048,7 @@ def page_html(p, body, n_images):
             <div class="issue-actions">
                 <a class="issue-btn" href="{drive_download(p['drive_id'])}" rel="noopener">Download the PDF</a>
                 <a class="issue-btn issue-btn-secondary" href="{drive_view(p['drive_id'])}" target="_blank" rel="noopener">Open in Google Drive</a>{audio}
-            </div>
+            </div>{audio_panel}
             <p class="issue-note">This is the text of the PDF, copied across so you can read and search it here. Tables and layout may look different from the original.{figures} The PDF is the definitive version.</p>
         </div>
 

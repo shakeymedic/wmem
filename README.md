@@ -13,6 +13,7 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `tools.js` | The list of tools shown as cards (name, description, category, tags, URL, screenshot) |
 | `updates.js` | The newsletter archive (the `updates` array) and the code that draws the archive sidebar |
 | `app.js` | Search, filters, tool cards, the tool viewer and the "Latest newsletter" card |
+| `audio.js` | The "Play audio summary" buttons: opens Spotify's player for an issue's `spotifyEpisodeId`, else Google Drive's player for its `audioId` |
 | `subscribe.js` | Sign-up form; posts straight to Loops from the browser |
 | `theme-init.js` | Applies dark mode before the page paints (saved choice, else the device setting) |
 | `styles.css` | All styling |
@@ -45,6 +46,7 @@ The newsletter pipeline adds a new object to the top of the `updates` array in `
 - Newest entries go at the top.
 - The Drive file must be shared as "Anyone with the link can view".
 - If an issue is re-uploaded, replace the `driveId` in the existing entry rather than adding a second entry.
+- `spotifyEpisodeId` (optional, after `audioId`): the issue's podcast episode, the 22 characters after `/episode/` in its Spotify link. The "Play audio summary" buttons then use Spotify's player, with the Drive audio as the fallback. Issue pages already built keep Drive's player until rebuilt with `python3 -I scripts/build-issue-pages.py --drive-id <driveId>`.
 - The "Latest newsletter" card shows the most recently dated link whose title contains "EM Evidence Rundown".
 
 ### The archive check
