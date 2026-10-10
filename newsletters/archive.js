@@ -71,20 +71,26 @@
                 <h2 class="archive-month-title">${escapeText(g.month)}</h2>
                 ${g.entries.map(u => {
                     const series = seriesOf(u);
+                    // With one PDF, the title is the link: a second button with the same words added nothing
+                    const single = u.links.length === 1;
+                    const extras = u.htmlPath || u.links.some(l => l.audioId);
                     return `
                     <article class="archive-issue archive-series-${series.key}">
                         <div class="archive-issue-meta">
                             <span class="archive-issue-series">${escapeText(series.name)}</span>
                             <time class="archive-issue-date">${escapeText(displayDate(u.date))}</time>
                         </div>
-                        <h3 class="archive-issue-title">${escapeText(u.label)}</h3>
+                        ${single ? `
+                        <h3 class="archive-issue-title"><a href="${driveUrl(u.links[0].driveId)}" target="_blank" rel="noopener" class="archive-issue-link">${escapeText(u.label)}<span class="archive-issue-format">PDF</span></a></h3>` : `
+                        <h3 class="archive-issue-title">${escapeText(u.label)}</h3>`}
+                        ${(!single || extras) ? `
                         <div class="archive-issue-links">
                             ${u.links.map(l => `
-                                <a href="${driveUrl(l.driveId)}" target="_blank" rel="noopener" class="sidebar-link">${docIcon}${escapeText(displayTitle(l.title))}</a>
+                                ${single ? "" : `<a href="${driveUrl(l.driveId)}" target="_blank" rel="noopener" class="sidebar-link">${docIcon}${escapeText(displayTitle(l.title))}</a>`}
                                 ${l.audioId ? `<a href="${driveUrl(l.audioId)}" target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">${audioIcon}Audio summary</a>` : ""}
                             `).join("")}
                             ${u.htmlPath ? `<a href="${escapeText(u.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}
-                        </div>
+                        </div>` : ""}
                         ${(u.tags && u.tags.length) ? `<div class="update-tags">${u.tags.map(t => `<span class="update-tag">${escapeText(t)}</span>`).join("")}</div>` : ""}
                     </article>`;
                 }).join("")}

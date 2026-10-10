@@ -85,29 +85,39 @@
         <div class="hero-background"></div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">Evidence-Based Emergency Medicine</div>
                 <h2 class="hero-title">Emergency Medicine Educational Tools</h2>
                 <p class="hero-subtitle">Weekly evidence summaries and free cognitive aids, simulators and guides, built by UK emergency medicine doctors</p>
+                <div class="search-box hero-search">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <label for="searchInput" class="visually-hidden">Search tools</label>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search tools, e.g. RSI"
+                        autocomplete="off"
+                    >
+                </div>
             </div>
         </div>
     </section>
 
     <section class="tools-section" id="home">
         <div class="tools-container">
-            <div class="section-header">
-                <h2 class="section-title">Available Tools</h2>
-                <p class="section-subtitle">Search, or browse by section. Each tool opens in its own window.</p>
-            </div>
-
             <div class="main-layout">
                 <div class="content-column">
                     
                     <div class="featured-newsletter-wrapper" id="featuredNewsletterWrapper">
-                        <div class="featured-newsletter-head">
-                            <h3 class="subsection-title">Latest EM Evidence Rundown</h3>
-                            <span class="featured-newsletter-date" id="latestNewsletterDate"></span>
+                        <div class="featured-newsletter-text">
+                            <div class="featured-newsletter-head">
+                                <h2 class="featured-newsletter-kicker">Latest EM Evidence Rundown</h2>
+                                <span class="featured-newsletter-date" id="latestNewsletterDate"></span>
+                            </div>
+                            <p class="featured-newsletter-title" id="latestNewsletterTitle"></p>
                         </div>
-                        <p class="featured-newsletter-title" id="latestNewsletterTitle"></p>
                         <div class="newsletter-actions">
                             <a id="latestNewsletterLink" href="#" target="_blank" rel="noopener" class="tool-link newsletter-action-primary">Read this issue</a>
                             <button type="button" id="latestNewsletterPreviewBtn" class="filter-btn" aria-expanded="false" aria-controls="latestNewsletterEmbed">Preview here</button>
@@ -121,22 +131,12 @@
                         <div class="newsletter-embed-container" id="latestNewsletterEmbed" hidden></div>
                     </div>
 
-                    <div class="search-container">
-                        <div class="search-box">
-                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="m21 21-4.35-4.35"></path>
-                            </svg>
-                            <label for="searchInput" class="visually-hidden">Search tools</label>
-                            <input
-                                type="search"
-                                id="searchInput"
-                                class="search-input"
-                                placeholder="Search tools... (Press '/')"
-                                autocomplete="off"
-                            >
-                        </div>
+                    <div class="section-header" id="toolsHeader">
+                        <h2 class="section-title" id="toolsHeading">Available Tools</h2>
+                        <p class="section-subtitle" id="toolsSubtitle" role="status">Browse by section, or search above. Each tool opens in its own window.</p>
+                    </div>
 
+                    <div class="search-container">
                         <div class="controls-row">
                             <div class="filter-buttons" role="group" aria-label="Filter tools by category">
                                 <button type="button" class="filter-btn active" data-category="all" aria-pressed="true">All Tools</button>
