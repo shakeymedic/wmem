@@ -3,7 +3,8 @@ const newToolsGrid = document.getElementById('newToolsGrid');
 const newToolsWrapper = document.getElementById('newToolsWrapper');
 const toolsGrid = document.getElementById('toolsGrid');
 const searchInput = document.getElementById('searchInput');
-const filterButtons = document.querySelectorAll('.filter-btn');
+// Only the category buttons: the newsletter box reuses the .filter-btn style for its own buttons
+const filterButtons = document.querySelectorAll('.filter-buttons .filter-btn');
 const tagFilter = document.getElementById('tagFilter');
 const noResults = document.getElementById('noResults');
 const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -83,12 +84,92 @@ function saveOpenSections(sections) {
     } catch (e) { /* storage blocked */ }
 }
 
-// Plain substring search, used if Fuse.js fails to load so the tool list still works
-function simpleSearch(term) {
-    const q = term.toLowerCase();
-    return tools
-        .filter(t => [t.name, t.description, t.category, ...t.tags].some(v => v.toLowerCase().includes(q)))
-        .map(item => ({ item }));
+// Words people type that the tool text spells differently
+const SYNONYMS = {
+    paeds: ['paediatric', 'paediatrics', 'children', 'child'],
+    paediatric: ['paeds', 'children', 'child'],
+    kids: ['paediatric', 'children'],
+    ventilator: ['ventilation', 'niv', 'hamilton', 'ventilated'],
+    ventilation: ['ventilator', 'niv', 'hamilton'],
+    niv: ['ventilator', 'ventilation', 'hamilton', 'cpap', 'bipap'],
+    hamilton: ['ventilator', 'niv'],
+    pe: ['pulmonary embolism', 'embolism'],
+    mi: ['myocardial infarction', 'stemi', 'omi'],
+    stemi: ['omi', 'myocardial infarction', 'ecg'],
+    arrest: ['cardiac arrest', 'resuscitation', 'als'],
+    resus: ['resuscitation', 'cardiac arrest', 'als'],
+    sepsis: ['septic', 'lactate'],
+    airway: ['intubation', 'rsi', 'laryngoscopy'],
+    intubation: ['rsi', 'airway'],
+    fluids: ['fluid', 'iv fluids', 'sid'],
+    toxicology: ['overdose', 'poisoning', 'tox'],
+    overdose: ['toxicology', 'poisoning'],
+    pneumothorax: ['chest drain', 'thoracostomy'],
+    fracture: ['fractures', 'orthopaedic', 'orthopaedics'],
+    ortho: ['orthopaedic', 'orthopaedics', 'fracture'],
+    mental: ['mental health', 'psychiatric', 'self-harm'],
+    psych: ['mental health', 'psychiatric'],
+    stroke: ['neurology', 'tia'],
+    ultrasound: ['pocus', 'echo'],
+    pocus: ['ultrasound', 'echo'],
+    bloods: ['blood gas', 'abg', 'vbg'],
+    gas: ['blood gas', 'abg', 'vbg'],
+    seizure: ['fit', 'epilepsy', 'convulsion'],
+    fit: ['seizure', 'epilepsy'],
+    tbi: ['head injury', 'brain injury'],
+    'head injury': ['tbi', 'brain injury'],
+    uhb: ['bhh', 'ghh', 'qehb', 'solihull', 'heartlands', 'good hope']
+};
+
+const WORD_SPLIT = /[^a-z0-9/]+/;
+
+function toolWords(tool) {
+    return [tool.name, tool.description, tool.category, ...tool.tags]
+        .join(' ')
+        .toLowerCase()
+        .split(WORD_SPLIT)
+        .filter(Boolean);
+}
+
+// Ranked search: exact name, then a whole-word match, then a word starting with the term,
+// then synonyms, then fuzzy matching (only for terms of four or more letters, because short
+// terms such as "rsi" or "PE" fuzzy-match the middle of unrelated words).
+function searchTools(term) {
+    const q = term.toLowerCase().trim();
+    if (!q) return [];
+    const qWords = q.split(WORD_SPLIT).filter(Boolean);
+    const synonyms = (SYNONYMS[q] || []).map(s => s.toLowerCase());
+    const scored = new Map();
+
+    function score(tool, points) {
+        const current = scored.get(tool.id);
+        if (current === undefined || points < current) scored.set(tool.id, points);
+    }
+
+    tools.forEach(tool => {
+        const name = tool.name.toLowerCase();
+        const text = toolWords(tool);
+        const haystack = text.join(' ');
+        const tags = tool.tags.map(t => t.toLowerCase());
+
+        if (name === q || tags.includes(q)) { score(tool, 0); return; }
+        if (name.split(WORD_SPLIT).includes(q)) { score(tool, 1); return; }
+        if (qWords.length > 1 && haystack.includes(q)) { score(tool, 2); return; }
+        if (qWords.every(w => text.includes(w))) { score(tool, 3); return; }
+        if (q.length >= 3 && text.some(w => w.startsWith(q))) { score(tool, 4); return; }
+        // A synonym in the name or tags outranks one buried in the description
+        if (synonyms.some(s => name.includes(s) || tags.some(t => t.includes(s)))) { score(tool, 5); return; }
+        if (synonyms.some(s => haystack.includes(s))) { score(tool, 6); return; }
+    });
+
+    if (q.length >= 4) {
+        const fuzzy = fuse ? fuse.search(q) : [];
+        fuzzy.forEach((r, i) => score(r.item, 10 + i));
+    }
+
+    return [...scored.entries()]
+        .sort((a, b) => a[1] - b[1])
+        .map(([id]) => ({ item: tools.find(t => t.id === id) }));
 }
 
 // Dark Mode Logic (theme-init.js has already applied the saved or device setting)
@@ -380,9 +461,9 @@ function renderTools() {
         });
 
         if (searchTerm !== '') {
-            // Keep Fuse's order so the best matches come first
-            const fuseResults = fuse ? fuse.search(searchTerm) : simpleSearch(searchTerm);
-            const rank = new Map(fuseResults.map((r, i) => [r.item.id, i]));
+            // Keep the search order so the best matches come first
+            const results = searchTools(searchTerm);
+            const rank = new Map(results.map((r, i) => [r.item.id, i]));
             filteredTools = filteredTools
                 .filter(tool => rank.has(tool.id))
                 .sort((a, b) => rank.get(a.id) - rank.get(b.id));
@@ -468,6 +549,12 @@ tagFilter.addEventListener('change', (e) => {
 searchInput.addEventListener('input', (e) => {
     searchTerm = e.target.value.trim();
     renderTools();
+    // Pre-fill the suggestion email with what was searched for
+    const suggest = document.getElementById('suggestToolLink');
+    if (suggest) {
+        const subject = searchTerm ? `New Tool Suggestion: ${searchTerm}` : 'New Tool Suggestion';
+        suggest.href = `mailto:emevidence999@gmail.com?subject=${encodeURIComponent(subject)}`;
+    }
 });
 
 clearSearchBtn.addEventListener('click', () => {
