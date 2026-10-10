@@ -24,7 +24,7 @@ const updates = [
     label: "Issue 33 \u2014 EM Evidence Rundown",
     htmlPath: "/newsletters/em/issue-33.html",
     links: [
-      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X" }
+      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X", audioId: "1_iDS3cavpFjys9uRbx7C5kmpdjkp-WTX" }
     ]
   },
   {
