@@ -33,7 +33,7 @@ Each tool in `tools.js` points at one of these files (77 in total).
 25. `hyponatraemia.png` - Hyponatraemia Guide
 26. `af.png` - AF in the ED
 27. `tloc-tool.png` - Syncope & TLOC Assessment
-28. `dvla-guide.png` - DVLA Driving Advice
+28. `dvla-guide.png` - DVLA Fitness to Drive: Decision Tool
 29. `omi.png` - OMI / STEMI Education
 30. `fluid-sid.png` - Acid–Base & Fluids Sandbox
 31. `hot-joint.png` - Hot Joint Education
@@ -42,7 +42,7 @@ Each tool in `tools.js` points at one of these files (77 in total).
 34. `box-breathing.png` - Box Breathing App
 35. `ct-risk.png` - CT Risk in Children
 36. `sedation-edu.png` - Sedation Education
-37. `dvla-poster.png` - DVLA Advice Poster
+37. `dvla-poster.png` - DVLA Fitness to Drive: A3 Poster
 38. `pericardiocentesis.png` - Emergency Pericardiocentesis
 39. `teg.png` - Viscoelastic Testing (TEG)
 40. `dog-bites.png` - Dog Bite Management
@@ -61,8 +61,8 @@ Each tool in `tools.js` points at one of these files (77 in total).
 53. `aortic-dissection.png` - Acute Aortic Dissection
 54. `delirium.png` - Delirium in the ED
 55. `hypothermia.png` - Hypothermia
-56. `dka.png` - Diabetic Ketoacidosis
-57. `ketoacidosis.png` - Ketoacidosis in the ED
+56. `dka.png` - DKA: Pathophysiology & ED Management
+57. `ketoacidosis.png` - Ketoacidosis: DKA, AKA & Starvation
 58. `lactate.png` - Lactic Acidosis
 59. `blood-gas-analysers.png` - How Blood Gas Analysers Work
 60. `vq-mismatch.png` - V/Q Mismatch Explorer

@@ -49,10 +49,39 @@ const fuseOptions = {
         { name: 'tags', weight: 0.2 },
         { name: 'category', weight: 0.1 }
     ],
-    threshold: 0.3,
+    threshold: 0.2,
     ignoreLocation: true
 };
 let fuse = null;
+
+// Sections of the default tool list, in display order
+const CATEGORIES = [
+    { name: 'Bedside Aids', className: 'category-bedside', summary: 'Documentation, checklists and decision aids for use during patient care' },
+    { name: 'UHB Tools', className: 'category-uhb', summary: 'For University Hospitals Birmingham sites (BHH, GHH, QEHB, Solihull)' },
+    { name: 'Simulation', className: 'category-simulation', summary: 'Simulators and games for training' },
+    { name: 'Education & Advisory', className: 'category-education', summary: 'Guides, infographics and reference material' },
+    { name: 'Journal Club', className: 'category-journal', summary: 'Summaries of key papers and trials' }
+];
+
+// Which sections a visitor has opened is remembered in their browser.
+// First visit: only Bedside Aids is open, so the clinical tools are one scroll away.
+const OPEN_SECTIONS_KEY = 'openToolSections';
+const DEFAULT_OPEN_SECTIONS = ['Bedside Aids'];
+
+function loadOpenSections() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(OPEN_SECTIONS_KEY));
+        return Array.isArray(saved) ? saved : DEFAULT_OPEN_SECTIONS;
+    } catch (e) {
+        return DEFAULT_OPEN_SECTIONS;
+    }
+}
+
+function saveOpenSections(sections) {
+    try {
+        localStorage.setItem(OPEN_SECTIONS_KEY, JSON.stringify(sections.filter(s => s.open).map(s => s.dataset.category)));
+    } catch (e) { /* storage blocked */ }
+}
 
 // Plain substring search, used if Fuse.js fails to load so the tool list still works
 function simpleSearch(term) {
@@ -290,37 +319,52 @@ function renderTools() {
         toolsGrid.style.display = 'block'; 
         toolsGrid.classList.remove('tools-grid-layout');
 
-        const categories = [
-            'Bedside Aids',
-            'UHB Tools',
-            'Simulation',
-            'Education & Advisory',
-            'Journal Club'
-        ];
+        const openSections = loadOpenSections();
+        const sections = [];
 
-        categories.forEach(category => {
-            const categoryTools = tools.filter(t => t.category === category);
-            
-            if (categoryTools.length > 0) {
-                const sectionHeader = document.createElement('h3');
-                sectionHeader.className = 'category-section-title';
-                sectionHeader.textContent = category;
-                
-                if(category === 'Bedside Aids') sectionHeader.classList.add('category-bedside');
-                if(category === 'Simulation') sectionHeader.classList.add('category-simulation');
-                if(category === 'Education & Advisory') sectionHeader.classList.add('category-education');
-                if(category === 'UHB Tools') sectionHeader.classList.add('category-uhb');
-                if(category === 'Journal Club') sectionHeader.classList.add('category-journal');
+        const controls = document.createElement('div');
+        controls.className = 'category-controls';
+        controls.innerHTML = `
+            <button type="button" class="category-control-btn" data-action="expand">Expand all</button>
+            <button type="button" class="category-control-btn" data-action="collapse">Collapse all</button>
+        `;
+        toolsGrid.appendChild(controls);
 
-                toolsGrid.appendChild(sectionHeader);
+        CATEGORIES.forEach(({ name, className, summary }) => {
+            const categoryTools = tools.filter(t => t.category === name);
+            if (categoryTools.length === 0) return;
 
-                const sectionGrid = document.createElement('div');
-                sectionGrid.className = 'tools-grid-layout';
-                sectionGrid.innerHTML = categoryTools.map(tool => createToolCard(tool)).join('');
-                toolsGrid.appendChild(sectionGrid);
-            }
+            // Native <details>: keyboard and screen-reader support come for free
+            const section = document.createElement('details');
+            section.className = 'category-section';
+            section.dataset.category = name;
+            section.open = openSections.includes(name);
+
+            const count = `${categoryTools.length} ${categoryTools.length === 1 ? 'tool' : 'tools'}`;
+            section.innerHTML = `
+                <summary class="category-section-title ${className}">
+                    <span class="category-section-heading">
+                        <span class="category-section-name">${escapeHtml(name)}</span>
+                        <span class="category-section-summary">${escapeHtml(summary)}</span>
+                    </span>
+                    <span class="category-section-count">${count}</span>
+                    <svg class="category-section-chevron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <div class="tools-grid-layout">${categoryTools.map(tool => createToolCard(tool)).join('')}</div>
+            `;
+            section.addEventListener('toggle', () => saveOpenSections(sections));
+            sections.push(section);
+            toolsGrid.appendChild(section);
         });
-        
+
+        controls.addEventListener('click', (e) => {
+            const btn = e.target.closest('.category-control-btn');
+            if (!btn) return;
+            const open = btn.dataset.action === 'expand';
+            sections.forEach(s => { s.open = open; });
+            saveOpenSections(sections);
+        });
+
     } else {
         if (newToolsWrapper) newToolsWrapper.style.display = 'none';
         toolsGrid.style.display = 'grid'; 
@@ -333,9 +377,12 @@ function renderTools() {
         });
 
         if (searchTerm !== '') {
+            // Keep Fuse's order so the best matches come first
             const fuseResults = fuse ? fuse.search(searchTerm) : simpleSearch(searchTerm);
-            const searchHits = new Set(fuseResults.map(r => r.item.id));
-            filteredTools = filteredTools.filter(tool => searchHits.has(tool.id));
+            const rank = new Map(fuseResults.map((r, i) => [r.item.id, i]));
+            filteredTools = filteredTools
+                .filter(tool => rank.has(tool.id))
+                .sort((a, b) => rank.get(a.id) - rank.get(b.id));
         }
 
         if (filteredTools.length === 0) {
@@ -347,9 +394,11 @@ function renderTools() {
     }
 
     setTimeout(() => {
-        const cards = document.querySelectorAll('.tool-card');
-        cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.05}s`;
+        // Stagger within each grid, capped so cards in a just-opened section don't lag
+        document.querySelectorAll('.tools-grid-layout, .new-tools-grid').forEach(grid => {
+            grid.querySelectorAll(':scope > .tool-card').forEach((card, index) => {
+                card.style.animationDelay = `${Math.min(index, 8) * 0.05}s`;
+            });
         });
     }, 50);
 }

@@ -516,11 +516,97 @@ html.dark-mode .update-tag {
 
 .category-section-title::before {
     content: '';
+    flex: none;
     width: 6px;
     height: 24px;
     background-color: var(--primary-blue);
     border-radius: 3px;
     margin-right: 0.75rem;
+}
+
+/* Collapsible category sections (default view) */
+.category-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.category-control-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    min-height: 2.25rem;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.category-control-btn:hover {
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.category-section > summary {
+    list-style: none;
+    cursor: pointer;
+    margin: 1rem 0 0;
+    padding: 0.75rem 0.25rem 0.75rem 0;
+    gap: 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.category-section > summary::-webkit-details-marker {
+    display: none;
+}
+
+.category-section > summary:focus-visible {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.category-section[open] > summary {
+    margin-bottom: 1.5rem;
+}
+
+.category-section-heading {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.category-section-summary {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 0.125rem;
+}
+
+.category-section-count {
+    flex: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.category-section-chevron {
+    flex: none;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+}
+
+.category-section[open] .category-section-chevron {
+    transform: rotate(180deg);
+}
+
+.category-section > summary:hover .category-section-chevron,
+.category-section > summary:hover .category-section-count {
+    color: currentColor;
 }
 
 .tool-card {
