@@ -8,6 +8,7 @@
 #   app.loops.so            mailing-list sign-up (subscribe.js)
 #   ingesteer…nsvcs.net     Netlify Real User Monitoring
 #   drive.google.com        newsletter PDF preview
+#   emevidence.goatcounter.com  cookie-free visitor counts (analytics.js)
 #   *.netlify.app           the tools, opened in the in-page viewer
 # A tool hosted anywhere else needs adding to frame-src (or openInNewTab: true in tools.js).
 [[headers]]
@@ -15,7 +16,7 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://app.loops.so https://ingesteer.services-prod.nsvcs.net; frame-src https://drive.google.com https://*.netlify.app; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://emevidence.goatcounter.com; font-src 'self'; connect-src 'self' https://app.loops.so https://ingesteer.services-prod.nsvcs.net https://emevidence.goatcounter.com; frame-src https://drive.google.com https://*.netlify.app; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self'"
 
 # ── Caching ───────────────────────────────────────────────────
 # File names don't change between releases, so pages, scripts and styles are

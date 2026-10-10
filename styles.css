@@ -2659,3 +2659,249 @@ html.dark-mode .tool-group-count {
     background-color: #374151;
     color: #e5e7eb;
 }
+
+/* =========================================
+   NEWSLETTER ISSUE PAGES (/newsletters/<series>/<issue>.html)
+   Written by scripts/build-issue-pages.py from each issue's PDF
+   ========================================= */
+.issue-page {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    max-width: 820px;
+}
+
+.issue-crumb {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.issue-crumb a,
+.issue-back {
+    color: var(--primary-blue);
+}
+
+.issue-head {
+    border-left: 4px solid var(--primary-blue-light);
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.issue-head h1 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    overflow-wrap: break-word;
+}
+
+.issue-meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.issue-actions,
+.issue-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+}
+
+.issue-actions {
+    margin-bottom: 1rem;
+}
+
+.issue-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--primary-blue);
+    border-radius: 0.5rem;
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.938rem;
+    text-decoration: none;
+}
+
+.issue-btn:hover,
+.issue-btn:focus-visible {
+    background-color: var(--primary-blue-dark);
+    border-color: var(--primary-blue-dark);
+    color: #ffffff;
+}
+
+.issue-btn-secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+}
+
+.issue-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.issue-text {
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-wrap: break-word;
+}
+
+.issue-text h2 {
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+    margin: 2.25rem 0 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.issue-text h3 {
+    font-size: 1.125rem;
+    line-height: 1.35;
+    margin: 1.75rem 0 0.5rem;
+}
+
+.issue-text h4 {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 1.25rem 0 0.4rem;
+}
+
+.issue-text p {
+    margin: 0 0 0.85rem;
+}
+
+.issue-text ul,
+.issue-text ol {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.issue-text li {
+    margin-bottom: 0.35rem;
+}
+
+.issue-text a {
+    color: var(--primary-blue);
+    overflow-wrap: anywhere;
+}
+
+.issue-tag {
+    display: inline-block;
+    padding: 0.05rem 0.4rem;
+    border-radius: 0.25rem;
+    background-color: rgba(37, 99, 168, 0.12);
+    color: var(--primary-blue-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    vertical-align: 0.1em;
+}
+
+.issue-text .issue-tags {
+    margin-bottom: 0.35rem;
+}
+
+.issue-text .issue-stats {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.5rem;
+}
+
+.issue-stats li {
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.issue-stats strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+/* Wide tables scroll inside their box, so the page itself never scrolls sideways */
+.issue-table-wrap {
+    overflow-x: auto;
+    margin: 0 0 1rem;
+}
+
+.issue-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.issue-table th,
+.issue-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+}
+
+.issue-table th {
+    background-color: var(--secondary-grey);
+    font-weight: 700;
+}
+
+.issue-table td p,
+.issue-table td ul {
+    margin-bottom: 0.4rem;
+}
+
+.issue-foot {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+html.dark-mode .issue-btn {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+html.dark-mode .issue-btn:hover,
+html.dark-mode .issue-btn:focus-visible {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+html.dark-mode .issue-btn-secondary {
+    background-color: transparent;
+    border-color: #93c5fd;
+    color: #93c5fd;
+}
+
+html.dark-mode .issue-crumb a,
+html.dark-mode .issue-back,
+html.dark-mode .issue-text a {
+    color: #93c5fd;
+}
+
+html.dark-mode .issue-tag {
+    background-color: rgba(96, 165, 250, 0.18);
+    color: #bfdbfe;
+}
+
+html.dark-mode .issue-table th {
+    background-color: #374151;
+}
+
+@media (max-width: 480px) {
+    .issue-head h1 {
+        font-size: 1.4rem;
+    }
+}
