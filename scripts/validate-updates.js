@@ -34,7 +34,8 @@ function parseDate(s) {
 
 const DRIVE_ID = /^[A-Za-z0-9_-]{25,}$/;
 const ENTRY_KEYS = new Set(["date", "label", "tags", "htmlPath", "links"]);
-const LINK_KEYS = new Set(["title", "driveId", "audioId", "htmlPath"]);
+const LINK_KEYS = new Set(["title", "driveId", "audioId", "spotifyEpisodeId", "htmlPath"]);
+const SPOTIFY_ID = /^[A-Za-z0-9]{22}$/;
 const HTML_PATH = /^\/newsletters\/[a-z]+\/[a-z0-9-]+\.html$/;
 const pages = new Map();
 // An issue page must be a file in this repo, so a "Read on site" link can never 404
@@ -101,6 +102,12 @@ ctx.updates.forEach((entry, i) => {
             if (id === undefined && key === "audioId") continue;
             if (typeof id !== "string" || !DRIVE_ID.test(id)) { errors.push(`${lw}: ${key} "${id}" does not look like a Google Drive file ID`); continue; }
             if (seen.has(id)) errors.push(`${lw}: ${key} ${id} is already used by ${seen.get(id)} (duplicate upload or draft?)`);
+            else seen.set(id, lw);
+        }
+        if (link.spotifyEpisodeId !== undefined) {
+            const id = link.spotifyEpisodeId;
+            if (typeof id !== "string" || !SPOTIFY_ID.test(id)) errors.push(`${lw}: spotifyEpisodeId "${id}" should be the 22 letters and digits after /episode/ in the Spotify link`);
+            else if (seen.has(id)) errors.push(`${lw}: spotifyEpisodeId ${id} is already used by ${seen.get(id)}`);
             else seen.set(id, lw);
         }
     });

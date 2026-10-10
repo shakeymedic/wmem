@@ -667,9 +667,10 @@ function loadLatestNewsletter() {
     if (titleText) titleText.textContent = latest.label;
 
     if (audioBtn) {
-        if (emLink.audioId) {
+        if (emLink.audioId || emLink.spotifyEpisodeId) {
             // audio.js opens the player in #latestNewsletterAudioPanel when this is clicked
-            audioBtn.dataset.audioId = emLink.audioId;
+            audioBtn.dataset.audioId = emLink.audioId || "";
+            if (emLink.spotifyEpisodeId) audioBtn.dataset.spotifyId = emLink.spotifyEpisodeId;
             audioBtn.dataset.audioTitle = latest.label;
             audioBtn.hidden = false;
         } else {

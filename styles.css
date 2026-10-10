@@ -389,6 +389,26 @@ button.sidebar-link-audio {
     color: #93c5fd;
 }
 
+/* Spotify's episode player brings its own card, so the panel only adds the note under it */
+.audio-panel-spotify {
+    border: 0;
+    background-color: transparent;
+}
+
+.audio-panel-spotify iframe {
+    height: 152px;
+    border-radius: 12px;
+}
+
+.audio-panel-spotify .audio-panel-note {
+    padding: 0.375rem 0 0;
+    color: var(--text-secondary);
+}
+
+.audio-panel-spotify .audio-panel-note a {
+    color: var(--primary-blue);
+}
+
 .newsletter-audio-container {
     flex-basis: 100%;
     width: 100%;

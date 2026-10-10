@@ -1,10 +1,12 @@
 // Evidence Rundown Newsletter Archive
 // This file is the single source of truth for newsletter links on the website.
 // The pipeline updates the `updates` array after each newsletter is sent.
-// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, htmlPath? }] }
+// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, spotifyEpisodeId?, htmlPath? }] }
 //   date:    "2 Oct 2026" (day, short month, year)
 //   label:   descriptive name, e.g. "EM Evidence Rundown — Issue 32" (shown in the Latest banner)
 //   audioId: Drive ID of the audio summary for that issue (not a separate link); audio.js plays it on the page
+//   spotifyEpisodeId: the issue's podcast episode on Spotify (the 22 characters after /episode/ in
+//            its link). When set, the page uses Spotify's player, with the Drive audio as a fallback.
 //   htmlPath: the issue's page on this site, e.g. "/newsletters/em/issue-32.html" (made by
 //            scripts/build-issue-pages.py). On the entry when it has one PDF; on each link when
 //            an entry holds several issues.
@@ -554,7 +556,7 @@ function buildTimelineHTML(filtered) {
                         ${docIcon}
                         ${escapeText(displayTitle(link.title))}
                     </a>
-                    ${link.audioId ? audioButtonHTML(link.audioId, displayTitle(link.title)) : ""}
+                    ${audioButtonHTML(link, displayTitle(link.title))}
                     ${link.htmlPath ? `<a href="${escapeText(link.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site<span class="visually-hidden">: ${escapeText(displayTitle(link.title))}</span> →</a>` : ""}
                 `).join("")}
                 ${week.htmlPath ? `<a href="${escapeText(week.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}

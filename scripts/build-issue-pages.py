@@ -106,6 +106,7 @@ def plan_pages(updates):
                 "display_date": f"{d} {LONG_MONTHS[mo - 1]} {y}",
                 "series": series, "series_name": series_name,
                 "drive_id": link["driveId"], "audio_id": link.get("audioId"),
+                "spotify_id": link.get("spotifyEpisodeId"),
                 "existing": (entry.get("htmlPath") if single else link.get("htmlPath")),
             })
     return pages
@@ -129,7 +130,7 @@ def set_html_paths(done):
             else:
                 src = src[:m.end(1)] + f'{m[2]}htmlPath: "{p["path"]}",\n' + src[m.end(1):]
         else:
-            m = re.search(r'(\{ title: "[^"\n]*", driveId: "' + did + r'"(?:, audioId: "[^"]*")?)(?:, htmlPath: "[^"]*")?( \})', src)
+            m = re.search(r'(\{ title: "[^"\n]*", driveId: "' + did + r'"(?:, audioId: "[^"]*")?(?:, spotifyEpisodeId: "[^"]*")?)(?:, htmlPath: "[^"]*")?( \})', src)
             if not m:
                 raise SystemExit(f"Could not find the link for {p['drive_id']} in updates.js")
             src = src[:m.start()] + m[1] + f', htmlPath: "{p["path"]}"' + m[2] + src[m.end():]
@@ -951,9 +952,10 @@ def drive_download(i):
     return f"https://drive.google.com/uc?export=download&id={i}"
 
 
-def audio_button(i, title):
-    """Opens Drive's audio player under the buttons (audio.js); Drive can't stream to the page directly."""
-    return (f'\n                <button type="button" class="issue-btn issue-btn-secondary" data-audio-id="{esc(i)}" '
+def audio_button(i, title, spotify_id=None):
+    """Opens the audio player under the buttons (audio.js): Spotify's if the issue has an episode, else Drive's."""
+    spotify = f'data-spotify-id="{esc(spotify_id)}" ' if spotify_id else ""
+    return (f'\n                <button type="button" class="issue-btn issue-btn-secondary" data-audio-id="{esc(i or "")}" {spotify}'
             f'data-audio-title="{esc(title)}" data-audio-panel="issueAudio" data-audio-label="Play the audio summary" '
             f'aria-expanded="false" aria-controls="issueAudio"><span class="audio-btn-text">Play the audio summary</span></button>')
 
@@ -971,8 +973,8 @@ def page_html(p, body, n_images):
         desc = (f"{title}, {date}: the full text of this quarterly State of the Science edition from EM Evidence. "
                 f"Read online or download the PDF.")
     audio = audio_panel = audio_script = ""
-    if p["audio_id"]:
-        audio, audio_panel, audio_script = audio_button(p["audio_id"], title), AUDIO_PANEL, AUDIO_SCRIPT
+    if p["audio_id"] or p.get("spotify_id"):
+        audio, audio_panel, audio_script = audio_button(p["audio_id"], title, p.get("spotify_id")), AUDIO_PANEL, AUDIO_SCRIPT
     figures = ""
     if n_images:
         figures = " This issue has figures or images that only appear in the PDF."
