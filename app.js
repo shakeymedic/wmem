@@ -263,6 +263,9 @@ const icons = {
     assessment: `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`
 };
 
+// Bump when screenshots are replaced, so browsers fetch the new files instead of a stale or failed cached copy
+const SCREENSHOT_VERSION = '2026-10-10';
+
 function createToolCard(tool, isSmall = false) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
@@ -275,7 +278,7 @@ function createToolCard(tool, isSmall = false) {
         <div class="tool-card ${featuredClass} ${smallClass}" data-category="${escapeHtml(tool.category)}" data-tags="${escapeHtml(tool.tags.join(' '))}" data-tool-id="${escapeHtml(tool.id)}">
             ${betaBadge}
             <div class="tool-screenshot">
-                <img src="${escapeHtml(tool.screenshot)}" alt="" loading="lazy">
+                <img src="${escapeHtml(tool.screenshot)}?v=${SCREENSHOT_VERSION}" alt="" loading="lazy">
                 <div class="tool-screenshot-overlay" aria-hidden="true">
                     <div class="tool-icon-small">
                         ${icon}
@@ -429,10 +432,16 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Show the icon fallback when a screenshot is missing
+// If a screenshot fails, retry once past any cache; show the icon fallback only if that fails too
 document.addEventListener('error', (e) => {
-    if (e.target.tagName === 'IMG' && e.target.closest('.tool-screenshot')) {
-        e.target.parentElement.classList.add('no-screenshot');
+    const img = e.target;
+    if (img.tagName === 'IMG' && img.closest('.tool-screenshot')) {
+        if (!img.dataset.retried) {
+            img.dataset.retried = 'true';
+            img.src = img.getAttribute('src').split('?')[0] + '?retry=' + Date.now();
+            return;
+        }
+        img.parentElement.classList.add('no-screenshot');
     }
 }, true);
 
