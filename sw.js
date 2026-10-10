@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the list of pre-cached files changes; old caches are deleted on activate
-const CACHE_NAME = 'emevidence-v4';
+const CACHE_NAME = 'emevidence-v5';
 const ASSETS = [
   '/',
   '/index.html',
@@ -12,17 +12,18 @@ const ASSETS = [
   '/subscribe.js',
   '/vendor/fuse.min.js',
   '/fonts/inter-latin-wght-normal.woff2',
-  '/icons/logo-128.png',
-  '/icons/logo-128.webp',
-  '/icons/logo-256.png',
-  '/icons/logo-256.webp',
-  '/icons/icon-192.png',
+  '/icons/logo-128.png?v=2',
+  '/icons/logo-128.webp?v=2',
+  '/icons/logo-256.png?v=2',
+  '/icons/logo-256.webp?v=2',
+  '/icons/icon-192.png?v=2',
   '/manifest.json'
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    // cache: 'reload' skips the browser's HTTP cache, so a new version never re-caches old files
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS.map((url) => new Request(url, { cache: 'reload' }))))
   );
   self.skipWaiting();
 });

@@ -61,7 +61,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <language>en-gb</language>
     <lastBuildDate>${newest.toUTCString()}</lastBuildDate>
     <image>
-      <url>${SITE}/icons/logo-256.png</url>
+      <url>${SITE}/icons/logo-256.png?v=2</url>
       <title>EM Evidence newsletters</title>
       <link>${SITE}/newsletters/</link>
     </image>
