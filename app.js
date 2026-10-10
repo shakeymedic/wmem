@@ -347,6 +347,19 @@ const icons = {
 // Bump when screenshots are replaced, so browsers fetch the new files instead of a stale or failed cached copy
 const SCREENSHOT_VERSION = '2026-10-10';
 
+// "Reviewed Oct 2026" line for tools with a lastReviewed date ("2026-10-07"); flagged when over a year old
+const REVIEW_STALE_DAYS = 365;
+function reviewedLabel(tool) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(tool.lastReviewed || '');
+    if (!m) return '';
+    const when = Date.UTC(+m[1], +m[2] - 1, +m[3]);
+    const label = `${MONTHS_SHORT[+m[2] - 1]} ${m[1]}`;
+    const stale = (Date.now() - when) / 86400000 > REVIEW_STALE_DAYS;
+    const by = tool.reviewedBy ? ` by ${escapeHtml(tool.reviewedBy)}` : '';
+    return `<span class="tool-reviewed${stale ? ' tool-reviewed-stale' : ''}" title="Content last reviewed${by}">${stale ? 'Review due: last checked ' : 'Reviewed '}${label}</span>`;
+}
+const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 function createToolCard(tool, isSmall = false) {
     const icon = icons[tool.icon] || icons.procedure;
     const featuredClass = tool.featured ? 'featured' : '';
@@ -354,6 +367,7 @@ function createToolCard(tool, isSmall = false) {
     const smallClass = isSmall ? 'small-card' : '';
     const name = escapeHtml(tool.name);
     const newTab = tool.openInNewTab ? 'true' : 'false';
+    const reviewed = reviewedLabel(tool);
 
     return `
         <div class="tool-card ${featuredClass} ${smallClass}" data-category="${escapeHtml(tool.category)}" data-tags="${escapeHtml(tool.tags.join(' '))}" data-tool-id="${escapeHtml(tool.id)}">
@@ -370,6 +384,7 @@ function createToolCard(tool, isSmall = false) {
                 <h3 class="tool-name">${name}</h3>
                 <p class="tool-description">${escapeHtml(tool.description)}</p>
                 <span class="tool-category">${escapeHtml(tool.category)}</span>
+                ${reviewed}
                 <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener" class="tool-link" data-url="${escapeHtml(tool.url)}" data-name="${name}" data-new-tab="${newTab}" aria-label="Launch Tool: ${name}">
                     Launch Tool
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

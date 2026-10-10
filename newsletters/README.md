@@ -1,4 +1,8 @@
-# Newsletter landing pages (not yet in use)
+# Newsletters folder
+
+`index.html` and `archive.js` are the public archive page at `/newsletters/`, which lists every entry in `updates.js` with series and year filters. The series is worked out from each entry's label by `seriesOf()` in `updates.js`.
+
+## Landing pages (not yet in use)
 
 This folder is reserved for HTML versions of each Evidence Rundown issue, so the content can be read and searched on emevidence.org rather than only as a PDF on Google Drive. No pages have been added yet; every issue is currently linked as a PDF.
 

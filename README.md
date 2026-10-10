@@ -21,12 +21,12 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `fonts/`, `vendor/` | Self-hosted Inter font and Fuse.js search library |
 | `robots.txt`, `sitemap.xml` | For search engines |
 | `screenshots/` | Tool card images; see [screenshots/README.md](screenshots/README.md) for the file list |
-| `newsletters/` | Reserved for on-site HTML versions of each issue; see [newsletters/README.md](newsletters/README.md) |
+| `newsletters/` | The archive page (`/newsletters/`, filters by series and year) and, in future, on-site HTML versions of each issue; see [newsletters/README.md](newsletters/README.md) |
 | `netlify/functions/loops-webhook.js` | Syncs Loops subscriber changes to the newsletter pipeline repo |
 | `netlify.toml` | Build command, security and caching headers, and redirects (including the old wmebem domains) |
 | `scripts/validate-updates.js` | Checks the newsletter archive before each deploy |
+| `scripts/build-feed.js` | Writes `feed.xml` (RSS) from the archive during each deploy; the file is not committed |
 | `scripts/check-links.js` | Checks every tool and Drive link opens for the public; run weekly by `.github/workflows/check-links.yml` |
-| `EMAIL_AUTOMATION_SETUP.md` | Older notes on the sign-up and email setup (may be out of date now Loops is used) |
 
 ## Adding a newsletter issue
 

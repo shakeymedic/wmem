@@ -6,6 +6,7 @@
     <title>EM Evidence: emergency medicine evidence summaries and clinical tools</title>
     <meta name="description" content="Weekly EM Evidence Rundown newsletters, monthly PHEM and Anaesthetics &amp; ICU summaries, and free interactive tools for emergency medicine clinicians, built by UK EM doctors.">
     <link rel="canonical" href="https://emevidence.org/">
+    <link rel="alternate" type="application/rss+xml" title="EM Evidence newsletters" href="/feed.xml">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="EM Evidence">
@@ -65,7 +66,8 @@
                 <nav class="nav">
                     <a href="#home" class="nav-link active">Tools</a>
                     <a href="#about" class="nav-link">About</a>
-                    <a href="#newsletter" class="nav-link">Newsletter</a>
+                    <a href="newsletters/" class="nav-link">Newsletters</a>
+                    <a href="#newsletter" class="nav-link">Subscribe</a>
                     <a href="#contact" class="nav-link">Contact</a>
                     
                     <button id="darkModeToggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode" class="theme-toggle">
@@ -180,6 +182,7 @@
                     <!-- Mobile-only archive, below the tools and collapsed. Hidden on desktop, where the sidebar shows it -->
                     <details class="mobile-archive-wrapper" id="mobileArchiveWrapper">
                         <summary class="subsection-title">Evidence Rundown archive: all past issues</summary>
+                        <p class="widget-link-row"><a href="newsletters/">Browse by series and year →</a></p>
                         <div class="archive-filter">
                             <select id="mobileArchiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
@@ -190,6 +193,7 @@
                 <aside class="sidebar-column" aria-label="Evidence Rundown archive">
                     <div class="sidebar-widget">
                         <h3 class="widget-title">Evidence Rundown Archive</h3>
+                        <p class="widget-link-row"><a href="newsletters/">All issues by series and year →</a></p>
                         <div class="archive-filter">
                             <select id="archiveTagFilter" class="tag-select" aria-label="Filter archive by topic"></select>
                         </div>
@@ -305,7 +309,9 @@
                     <ul class="footer-links">
                         <li><a href="#home">Tools</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="newsletters/">Newsletter archive</a></li>
+                        <li><a href="#newsletter">Subscribe</a></li>
+                        <li><a href="feed.xml">RSS feed</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="privacy.html">Privacy</a></li>
                     </ul>

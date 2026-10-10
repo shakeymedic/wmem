@@ -1,6 +1,7 @@
 [build]
-  # Checks the newsletter archive; a bad entry fails the deploy and the live site stays as it was
-  command = "node scripts/validate-updates.js"
+  # Checks the newsletter archive (a bad entry fails the deploy and the live site stays as it was),
+  # then writes feed.xml from it
+  command = "node scripts/validate-updates.js && node scripts/build-feed.js"
   functions = "netlify/functions"
 
 [functions]
@@ -82,12 +83,6 @@
 # ── Repo files that aren't part of the website ────────────────
 [[redirects]]
   from = "/README.md"
-  to = "/404.html"
-  status = 404
-  force = true
-
-[[redirects]]
-  from = "/EMAIL_AUTOMATION_SETUP.md"
   to = "/404.html"
   status = 404
   force = true
