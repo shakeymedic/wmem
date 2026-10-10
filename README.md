@@ -55,7 +55,7 @@ The newsletter pipeline adds a new object to the top of the `updates` array in `
 
 Copy an existing object in `tools.js`, change its details, and add a screenshot to `screenshots/` with the file name you gave it. Cards without a screenshot show a blue fallback with the tool's icon.
 
-- `category` must be one of `Bedside Aids`, `UHB Tools`, `Simulation`, `Education & Advisory` or `Journal Club`. `UHB Tools` is for tools specific to University Hospitals Birmingham sites (BHH, GHH, QEHB, Solihull).
+- `category` must be one of `Bedside Aids`, `Paediatrics`, `UHB Tools`, `Simulation`, `Education & Advisory` or `Journal Club`. `UHB Tools` is for tools specific to University Hospitals Birmingham sites (BHH, GHH, QEHB, Solihull).
 - `isNew: true` also shows the tool in the Highlighted Apps row. Each tool should have only one entry.
 - `openInNewTab: true` opens the tool in a new tab instead of the in-page viewer. Use it for tools that refuse to be framed, or that are hosted anywhere other than `*.netlify.app` (the site's security policy only allows those in the viewer).
 
