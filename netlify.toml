@@ -2,10 +2,6 @@
   # Checks the newsletter archive (a bad entry fails the deploy and the live site stays as it was),
   # then writes feed.xml from it
   command = "node scripts/validate-updates.js && node scripts/build-feed.js"
-  functions = "netlify/functions"
-
-[functions]
-  node_bundler = "esbuild"
 
 # ── Security headers ──────────────────────────────────────────
 # The Content-Security-Policy lists every outside service the site uses:

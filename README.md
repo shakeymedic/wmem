@@ -22,7 +22,6 @@ It is hosted on Netlify (project `wmem`) and deploys from the `main` branch of t
 | `robots.txt`, `sitemap.xml` | For search engines |
 | `screenshots/` | Tool card images; see [screenshots/README.md](screenshots/README.md) for the file list |
 | `newsletters/` | The archive page (`/newsletters/`, filters by series and year) and, in future, on-site HTML versions of each issue; see [newsletters/README.md](newsletters/README.md) |
-| `netlify/functions/loops-webhook.js` | Syncs Loops subscriber changes to the newsletter pipeline repo |
 | `netlify.toml` | Build command, security and caching headers, and redirects (including the old wmebem domains) |
 | `scripts/validate-updates.js` | Checks the newsletter archive before each deploy |
 | `scripts/build-feed.js` | Writes `feed.xml` (RSS) from the archive during each deploy; the file is not committed |
