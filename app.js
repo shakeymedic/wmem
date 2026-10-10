@@ -407,11 +407,40 @@ function renderNewTools() {
     }
 }
 
+// "Search 77 tools" stays right as tools are added
+if (searchInput) searchInput.placeholder = `Search ${tools.length} tools, e.g. RSI`;
+
+const toolsHeading = document.getElementById('toolsHeading');
+const toolsSubtitle = document.getElementById('toolsSubtitle');
+const TOOLS_HEADING_DEFAULT = toolsHeading ? toolsHeading.textContent : '';
+const TOOLS_SUBTITLE_DEFAULT = toolsSubtitle ? toolsSubtitle.textContent : '';
+
+// While searching or filtering, the heading says what is shown and the latest-issue strip steps aside,
+// so results sit straight under the filters
+function updateToolsHeading(isDefaultView, count) {
+    document.body.classList.toggle('tools-filtered', !isDefaultView);
+    if (!toolsHeading || !toolsSubtitle) return;
+    if (isDefaultView) {
+        toolsHeading.textContent = TOOLS_HEADING_DEFAULT;
+        toolsSubtitle.textContent = TOOLS_SUBTITLE_DEFAULT;
+        return;
+    }
+    const noun = count === 1 ? 'tool' : 'tools';
+    if (searchTerm !== '') {
+        toolsHeading.textContent = 'Search results';
+        toolsSubtitle.textContent = `${count} ${noun} matching “${searchTerm}”`;
+    } else {
+        toolsHeading.textContent = currentCategory === 'all' ? 'All tools' : currentCategory;
+        toolsSubtitle.textContent = `${count} ${noun}${currentTag ? ` tagged “${currentTag}”` : ''}`;
+    }
+}
+
 function renderTools() {
     const isDefaultView = currentCategory === 'all' && searchTerm === '' && currentTag === '';
 
     toolsGrid.innerHTML = '';
     noResults.style.display = 'none';
+    if (isDefaultView) updateToolsHeading(true);
 
     if (isDefaultView) {
         if (newToolsWrapper) newToolsWrapper.style.display = 'block';
@@ -483,6 +512,8 @@ function renderTools() {
                 .filter(tool => rank.has(tool.id))
                 .sort((a, b) => rank.get(a.id) - rank.get(b.id));
         }
+
+        updateToolsHeading(false, filteredTools.length);
 
         if (filteredTools.length === 0) {
             toolsGrid.style.display = 'none';
@@ -559,6 +590,13 @@ filterButtons.forEach(button => {
 tagFilter.addEventListener('change', (e) => {
     currentTag = e.target.value.toLowerCase();
     renderTools();
+});
+
+// On phones, lift the search box to the top of the screen so results show above the keyboard
+searchInput.addEventListener('focus', () => {
+    if (window.matchMedia('(max-width: 768px)').matches && searchInput.getBoundingClientRect().top > 80) {
+        searchInput.scrollIntoView({ block: 'start' });
+    }
 });
 
 searchInput.addEventListener('input', (e) => {
