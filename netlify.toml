@@ -1,7 +1,7 @@
 [build]
   # Checks the newsletter archive (a bad entry fails the deploy and the live site stays as it was),
-  # then writes feed.xml from it
-  command = "node scripts/validate-updates.js && node scripts/build-feed.js"
+  # then writes feed.xml and the podcast feed podcast.xml from it
+  command = "node scripts/validate-updates.js && node scripts/build-feed.js && node scripts/build-podcast.js"
 
 # ── Security headers ──────────────────────────────────────────
 # The Content-Security-Policy lists every outside service the site uses:
@@ -46,6 +46,13 @@
   for = "*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+
+# Podcast apps check the feed often; keep it fresh
+[[headers]]
+  for = "/podcast.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=utf-8"
+    Cache-Control = "public, max-age=300"
 
 # Rename the font file if it is ever replaced
 [[headers]]
@@ -117,6 +124,18 @@
 
 [[redirects]]
   from = "/screenshots/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/podcast/show.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/podcast/imported-episodes.json"
   to = "/404.html"
   status = 404
   force = true

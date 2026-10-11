@@ -34,7 +34,7 @@ function parseDate(s) {
 
 const DRIVE_ID = /^[A-Za-z0-9_-]{25,}$/;
 const ENTRY_KEYS = new Set(["date", "label", "tags", "htmlPath", "links"]);
-const LINK_KEYS = new Set(["title", "driveId", "audioId", "spotifyEpisodeId", "htmlPath"]);
+const LINK_KEYS = new Set(["title", "driveId", "audioId", "audioBytes", "audioSeconds", "spotifyEpisodeId", "htmlPath"]);
 const SPOTIFY_ID = /^[A-Za-z0-9]{22}$/;
 const HTML_PATH = /^\/newsletters\/[a-z]+\/[a-z0-9-]+\.html$/;
 const pages = new Map();
@@ -97,6 +97,13 @@ ctx.updates.forEach((entry, i) => {
                 else titles.set(key, lw);
             }
         }
+        // audioBytes and audioSeconds put the audio summary in the podcast feed (scripts/build-podcast.js)
+        for (const key of ["audioBytes", "audioSeconds"]) {
+            if (link[key] === undefined) continue;
+            if (!Number.isInteger(link[key]) || link[key] <= 0) errors.push(`${lw}: ${key} should be a whole number above 0, not "${link[key]}"`);
+            if (link.audioId === undefined) errors.push(`${lw}: has ${key} but no audioId`);
+        }
+        if ((link.audioBytes === undefined) !== (link.audioSeconds === undefined)) errors.push(`${lw}: the podcast needs both audioBytes and audioSeconds, or neither`);
         for (const key of ["driveId", "audioId"]) {
             const id = link[key];
             if (id === undefined && key === "audioId") continue;

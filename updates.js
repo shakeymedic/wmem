@@ -1,10 +1,11 @@
 // Evidence Rundown Newsletter Archive
 // This file is the single source of truth for newsletter links on the website.
 // The pipeline updates the `updates` array after each newsletter is sent.
-// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, spotifyEpisodeId?, htmlPath? }] }
+// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, audioBytes?, audioSeconds?, spotifyEpisodeId?, htmlPath? }] }
 //   date:    "2 Oct 2026" (day, short month, year)
 //   label:   descriptive name, e.g. "EM Evidence Rundown — Issue 32" (shown in the Latest banner)
 //   audioId: Drive ID of the audio summary for that issue (not a separate link); audio.js plays it on the page
+//   audioBytes, audioSeconds: the MP3's size and length; with these the audio is also a podcast episode (scripts/build-podcast.js)
 //   spotifyEpisodeId: the issue's podcast episode on Spotify (the 22 characters after /episode/ in
 //            its link). When set, the page uses Spotify's player, with the Drive audio as a fallback.
 //   htmlPath: the issue's page on this site, e.g. "/newsletters/em/issue-32.html" (made by
@@ -24,7 +25,7 @@ const updates = [
     label: "Issue 33 \u2014 EM Evidence Rundown",
     htmlPath: "/newsletters/em/issue-33.html",
     links: [
-      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X", audioId: "1_iDS3cavpFjys9uRbx7C5kmpdjkp-WTX" }
+      { title: "EM Evidence Rundown \u2014 Issue 33", driveId: "1n8Fu5l5JtdFQHHzQLyI-znQ77mq-Mp0X", audioId: "1_iDS3cavpFjys9uRbx7C5kmpdjkp-WTX", audioBytes: 5131479, audioSeconds: 641 }
     ]
   },
   {
