@@ -104,13 +104,17 @@ ctx.updates.forEach((entry, i) => {
             if (link.audioId === undefined) errors.push(`${lw}: has ${key} but no audioId`);
         }
         if ((link.audioBytes === undefined) !== (link.audioSeconds === undefined)) errors.push(`${lw}: the podcast needs both audioBytes and audioSeconds, or neither`);
-        if (link.spotifyEpisodeId !== undefined && (typeof link.spotifyEpisodeId !== "string" || !SPOTIFY_ID.test(link.spotifyEpisodeId)))
-            errors.push(`${lw}: spotifyEpisodeId "${link.spotifyEpisodeId}" should be the 22 letters and digits after /episode/ in the Spotify link`);
         for (const key of ["driveId", "audioId"]) {
             const id = link[key];
             if (id === undefined && key === "audioId") continue;
             if (typeof id !== "string" || !DRIVE_ID.test(id)) { errors.push(`${lw}: ${key} "${id}" does not look like a Google Drive file ID`); continue; }
             if (seen.has(id)) errors.push(`${lw}: ${key} ${id} is already used by ${seen.get(id)} (duplicate upload or draft?)`);
+            else seen.set(id, lw);
+        }
+        if (link.spotifyEpisodeId !== undefined) {
+            const id = link.spotifyEpisodeId;
+            if (typeof id !== "string" || !SPOTIFY_ID.test(id)) errors.push(`${lw}: spotifyEpisodeId "${id}" should be the 22 letters and digits after /episode/ in the Spotify link`);
+            else if (seen.has(id)) errors.push(`${lw}: spotifyEpisodeId ${id} is already used by ${seen.get(id)}`);
             else seen.set(id, lw);
         }
     });

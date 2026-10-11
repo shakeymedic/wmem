@@ -18,7 +18,7 @@ const tools = [
         description: "Interactive emergency medicine simulation cases for training and self-directed learning — resuscitation, majors, and paediatric scenarios",
         category: "Simulation",
         tags: ["simulation", "training", "education", "cases", "resuscitation"],
-        url: "https://wmebemsim.netlify.app/",
+        url: "https://emsimulator.com/",
         featured: true,
         isNew: true,
         icon: "monitor",

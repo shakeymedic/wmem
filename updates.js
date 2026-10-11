@@ -1,19 +1,18 @@
 // Evidence Rundown Newsletter Archive
 // This file is the single source of truth for newsletter links on the website.
 // The pipeline updates the `updates` array after each newsletter is sent.
-// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, htmlPath? }] }
+// Schema: { date, label, tags?, htmlPath?, links: [{ title, driveId, audioId?, audioBytes?, audioSeconds?, spotifyEpisodeId?, htmlPath? }] }
 //   date:    "2 Oct 2026" (day, short month, year)
 //   label:   descriptive name, e.g. "EM Evidence Rundown — Issue 32" (shown in the Latest banner)
-//   audioId: Drive ID of the audio summary for that issue (not a separate link)
+//   audioId: Drive ID of the audio summary for that issue (not a separate link); audio.js plays it on the page
 //   audioBytes, audioSeconds: the MP3's size and length; with these the audio is also a podcast episode (scripts/build-podcast.js)
-//   spotifyEpisodeId: the episode's ID on Spotify, once Spotify has picked it up from the podcast feed
+//   spotifyEpisodeId: the issue's podcast episode on Spotify (the 22 characters after /episode/ in
+//            its link). When set, the page uses Spotify's player, with the Drive audio as a fallback.
 //   htmlPath: the issue's page on this site, e.g. "/newsletters/em/issue-32.html" (made by
 //            scripts/build-issue-pages.py). On the entry when it has one PDF; on each link when
 //            an entry holds several issues.
 // driveId: Google Drive file ID — must be set to "Anyone with the link can view"
 // `node scripts/validate-updates.js` checks this file; Netlify runs it before every deploy.
-
-const audioIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;flex-shrink:0;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
 
 const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`;
 
@@ -558,11 +557,7 @@ function buildTimelineHTML(filtered) {
                         ${docIcon}
                         ${escapeText(displayTitle(link.title))}
                     </a>
-                    ${link.audioId ? `<a href="https://drive.google.com/file/d/${link.audioId}/view?usp=sharing"
-                       target="_blank" rel="noopener" class="sidebar-link sidebar-link-audio">
-                        ${audioIcon}
-                        Audio summary
-                    </a>` : ""}
+                    ${audioButtonHTML(link, displayTitle(link.title))}
                     ${link.htmlPath ? `<a href="${escapeText(link.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site<span class="visually-hidden">: ${escapeText(displayTitle(link.title))}</span> →</a>` : ""}
                 `).join("")}
                 ${week.htmlPath ? `<a href="${escapeText(week.htmlPath)}" class="sidebar-link sidebar-link-html">Read on site →</a>` : ""}

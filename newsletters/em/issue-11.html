@@ -20,12 +20,13 @@
 
     <script src="/theme-init.js"></script>
     <script src="/analytics.js" defer></script>
+    <script src="/audio.js" defer></script>
     <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2563a8">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 </head>
 <body>
     <a class="skip-link" href="#issueText">Skip to the issue</a>
@@ -34,8 +35,8 @@
             <div class="header-content">
                 <a class="logo-section page-home-link" href="/">
                     <picture>
-                        <source srcset="/icons/logo-128.webp" type="image/webp">
-                        <img src="/icons/logo-128.png" alt="" class="logo" width="60" height="60">
+                        <source srcset="/icons/logo-128.webp?v=2" type="image/webp">
+                        <img src="/icons/logo-128.png?v=2" alt="" class="logo" width="60" height="60">
                     </picture>
                     <div class="logo-text">
                         <p class="page-site-name">EM Evidence</p>
@@ -66,8 +67,9 @@
             <div class="issue-actions">
                 <a class="issue-btn" href="https://drive.google.com/uc?export=download&id=1W5u1q4MQ_6xuPqdCAEnUMW-4PqgppbbU" rel="noopener">Download the PDF</a>
                 <a class="issue-btn issue-btn-secondary" href="https://drive.google.com/file/d/1W5u1q4MQ_6xuPqdCAEnUMW-4PqgppbbU/view?usp=sharing" target="_blank" rel="noopener">Open in Google Drive</a>
-                <a class="issue-btn issue-btn-secondary" href="https://drive.google.com/file/d/1aBLNMe-dwaTsSnN7SurLuyGjLAnWIppg/view?usp=sharing" target="_blank" rel="noopener">Listen to the audio summary</a>
+                <button type="button" class="issue-btn issue-btn-secondary" data-audio-id="1aBLNMe-dwaTsSnN7SurLuyGjLAnWIppg" data-audio-title="EM Evidence Rundown — Issue 11" data-audio-panel="issueAudio" data-audio-label="Play the audio summary" aria-expanded="false" aria-controls="issueAudio"><span class="audio-btn-text">Play the audio summary</span></button>
             </div>
+            <div class="issue-audio" id="issueAudio" hidden></div>
             <p class="issue-note">This is the text of the PDF, copied across so you can read and search it here. Tables and layout may look different from the original. The PDF is the definitive version.</p>
         </div>
 
