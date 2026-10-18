@@ -513,7 +513,7 @@ const tools = [
     {
         id: "paed-wheeze",
         name: "Paediatric Wheeze Assessment",
-        description: "Structured assessment and documentation tool for children with wheeze (BTS/SIGN 2024, NICE NG80), covering severity, treatment, response and disposition, with a pre-populated EPR note",
+        description: "Structured assessment and documentation tool for children with wheeze (BTS/SIGN 2024, BTS/NICE/SIGN NG245), covering severity, treatment, response and disposition, with a pre-populated EPR note",
         category: "Paediatrics",
         tags: ["paediatrics", "asthma", "wheeze", "respiratory", "documentation"],
         url: "https://paedwheeze.netlify.app",
