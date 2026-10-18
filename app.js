@@ -88,10 +88,9 @@ const SYNONYMS = {
     paeds: ['paediatric', 'paediatrics', 'children', 'child'],
     paediatric: ['paeds', 'children', 'child'],
     kids: ['paediatric', 'children'],
-    ventilator: ['ventilation', 'niv', 'hamilton', 'ventilated'],
-    ventilation: ['ventilator', 'niv', 'hamilton'],
-    niv: ['ventilator', 'ventilation', 'hamilton', 'cpap', 'bipap'],
-    hamilton: ['ventilator', 'niv'],
+    ventilator: ['ventilation', 'niv', 'ventilated'],
+    ventilation: ['ventilator', 'niv'],
+    niv: ['ventilator', 'ventilation', 'cpap', 'bipap'],
     pe: ['pulmonary embolism', 'embolism'],
     mi: ['myocardial infarction', 'stemi', 'omi'],
     stemi: ['omi', 'myocardial infarction', 'ecg'],
@@ -322,7 +321,7 @@ const icons = {
 };
 
 // Bump when screenshots are replaced, so browsers fetch the new files instead of a stale or failed cached copy
-const SCREENSHOT_VERSION = '2026-10-10b';
+const SCREENSHOT_VERSION = '2026-10-18a';
 
 // "Reviewed Oct 2026" line for tools with a lastReviewed date ("2026-10-07"); flagged once the two-yearly review is overdue
 const REVIEW_STALE_DAYS = 730;

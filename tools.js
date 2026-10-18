@@ -594,15 +594,15 @@ const tools = [
     // --- EDUCATION & ADVISORY (added Oct 2026) ---
     {
         id: "niv-hamilton-t1",
-        name: "Ventilator Training: Hamilton T1",
-        description: "Interactive Hamilton T1 ventilator simulator with every adult mode, from NIV and HiFlowO2 to (S)CMV+, APRV, ASV and CPR ventilation, plus an acute NIV teaching guide: pre-use checks, set-up, alarms, troubleshooting and practice scenarios",
+        name: "Ventilator Training: Transport Ventilator",
+        description: "Interactive transport ventilator simulator with every adult mode, from NIV and HiFlowO2 to (S)CMV+, APRV, ASV and CPR ventilation, plus an acute NIV teaching guide: pre-use checks, set-up, alarms, troubleshooting and practice scenarios",
         category: "Education & Advisory",
         group: "Resus, cardiac & procedures",
-        tags: ["NIV", "ventilation", "mechanical ventilation", "ASV", "Hamilton T1", "respiratory", "training"],
+        tags: ["NIV", "ventilation", "mechanical ventilation", "ASV", "transport ventilator", "respiratory", "training"],
         url: "https://wmebemventilator.netlify.app",
         featured: false,
         icon: "airway",
-        screenshot: "screenshots/niv-hamilton-t1.png",
+        screenshot: "screenshots/niv-ventilator.png",
         isNew: true
     },
     {
