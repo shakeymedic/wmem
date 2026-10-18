@@ -43,7 +43,7 @@ const tools = [
         id: "als-app",
         isNew: true,
         name: "Cardiac Arrest App",
-        description: "Real-time tool for managing and documenting actual cardiac arrest resuscitations in the emergency department",
+        description: "Educational aid that prompts, times and records the steps of a cardiac arrest in the emergency department",
         category: "Bedside Aids",
         tags: ["resuscitation", "cardiac", "ALS", "documentation", "real-time"],
         url: "https://wmebemals.netlify.app",
@@ -54,7 +54,7 @@ const tools = [
     {
         id: "major-trauma",
         name: "Major Trauma Management",
-        description: "Complete app to run and document major trauma cases including primary and secondary survey protocols",
+        description: "Educational aid that walks through major trauma cases, including the primary and secondary survey",
         category: "Bedside Aids",
         tags: ["trauma", "ATLS", "primary survey", "secondary survey", "documentation"],
         url: "https://majortrauma.netlify.app",
@@ -88,7 +88,7 @@ const tools = [
     {
         id: "sedation",
         name: "Procedural Sedation Tool",
-        description: "Comprehensive tool to help plan, run, and document procedural sedation safely in the emergency department",
+        description: "Educational aid to help plan and check the steps of procedural sedation in the emergency department",
         category: "Bedside Aids",
         tags: ["sedation", "procedures", "safety", "documentation", "monitoring"],
         url: "https://sedation.netlify.app",
@@ -99,7 +99,7 @@ const tools = [
     {
         id: "rsi-tool",
         name: "RSI Management Tool",
-        description: "Structured tool to assist with planning, execution, and documentation of rapid sequence intubation in the ED",
+        description: "Educational aid to help plan and check the steps of rapid sequence intubation in the ED",
         category: "Bedside Aids",
         tags: ["RSI", "airway", "intubation", "safety", "checklist"],
         url: "https://wmebemrsi.netlify.app",
@@ -110,7 +110,7 @@ const tools = [
     {
         id: "rosc-management",
         name: "Post-ROSC Management",
-        description: "Dedicated tool for the receipt and management of post-return of spontaneous circulation patients in the ED",
+        description: "Educational aid covering the receipt and management of patients after return of spontaneous circulation in the ED",
         category: "Bedside Aids",
         tags: ["cardiac", "resuscitation", "ROSC", "critical care"],
         url: "https://wmebemcardiacarrest.netlify.app",
@@ -121,7 +121,7 @@ const tools = [
     {
         id: "em-obstetrics",
         name: "Obstetric Emergencies",
-        description: "Real-time cognitive aid for managing obstetric emergencies including PPH, eclampsia, and maternal resuscitation",
+        description: "Educational cognitive aid for obstetric emergencies, including PPH, eclampsia and maternal resuscitation",
         category: "Bedside Aids",
         tags: ["obstetrics", "pregnancy", "emergency", "PPH", "resuscitation"],
         url: "https://emobstetrics.netlify.app",
@@ -132,7 +132,7 @@ const tools = [
     {
         id: "sedation-agitated",
         name: "Agitated Patient Sedation",
-        description: "Protocol for the safe sedation and management of patients with acute behavioural disturbance",
+        description: "Educational aid on the safe sedation and management of patients with acute behavioural disturbance",
         category: "Bedside Aids",
         tags: ["sedation", "mental health", "agitated", "ABD", "safety"],
         url: "https://wmebemsedationagitated.netlify.app",
