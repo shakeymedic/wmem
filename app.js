@@ -348,6 +348,10 @@ function createToolCard(tool, isSmall = false) {
     const name = escapeHtml(tool.name);
     const newTab = tool.openInNewTab ? 'true' : 'false';
     const reviewed = reviewedLabel(tool);
+    // Optional print version (e.g. a PDF of the sheet), opened directly rather than in the viewer
+    const download = tool.download
+        ? `<a href="${escapeHtml(tool.download.url)}" target="_blank" rel="noopener" class="tool-download">${escapeHtml(tool.download.label || 'Download PDF')}</a>`
+        : '';
 
     return `
         <div class="tool-card ${featuredClass} ${smallClass}" data-category="${escapeHtml(tool.category)}" data-tags="${escapeHtml(tool.tags.join(' '))}" data-tool-id="${escapeHtml(tool.id)}">
@@ -365,6 +369,7 @@ function createToolCard(tool, isSmall = false) {
                 <p class="tool-description">${escapeHtml(tool.description)}</p>
                 <span class="tool-category">${escapeHtml(tool.category)}</span>
                 ${reviewed}
+                ${download}
                 <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener" class="tool-link" data-url="${escapeHtml(tool.url)}" data-name="${name}" data-new-tab="${newTab}" aria-label="Launch Tool: ${name}${tool.openInNewTab ? ' (opens in a new tab)' : ''}">
                     Launch Tool
                     ${tool.openInNewTab ? NEW_TAB_ICON : ARROW_ICON}
