@@ -192,6 +192,7 @@ const tools = [
         category: "Bedside Aids",
         tags: ["isolation", "side room", "infection control", "IPC", "UHB", "preliminary"],
         url: "https://uhbsideroom.netlify.app",
+        download: { url: "https://uhbsideroom.netlify.app/side-room-prioritisation-draft-v5.pdf", label: "Download printable PDF" },
         featured: false,
         beta: true,
         icon: "guidelines",

@@ -24,6 +24,7 @@ const updates = loadArray("updates.js", "updates");
 
 const checks = [];
 for (const t of tools) checks.push({ what: `Tool: ${t.name}`, url: t.url });
+for (const t of tools) if (t.download) checks.push({ what: `Download: ${t.name}`, url: t.download.url });
 for (const entry of updates) {
     for (const link of entry.links || []) {
         for (const id of [link.driveId, link.audioId].filter(Boolean)) {

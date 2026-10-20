@@ -916,6 +916,19 @@ html.dark-mode .update-tag {
     display: none;
 }
 
+/* Secondary link on a tool card, e.g. a printable PDF */
+.tool-download {
+    align-self: flex-start;
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: -0.5rem 0 1rem;
+}
+
+html.dark-mode .tool-download {
+    color: #93c5fd;
+}
+
 /* Inside a section the heading already names the category, so the chip only shows in search and filter results */
 .category-section .tool-category,
 .new-tools-grid .tool-category {
@@ -2591,6 +2604,11 @@ body.tools-filtered .featured-newsletter-wrapper {
 
     .tools-grid-layout > .tool-card .tool-reviewed {
         margin: 0 0 0.375rem;
+    }
+
+    .tools-grid-layout > .tool-card .tool-download {
+        margin: 0 0 0.375rem;
+        min-height: 24px;
     }
 
     /* The whole row opens the tool; the link stays for keyboards and screen readers */
