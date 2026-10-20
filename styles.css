@@ -1897,49 +1897,6 @@ html.dark-mode .newsletter-card {
     color: var(--primary-blue);
 }
 
-/* Podcast sign-up, under the mailing list form */
-.podcast-card {
-    max-width: 600px;
-    margin: 1.5rem auto 0;
-    background-color: #f9fafb;
-    padding: 1.5rem 2rem;
-    border-radius: 1rem;
-    border: 1px solid var(--border-color);
-    text-align: center;
-}
-
-html.dark-mode .podcast-card {
-    background-color: #111827;
-}
-
-.podcast-title {
-    font-size: 1.15rem;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
-
-.podcast-text {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-}
-
-.podcast-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.podcast-actions a {
-    text-decoration: none;
-}
-
-.podcast-feed-url {
-    overflow-wrap: anywhere;
-    user-select: all;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
 
 .governance-section {
     display: flex;
@@ -2362,6 +2319,11 @@ html.dark-mode .update-tag {
 }
 
 /* While searching or filtering, results come straight after the filters */
+/* Podcast strip sits straight under the latest issue, in the same style */
+#featuredNewsletterWrapper {
+    margin-bottom: 0.75rem;
+}
+
 body.tools-filtered .featured-newsletter-wrapper {
     display: none;
 }
