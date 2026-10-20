@@ -278,6 +278,7 @@ const tools = [
         tags: ["QIP", "audit", "governance", "education", "management"],
         url: "https://wmebemqipassist.netlify.app",
         featured: false,
+        isNew: true,
         icon: "guidelines",
         screenshot: "screenshots/qip-assist.png"
     },
