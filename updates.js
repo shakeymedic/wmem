@@ -21,6 +21,15 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "23 Oct 2026",
+    label: "EM Evidence Rundown — Issue 35",
+    htmlPath: "/newsletters/em/issue-35.html",
+    tags: [],
+    links: [
+      { title: "EM Evidence Rundown — Issue 35", driveId: "1gL8t7EnlKBxEZaEwVvE-ddGijM1L6E_D" }
+    ]
+  },
+  {
     date: "15 Oct 2026",
     label: "EM Evidence Rundown — Issue 34",
     tags: [],
