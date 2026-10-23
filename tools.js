@@ -31,7 +31,7 @@ const tools = [
         category: "Education & Advisory",
         group: "Training, AI & wellbeing",
         tags: ["FRCEM", "MRCEM", "revision", "exams", "OSCE", "training"],
-        url: "https://frcemosceprep.netlify.app/",
+        url: "https://rcemrevision.com/",
         featured: true,
         beta: true,
         isNew: true,
