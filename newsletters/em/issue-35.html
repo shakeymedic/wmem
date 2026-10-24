@@ -20,6 +20,7 @@
 
     <script src="/theme-init.js"></script>
     <script src="/analytics.js" defer></script>
+    <script src="/audio.js" defer></script>
     <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css">
     <link rel="manifest" href="/manifest.json">
@@ -66,7 +67,9 @@
             <div class="issue-actions">
                 <a class="issue-btn" href="https://drive.google.com/uc?export=download&id=1gL8t7EnlKBxEZaEwVvE-ddGijM1L6E_D" rel="noopener">Download the PDF</a>
                 <a class="issue-btn issue-btn-secondary" href="https://drive.google.com/file/d/1gL8t7EnlKBxEZaEwVvE-ddGijM1L6E_D/view?usp=sharing" target="_blank" rel="noopener">Open in Google Drive</a>
+                <button type="button" class="issue-btn issue-btn-secondary" data-audio-id="1--9FBsyPIi_LDSwmvvcIZVyoJePxcLIn" data-audio-title="EM Evidence Rundown — Issue 35" data-audio-panel="issueAudio" data-audio-label="Play the audio summary" aria-expanded="false" aria-controls="issueAudio"><span class="audio-btn-text">Play the audio summary</span></button>
             </div>
+            <div class="issue-audio" id="issueAudio" hidden></div>
             <p class="issue-note">This is the text of the PDF, copied across so you can read and search it here. Tables and layout may look different from the original. This issue has figures or images that only appear in the PDF. The PDF is the definitive version.</p>
         </div>
 
