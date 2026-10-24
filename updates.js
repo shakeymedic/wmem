@@ -26,7 +26,7 @@ const updates = [
     htmlPath: "/newsletters/em/issue-35.html",
     tags: [],
     links: [
-      { title: "EM Evidence Rundown — Issue 35", driveId: "1gL8t7EnlKBxEZaEwVvE-ddGijM1L6E_D", audioId: "1--9FBsyPIi_LDSwmvvcIZVyoJePxcLIn", audioBytes: 9813399, audioSeconds: 1226 }
+      { title: "EM Evidence Rundown — Issue 35", driveId: "1gL8t7EnlKBxEZaEwVvE-ddGijM1L6E_D", audioId: "1--9FBsyPIi_LDSwmvvcIZVyoJePxcLIn", audioBytes: 9813399, audioSeconds: 1226, spotifyEpisodeId: "76V2WbtDQFj9luzyZT0OGu" }
     ]
   },
   {
