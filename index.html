@@ -169,6 +169,12 @@
                                     <option value="">Filter by topic (any)</option>
                                 </select>
                             </div>
+
+                            <!-- Some work and hospital networks stop tools loading inside the viewer; this skips it -->
+                            <label class="new-tab-pref">
+                                <input type="checkbox" id="newTabPref">
+                                Always open tools in a new tab
+                            </label>
                         </div>
                     </div>
 
@@ -401,12 +407,19 @@
                     <p>Loading tool...</p>
                 </div>
                 <div class="tool-modal-error" id="modalError" style="display: none;">
-                    <p>Taking longer than expected...</p>
+                    <p>This tool is taking longer than expected to load here.</p>
+                    <p>Some work and hospital networks stop tools loading inside this window. Opening it in a new tab usually works.</p>
                     <button type="button" id="forceOpenBtn" class="tool-link button-reset">
-                        Click to open directly
+                        Open in a new tab
                     </button>
                 </div>
                 <iframe id="toolIframe" class="tool-iframe" title="Tool" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <!-- A blocked tool can still "load" (as a blank or block page), so this help is always shown -->
+            <div class="tool-modal-help">
+                <span>Blank or blocked? Some work networks stop tools loading in this window.</span>
+                <button type="button" class="tool-modal-help-btn button-reset" id="helpOpenBtn">Open in a new tab</button>
+                <button type="button" class="tool-modal-help-btn button-reset" id="helpAlwaysBtn">Always use new tabs</button>
             </div>
         </div>
     </div>

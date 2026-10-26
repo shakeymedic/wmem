@@ -18,6 +18,9 @@ const modalError = document.getElementById('modalError');
 const forceOpenBtn = document.getElementById('forceOpenBtn'); 
 const closeModalBtn = document.getElementById('closeModal');
 const openInNewTabBtn = document.getElementById('openInNewTab');
+const helpOpenBtn = document.getElementById('helpOpenBtn');
+const helpAlwaysBtn = document.getElementById('helpAlwaysBtn');
+const newTabPref = document.getElementById('newTabPref');
 const modalBackdrop = document.querySelector('.tool-modal-backdrop');
 
 // Theme Elements
@@ -82,6 +85,28 @@ function saveOpenSections(sections) {
         localStorage.setItem(OPEN_SECTIONS_KEY, JSON.stringify(sections.filter(s => s.open).map(s => s.dataset.category)));
     } catch (e) { /* storage blocked */ }
 }
+
+// Some work and hospital networks stop tools loading inside the viewer (the frame
+// shows a blank or block page, which can't be detected from here), so visitors can
+// choose to skip the viewer. Remembered in their browser.
+const NEW_TAB_PREF_KEY = 'openToolsInNewTab';
+
+function loadNewTabPref() {
+    try {
+        return localStorage.getItem(NEW_TAB_PREF_KEY) === 'true';
+    } catch (e) {
+        return false;
+    }
+}
+
+function saveNewTabPref(value) {
+    try {
+        if (value) localStorage.setItem(NEW_TAB_PREF_KEY, 'true');
+        else localStorage.removeItem(NEW_TAB_PREF_KEY);
+    } catch (e) { /* storage blocked */ }
+}
+
+let alwaysNewTab = loadNewTabPref();
 
 // Words people type that the tool text spells differently
 const SYNONYMS = {
@@ -259,12 +284,26 @@ openInNewTabBtn.addEventListener('click', () => {
     window.open(currentToolUrl, '_blank', 'noopener,noreferrer');
 });
 
-if (forceOpenBtn) {
-    forceOpenBtn.addEventListener('click', () => {
-        window.open(currentToolUrl, '_blank', 'noopener,noreferrer');
-        closeModal();
-    });
+function openCurrentToolInNewTab() {
+    window.open(currentToolUrl, '_blank', 'noopener,noreferrer');
+    closeModal();
 }
+
+if (forceOpenBtn) forceOpenBtn.addEventListener('click', openCurrentToolInNewTab);
+helpOpenBtn.addEventListener('click', openCurrentToolInNewTab);
+
+helpAlwaysBtn.addEventListener('click', () => {
+    alwaysNewTab = true;
+    saveNewTabPref(true);
+    newTabPref.checked = true;
+    openCurrentToolInNewTab();
+});
+
+newTabPref.checked = alwaysNewTab;
+newTabPref.addEventListener('change', () => {
+    alwaysNewTab = newTabPref.checked;
+    saveNewTabPref(alwaysNewTab);
+});
 
 document.addEventListener('keydown', (e) => {
     const typing = ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName);
@@ -274,7 +313,7 @@ document.addEventListener('keydown', (e) => {
     }
     // Keep keyboard focus inside the open tool viewer
     if (e.key === 'Tab' && toolModal.classList.contains('active')) {
-        const focusable = [openInNewTabBtn, closeModalBtn, toolIframe];
+        const focusable = [openInNewTabBtn, closeModalBtn, toolIframe, helpOpenBtn, helpAlwaysBtn];
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
         if (e.shiftKey && document.activeElement === first) {
@@ -538,9 +577,10 @@ function renderTools() {
 }
 
 // Opens a tool in the in-page viewer on larger screens; on phones, for tools that
-// can't be framed, or when the user asks for a new tab, the link's own target="_blank" applies
+// can't be framed, or when the user asks for a new tab (once or always), the link's
+// own target="_blank" applies
 function handleToolActivation(link, e) {
-    const wantsNewTab = e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1;
+    const wantsNewTab = alwaysNewTab || e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1;
     if (wantsNewTab || link.dataset.newTab === 'true' || window.innerWidth < 768) return false;
     e.preventDefault();
     openModal(link.dataset.name, link.dataset.url, link);

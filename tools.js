@@ -32,6 +32,8 @@ const tools = [
         group: "Training, AI & wellbeing",
         tags: ["FRCEM", "MRCEM", "revision", "exams", "OSCE", "training"],
         url: "https://rcemrevision.com/",
+        // Its own site refuses to be framed (frame-ancestors 'none'), and it isn't on *.netlify.app
+        openInNewTab: true,
         featured: true,
         beta: true,
         isNew: true,
