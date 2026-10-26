@@ -198,6 +198,18 @@ const tools = [
         icon: "guidelines",
         screenshot: "screenshots/uhb-side-room.png"
     },
+    {
+        id: "nursing-notes",
+        name: "Nursing Notes",
+        description: "Educational aid that helps nurses write clear, structured notes for common tasks (first contact, deteriorating patient, skin, nutrition, falls, cannula, catheter and more), ready to copy into the record. Nothing typed is saved or sent",
+        category: "Bedside Aids",
+        tags: ["nursing", "documentation", "NEWS2", "SBAR", "pressure ulcers", "nutrition", "falls"],
+        url: "https://wmebemnursingnotes.netlify.app",
+        featured: false,
+        icon: "assessment",
+        lastReviewed: "2026-10-26",
+        screenshot: "screenshots/nursing-notes.png"
+    },
 
     // --- SIMULATION (For Training) ---
     {
