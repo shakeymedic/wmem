@@ -1975,6 +1975,86 @@ html.dark-mode .tool-modal-error {
     background: #111827;
 }
 
+.tool-modal-error p {
+    max-width: 32rem;
+    padding: 0 1.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.tool-modal-error .tool-link {
+    margin-top: 0.5rem;
+}
+
+/* Always-shown help under the viewer, for networks that block framed tools */
+.tool-modal-help {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--white);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.tool-modal-help-btn {
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--primary-blue);
+    border-radius: 2rem;
+    background: transparent;
+    color: var(--primary-blue);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.tool-modal-help-btn:hover,
+.tool-modal-help-btn:focus-visible {
+    background: var(--primary-blue);
+    color: #ffffff;
+}
+
+html.dark-mode .tool-modal-help {
+    background: #111827;
+    border-color: #374151;
+    color: #d1d5db;
+}
+
+html.dark-mode .tool-modal-help-btn {
+    border-color: #93c5fd;
+    color: #93c5fd;
+}
+
+html.dark-mode .tool-modal-help-btn:hover,
+html.dark-mode .tool-modal-help-btn:focus-visible {
+    background: #93c5fd;
+    color: #111827;
+}
+
+/* "Always open tools in a new tab": phones already open tools in a new tab */
+.new-tab-pref {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.new-tab-pref input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--primary-blue);
+}
+
+@media (max-width: 767px) {
+    .new-tab-pref {
+        display: none;
+    }
+}
+
 /* Respect the device's reduced-motion setting */
 @media (prefers-reduced-motion: reduce) {
     html {
