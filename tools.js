@@ -154,6 +154,19 @@ const tools = [
         screenshot: "screenshots/paeds-trauma.png"
     },
     {
+        id: "paeds-rashes",
+        name: "Paediatric Rashes",
+        description: "Photo guide to childhood rashes for the ED, starting with the red-flag rashes (meningococcal septicaemia, Kawasaki disease, eczema herpeticum) that need action now",
+        category: "Paediatrics",
+        tags: ["paediatrics", "rash", "dermatology", "meningococcal", "Kawasaki", "red flags", "photos"],
+        url: "https://wmebemrash.netlify.app",
+        featured: false,
+        // Photos checked by Jake on 27 Oct 2026
+        lastReviewed: "2026-10-27",
+        icon: "guidelines",
+        screenshot: "screenshots/paeds-rashes.png"
+    },
+    {
         id: "visual-acuity",
         name: "Visual Acuity Screen",
         description: "Teaching guide for ED clinicians on how to test, interpret and document visual acuity, with a record builder and red flags",
