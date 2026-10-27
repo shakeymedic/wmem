@@ -84,6 +84,7 @@ Each tool in `tools.js` points at one of these files (78 in total).
 76. `em-pharmacotherapy-2024.png` - EM Pharmacotherapy 2024
 77. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
 78. `mts-major-trauma.png` - MTS Major Trauma Admission Tool (UHB)
+79. `paeds-rashes.png` - Paediatric Rashes
 
 When you add a tool to `tools.js`, add its file name here too.
 
