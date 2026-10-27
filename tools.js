@@ -624,10 +624,10 @@ const tools = [
     {
         id: "regional-anaesthesia",
         name: "Regional Anaesthesia Guide",
-        description: "Body-map guide to ED nerve blocks, with indications, equipment, volumes, maximum safe local anaesthetic doses, LAST management and patient advice",
+        description: "ED nerve blocks: step through your Trust's LocSSIP (UHB fascia iliaca loaded), check local anaesthetic doses and build a note for the record, with teaching, ultrasound guides and LAST management",
         category: "Education & Advisory",
         group: "Resus, cardiac & procedures",
-        tags: ["nerve blocks", "regional anaesthesia", "analgesia", "LAST", "ultrasound"],
+        tags: ["nerve blocks", "regional anaesthesia", "analgesia", "LAST", "ultrasound", "LocSSIP", "documentation"],
         url: "https://emplanablocks.netlify.app",
         featured: false,
         icon: "procedure",
