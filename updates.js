@@ -30,15 +30,6 @@ const updates = [
     ]
   },
   {
-    date: "29 Oct 2026",
-    label: "EM Evidence Rundown — Issue 36",
-    htmlPath: "/newsletters/em/issue-36.html",
-    tags: [],
-    links: [
-      { title: "EM Evidence Rundown — Issue 36", driveId: "1G51QnptupOfexJ4ovs9tBiH7ED7NEtly" }
-    ]
-  },
-  {
     date: "23 Oct 2026",
     label: "EM Evidence Rundown — Issue 35",
     htmlPath: "/newsletters/em/issue-35.html",
