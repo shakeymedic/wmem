@@ -26,6 +26,15 @@ const updates = [
     htmlPath: "/newsletters/em/issue-36.html",
     tags: [],
     links: [
+      { title: "EM Evidence Rundown — Issue 36", driveId: "1G51QnptupOfexJ4ovs9tBiH7ED7NEtly", audioId: "1R-9f52rnsnqkXUnQUZGFj_17NOzQKwmX", audioBytes: 9855639, audioSeconds: 1231 }
+    ]
+  },
+  {
+    date: "29 Oct 2026",
+    label: "EM Evidence Rundown — Issue 36",
+    htmlPath: "/newsletters/em/issue-36.html",
+    tags: [],
+    links: [
       { title: "EM Evidence Rundown — Issue 36", driveId: "1G51QnptupOfexJ4ovs9tBiH7ED7NEtly" }
     ]
   },
