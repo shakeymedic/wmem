@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the list of pre-cached files changes; old caches are deleted on activate
-const CACHE_NAME = 'emevidence-v6';
+const CACHE_NAME = 'emevidence-v7';
 const ASSETS = [
   '/',
   '/index.html',
