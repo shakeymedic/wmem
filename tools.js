@@ -419,6 +419,20 @@ const tools = [
         screenshot: "screenshots/hot-joint.png"
     },
     {
+        id: "mass-cas-handbook",
+        name: "Mass Casualty Handbook",
+        description: "Training handbook for UK ED and pre-hospital clinicians on mass casualty incidents: evidence from real incidents, draft hospital SOPs and planning tools, and a learning pathway with TST/MITT triage, a triage trainer, surge exercise and facilitator sessions. For training only, not a clinical protocol",
+        category: "Education & Advisory",
+        group: "Trauma, environment & other presentations",
+        tags: ["major incident", "mass casualty", "triage", "TST", "MITT", "training", "pre-hospital"],
+        url: "https://mass-cas-handbook.netlify.app",
+        // Its own site sends X-Frame-Options: SAMEORIGIN, so it can't be shown in the viewer
+        openInNewTab: true,
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/mass-cas-handbook.png"
+    },
+    {
         id: "antiemetics",
         name: "Antiemetics Guidance",
         description: "Evidence-based advice and guidance on antiemetic selection and dosing for various presentations",
