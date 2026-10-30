@@ -650,7 +650,7 @@ searchInput.addEventListener('input', (e) => {
     const suggest = document.getElementById('suggestToolLink');
     if (suggest) {
         const subject = searchTerm ? `New Tool Suggestion: ${searchTerm}` : 'New Tool Suggestion';
-        suggest.href = `mailto:emevidence999@gmail.com?subject=${encodeURIComponent(subject)}`;
+        suggest.href = `mailto:hello@emevidence.org?subject=${encodeURIComponent(subject)}`;
     }
 });
 
