@@ -4,7 +4,7 @@ This folder contains screenshots for your EMEvidence tools.
 
 ## Required Screenshots
 
-Each tool in `tools.js` points at one of these files (78 in total).
+Each tool in `tools.js` points at one of these files (80 in total).
 
 1. `em-simulator.png` - Medical Simulation App
 2. `frcem-revision.png` - FRCEM & MRCEM Revision App
@@ -85,6 +85,7 @@ Each tool in `tools.js` points at one of these files (78 in total).
 77. `uhb-side-room.png` - ED Side-Room Prioritisation (UHB, preliminary)
 78. `mts-major-trauma.png` - MTS Major Trauma Admission Tool (UHB)
 79. `paeds-rashes.png` - Paediatric Rashes
+80. `mass-cas-handbook.png` - Mass Casualty Handbook
 
 When you add a tool to `tools.js`, add its file name here too.
 
