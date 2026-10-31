@@ -225,6 +225,18 @@ const tools = [
         lastReviewed: "2026-10-26",
         screenshot: "screenshots/nursing-notes.png"
     },
+    {
+        id: "triage-app",
+        name: "Experimental Triage",
+        description: "Experimental educational aid for emergency department triage: initial patient assessment and categorisation",
+        category: "Bedside Aids",
+        tags: ["triage", "assessment", "experimental"],
+        url: "https://wmebemtriage.netlify.app",
+        featured: false,
+        beta: true,
+        icon: "assessment",
+        screenshot: "screenshots/triage.png"
+    },
 
     // --- SIMULATION (For Training) ---
     {
@@ -443,19 +455,6 @@ const tools = [
         featured: false,
         icon: "procedure",
         screenshot: "screenshots/antiemetics.png"
-    },
-    {
-        id: "triage-app",
-        name: "Experimental Triage",
-        description: "Experimental digital triage support tool for initial patient assessment and categorisation",
-        category: "Education & Advisory",
-        group: "Trauma, environment & other presentations",
-        tags: ["triage", "assessment", "experimental"],
-        url: "https://wmebemtriage.netlify.app",
-        featured: false,
-        beta: true,
-        icon: "assessment",
-        screenshot: "screenshots/triage.png"
     },
     {
         id: "box-breathing",
