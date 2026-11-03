@@ -21,6 +21,15 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "3 Nov 2026",
+    label: "Anaesthetics & ICU Evidence Rundown — Issue 10 (November 2026)",
+    htmlPath: "/newsletters/anaes/issue-10.html",
+    tags: [],
+    links: [
+      { title: "Anaesthetics & ICU Evidence Rundown — Issue 10 (November 2026)", driveId: "1oKPKzk6iomKwBEpLibDT5Pc5nByk0hrp", audioId: "1X8B60gu8IOMYp4D5a_t5Zdx7bzpqtQgM", audioBytes: 8847255, audioSeconds: 1105 }
+    ]
+  },
+  {
     date: "2 Nov 2026",
     label: "PHEM Evidence Rundown — Issue 10 (November 2026)",
     htmlPath: "/newsletters/phem/issue-10.html",
