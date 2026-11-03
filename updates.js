@@ -35,7 +35,7 @@ const updates = [
     htmlPath: "/newsletters/phem/issue-10.html",
     tags: [],
     links: [
-      { title: "PHEM Evidence Rundown — Issue 10 (November 2026)", driveId: "1xt8QNe-7tbcb25CPi9Pn8UbtB3Oh0k6I", audioId: "1GLLMyO0N2o044CcY4u0qGAeqMIqA5_eA", audioBytes: 9133335, audioSeconds: 1141 }
+      { title: "PHEM Evidence Rundown — Issue 10 (November 2026)", driveId: "1xt8QNe-7tbcb25CPi9Pn8UbtB3Oh0k6I", audioId: "1GLLMyO0N2o044CcY4u0qGAeqMIqA5_eA", audioBytes: 9133335, audioSeconds: 1141, spotifyEpisodeId: "2XhApf2FiwVGCwxMhDHlnL" }
     ]
   },
   {
