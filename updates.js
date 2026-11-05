@@ -22,13 +22,21 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 const updates = [
   {
     date: "5 Nov 2026",
+    label: "EM Evidence Rundown — Issue 37",
+    htmlPath: "/newsletters/em/issue-37.html",
+    tags: [],
+    links: [
+      { title: "EM Evidence Rundown — Issue 37", driveId: "1ficT1znMgDOEjEX5Zx9LSN8xCe47PEue", audioId: "1B6IADHNasr2lyqLlSXlOrbK6hUq0UK9J", audioBytes: 9654615, audioSeconds: 1206 }
+    ]
+  },
+  {
+    date: "5 Nov 2026",
     label: "Major Trauma Evidence Rundown — Issue 8 (November 2026)",
     htmlPath: "/newsletters/trauma/issue-8.html",
     tags: [],
     links: [
       { title: "Major Trauma Evidence Rundown — Issue 8 (November 2026)", driveId: "1FbtnMXXZGUWckARtC9-ZUGdjG3r3vlXH", audioId: "1LcS1BChg1ELJOpAAlQ0QY9V9vq-yZECz", audioBytes: 9838935, audioSeconds: 1229 }
-    
-      { title: "EM Evidence Rundown — Issue 37", driveId: "1ficT1znMgDOEjEX5Zx9LSN8xCe47PEue", audioId: "1B6IADHNasr2lyqLlSXlOrbK6hUq0UK9J", audioBytes: 9654615, audioSeconds: 1206 },]
+    ]
   },
   {
     date: "3 Nov 2026",
