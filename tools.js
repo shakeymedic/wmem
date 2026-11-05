@@ -19,6 +19,8 @@ const tools = [
         category: "Simulation",
         tags: ["simulation", "training", "education", "cases", "resuscitation"],
         url: "https://emsimulator.com/",
+        lastReviewed: "2026-11-01",
+        reviewedBy: "Claude (automated check)",
         featured: true,
         isNew: true,
         icon: "monitor",
@@ -32,6 +34,8 @@ const tools = [
         group: "Training, AI & wellbeing",
         tags: ["FRCEM", "MRCEM", "revision", "exams", "OSCE", "training"],
         url: "https://rcemrevision.com/",
+        lastReviewed: "2026-11-01",
+        reviewedBy: "Claude (automated check)",
         // Its own site refuses to be framed (frame-ancestors 'none'), and it isn't on *.netlify.app
         openInNewTab: true,
         featured: true,
@@ -49,6 +53,8 @@ const tools = [
         category: "Bedside Aids",
         tags: ["resuscitation", "cardiac", "ALS", "documentation", "real-time"],
         url: "https://wmebemals.netlify.app",
+        lastReviewed: "2026-11-01",
+        reviewedBy: "Claude (automated check)",
         featured: true,
         icon: "cardiac",
         screenshot: "screenshots/als-app.png"
@@ -60,6 +66,8 @@ const tools = [
         category: "Bedside Aids",
         tags: ["trauma", "ATLS", "primary survey", "secondary survey", "documentation"],
         url: "https://majortrauma.netlify.app",
+        lastReviewed: "2026-11-01",
+        reviewedBy: "Claude (automated check)",
         featured: true,
         icon: "trauma",
         screenshot: "screenshots/major-trauma.png"
