@@ -21,6 +21,15 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "5 Nov 2026",
+    label: "Major Trauma Evidence Rundown — Issue 8 (November 2026)",
+    htmlPath: "/newsletters/trauma/issue-8.html",
+    tags: [],
+    links: [
+      { title: "Major Trauma Evidence Rundown — Issue 8 (November 2026)", driveId: "1FbtnMXXZGUWckARtC9-ZUGdjG3r3vlXH", audioId: "1LcS1BChg1ELJOpAAlQ0QY9V9vq-yZECz", audioBytes: 9838935, audioSeconds: 1229 }
+    ]
+  },
+  {
     date: "3 Nov 2026",
     label: "Anaesthetics & ICU Evidence Rundown — Issue 10 (November 2026)",
     htmlPath: "/newsletters/anaes/issue-10.html",
