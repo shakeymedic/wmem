@@ -19,6 +19,7 @@ const tools = [
         category: "Simulation",
         tags: ["simulation", "training", "education", "cases", "resuscitation"],
         url: "https://emsimulator.com/",
+        openInNewTab: true,
         lastReviewed: "2026-11-01",
         reviewedBy: "Claude (automated check)",
         featured: true,
