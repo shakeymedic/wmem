@@ -41,6 +41,12 @@ LONG_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "
 BULLETS = "•·›→▸▶▪◦●○■□✓✔➤►"
 MIN_CHARS = 0.998   # letters and digits on the page must match the PDF this closely
 MIN_NGRAMS = 0.97   # share of the PDF's text that must read in the same order
+# Some issues set many cards and tables side by side, and pdftotext's default reading takes those
+# across the row where the PDF was written down the column (Issue 34: 0.952). Such a page is still
+# accepted when it follows the order the PDF was written in exactly (pdftotext -raw) and is not far
+# from the default reading either.
+MIN_NGRAMS_RAW = 0.999
+MIN_NGRAMS_LOOSE = 0.94
 
 
 # ─────────────────────────────────────────────────────────────
@@ -919,7 +925,9 @@ def coverage(pdf_path, body_html):
     Returns (chars, ngrams): how closely the counts of letters and digits match (1.0 = exactly,
     so nothing was dropped or doubled), and the share of the PDF's 8-character runs that appear on
     the page in the same order (low = text jumbled)."""
-    ref = alnum(redact(subprocess.run(["pdftotext", "-q", str(pdf_path), "-"], capture_output=True, text=True).stdout))
+    def read(*flags):
+        return alnum(redact(subprocess.run(["pdftotext", "-q", *flags, str(pdf_path), "-"], capture_output=True, text=True).stdout))
+    ref = read()
     body_html = re.sub(r'<li value="(\d+)">', r"\1", body_html)  # list numbers the browser draws
     page = alnum(html.unescape(re.sub(r"<[^>]+>", "", body_html)))
     if not ref:
@@ -930,6 +938,11 @@ def coverage(pdf_path, body_html):
     ga = collections.Counter(ref[i:i + n] for i in range(len(ref) - n + 1))
     gb = collections.Counter(page[i:i + n] for i in range(len(page) - n + 1))
     ngrams = sum((ga & gb).values()) / max(1, sum(ga.values()))
+    if MIN_NGRAMS_LOOSE <= ngrams < MIN_NGRAMS:
+        raw = read("-raw")
+        gr = collections.Counter(raw[i:i + n] for i in range(len(raw) - n + 1))
+        if sum((gr & gb).values()) / max(1, sum(gr.values())) >= MIN_NGRAMS_RAW:
+            ngrams = MIN_NGRAMS  # written order matches exactly: accept at the threshold
     return chars, ngrams
 
 

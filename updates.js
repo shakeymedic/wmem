@@ -26,7 +26,7 @@ const updates = [
     htmlPath: "/newsletters/em/issue-38.html",
     tags: [],
     links: [
-      { title: "EM Evidence Rundown — Issue 38", driveId: "11MhlVVXJsLG8-xwRUO9VycUtbrJnNRh6", audioId: "1gs1jK_qNJjcc0hlCnS8b1xenGhFqyMc2", audioBytes: 9335661, audioSeconds: 1167 }
+      { title: "EM Evidence Rundown — Issue 38", driveId: "11MhlVVXJsLG8-xwRUO9VycUtbrJnNRh6", audioId: "1gs1jK_qNJjcc0hlCnS8b1xenGhFqyMc2", audioBytes: 9335661, audioSeconds: 1167, spotifyEpisodeId: "4YqA30QbOOge6fdu8WjvKL" }
     ]
   },
   {
@@ -35,7 +35,7 @@ const updates = [
     htmlPath: "/newsletters/em/issue-37.html",
     tags: [],
     links: [
-      { title: "EM Evidence Rundown — Issue 37", driveId: "1ficT1znMgDOEjEX5Zx9LSN8xCe47PEue", audioId: "1B6IADHNasr2lyqLlSXlOrbK6hUq0UK9J", audioBytes: 9654615, audioSeconds: 1206 }
+      { title: "EM Evidence Rundown — Issue 37", driveId: "1ficT1znMgDOEjEX5Zx9LSN8xCe47PEue", audioId: "1B6IADHNasr2lyqLlSXlOrbK6hUq0UK9J", audioBytes: 9654615, audioSeconds: 1206, spotifyEpisodeId: "4b9iypQktLLseZbQt7QXuX" }
     ]
   },
   {
@@ -44,7 +44,7 @@ const updates = [
     htmlPath: "/newsletters/trauma/issue-8.html",
     tags: [],
     links: [
-      { title: "Major Trauma Evidence Rundown — Issue 8 (November 2026)", driveId: "1FbtnMXXZGUWckARtC9-ZUGdjG3r3vlXH", audioId: "1LcS1BChg1ELJOpAAlQ0QY9V9vq-yZECz", audioBytes: 9838935, audioSeconds: 1229 }
+      { title: "Major Trauma Evidence Rundown — Issue 8 (November 2026)", driveId: "1FbtnMXXZGUWckARtC9-ZUGdjG3r3vlXH", audioId: "1LcS1BChg1ELJOpAAlQ0QY9V9vq-yZECz", audioBytes: 9838935, audioSeconds: 1229, spotifyEpisodeId: "3TPnddNybTdeS8yWTlTXe7" }
     ]
   },
   {
@@ -53,7 +53,7 @@ const updates = [
     htmlPath: "/newsletters/anaes/issue-10.html",
     tags: [],
     links: [
-      { title: "Anaesthetics & ICU Evidence Rundown — Issue 10 (November 2026)", driveId: "1oKPKzk6iomKwBEpLibDT5Pc5nByk0hrp", audioId: "1X8B60gu8IOMYp4D5a_t5Zdx7bzpqtQgM", audioBytes: 8847255, audioSeconds: 1105 }
+      { title: "Anaesthetics & ICU Evidence Rundown — Issue 10 (November 2026)", driveId: "1oKPKzk6iomKwBEpLibDT5Pc5nByk0hrp", audioId: "1X8B60gu8IOMYp4D5a_t5Zdx7bzpqtQgM", audioBytes: 8847255, audioSeconds: 1105, spotifyEpisodeId: "6nbXHmn7p5iGrS5lblXy55" }
     ]
   },
   {
@@ -86,6 +86,7 @@ const updates = [
   {
     date: "15 Oct 2026",
     label: "EM Evidence Rundown — Issue 34",
+    htmlPath: "/newsletters/em/issue-34.html",
     tags: [],
     links: [
       { title: "EM Evidence Rundown — Issue 34", driveId: "1uQYB6VZBv3Vw5zO8hqXGvhTliOAYbXcC", audioId: "1PadEN1qdwBlD4-fW1wSat3M4vamVv_n9", audioBytes: 3582807, audioSeconds: 447 }
