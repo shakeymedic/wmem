@@ -21,6 +21,15 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "15 Nov 2026",
+    label: "Extrication Evidence Rundown — Special Edition (November 2026)",
+    htmlPath: "/newsletters/phem/2026-11-15.html",
+    tags: ["special edition", "fire and rescue", "pre-hospital"],
+    links: [
+      { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "1EW5EsTpMpw9SjuXXFS_DVUXsIRFJ88kG", audioId: "1fe_t2XowXx5Jtu8El-F7CLmNmVDTpX0f", audioBytes: 8427927, audioSeconds: 1053 }
+    ]
+  },
+  {
     date: "12 Nov 2026",
     label: "EM Evidence Rundown — Issue 38",
     htmlPath: "/newsletters/em/issue-38.html",
