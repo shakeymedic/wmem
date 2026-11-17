@@ -23,7 +23,7 @@ const updates = [
   {
     date: "15 Nov 2026",
     label: "Extrication Evidence Rundown — Special Edition (November 2026)",
-    htmlPath: "/newsletters/phem/2026-11-15.html",
+    htmlPath: "/newsletters/extrication/2026-11-15.html",
     tags: ["special edition", "fire and rescue", "pre-hospital"],
     links: [
       { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "11eSmxRqHxxV68ZNCgfeQAsDYUvX6nXLU", audioId: "1dgirBf5Wf9RGQZGZbVnbfBgkP_oMaPBT", audioBytes: 8971287, audioSeconds: 1121 }
@@ -609,9 +609,11 @@ const SERIES = [
     { key: "phem", name: "PHEM Evidence Rundown", test: /\bphem\b|pre-?hospital/i },
     { key: "anaes", name: "Anaesthetics & ICU Evidence Rundown", test: /anaesth|\bicu\b|\bicm\b/i },
     { key: "trauma", name: "Major Trauma Evidence Rundown", test: /major trauma/i },
-    { key: "quarterly", name: "Quarterly State of the Science", test: /state of the science|\bq[1-4]\b|quarterly|ebook/i }
+    { key: "quarterly", name: "Quarterly State of the Science", test: /state of the science|\bq[1-4]\b|quarterly|ebook/i },
+    // Monthly for fire and rescue services from Dec 2026 (the Nov 2026 special edition belongs here too)
+    { key: "extrication", name: "Extrication Evidence Rundown", test: /extrication/i }
 ];
-const SERIES_MATCH_ORDER = ["quarterly", "phem", "anaes", "trauma", "em"];
+const SERIES_MATCH_ORDER = ["extrication", "quarterly", "phem", "anaes", "trauma", "em"];
 function seriesOf(entry) {
     const text = [entry.label, ...(entry.links || []).map(l => l.title), ...(entry.tags || [])].join(" ");
     const key = SERIES_MATCH_ORDER.find(k => SERIES.find(s => s.key === k).test.test(text));
