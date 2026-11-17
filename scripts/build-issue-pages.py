@@ -34,7 +34,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://emevidence.org"
-SERIES_DIR = {"em": "em", "phem": "phem", "anaes": "anaes", "trauma": "trauma", "quarterly": "quarterly"}
+SERIES_DIR = {"em": "em", "phem": "phem", "anaes": "anaes", "trauma": "trauma", "quarterly": "quarterly",
+              "extrication": "extrication"}
 MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 LONG_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
                "September", "October", "November", "December"]

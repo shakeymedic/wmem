@@ -19,6 +19,7 @@ One folder per series, then the issue:
 | Anaesthetics & ICU Evidence Rundown | `anaes/` | `anaes/issue-9.html` |
 | Major Trauma Evidence Rundown | `trauma/` | `trauma/issue-7.html` |
 | Quarterly State of the Science | `quarterly/` | `quarterly/2026-q3-em.html` |
+| Extrication Evidence Rundown (fire and rescue, monthly from Dec 2026) | `extrication/` | `extrication/issue-1.html` |
 
 The file name is `issue-N` when `updates.js` gives the issue number, otherwise the issue's date (`2026-06-02.html`). Quarterlies are `YEAR-qN-series`. If two PDFs would get the same name (an earlier version of an issue, for example), the older one has its date added: `trauma/issue-1-2026-06-29.html`.
 

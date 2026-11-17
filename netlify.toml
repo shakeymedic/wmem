@@ -146,6 +146,13 @@
   status = 404
   force = true
 
+# The Extrication special edition page moved to its own series on 17 Nov 2026
+[[redirects]]
+  from = "/newsletters/phem/2026-11-15.html"
+  to = "/newsletters/extrication/2026-11-15.html"
+  status = 301
+  force = true
+
 # ── Simple anchor redirects ───────────────────────────────────
 [[redirects]]
   from = "/home"

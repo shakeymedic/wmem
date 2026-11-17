@@ -2254,6 +2254,7 @@ html.dark-mode .update-tag {
 .archive-series-anaes { border-left-color: #7c3aed; }
 .archive-series-trauma { border-left-color: #dc2626; }
 .archive-series-quarterly { border-left-color: #d97706; }
+.archive-series-extrication { border-left-color: #ea580c; }
 
 .archive-issue-meta {
     display: flex;
