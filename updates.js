@@ -26,7 +26,7 @@ const updates = [
     htmlPath: "/newsletters/extrication/2026-11-15.html",
     tags: ["special edition", "fire and rescue", "pre-hospital"],
     links: [
-      { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "1A7FZNauaa949atILlhbTQuKt1WaLOuoy", audioId: "1dgirBf5Wf9RGQZGZbVnbfBgkP_oMaPBT", audioBytes: 8971287, audioSeconds: 1121 }
+      { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "1A7FZNauaa949atILlhbTQuKt1WaLOuoy", audioId: "1NpP3T2fuj7aY54X_-l8jyWAnYkgi985Z", audioBytes: 9191853, audioSeconds: 1149 }
     ]
   },
   {
