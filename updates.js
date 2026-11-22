@@ -26,7 +26,7 @@ const updates = [
     htmlPath: "/newsletters/em/issue-39.html",
     tags: [],
     links: [
-      { title: "EM Evidence Rundown — Issue 39", driveId: "1wp_Mnnhw-c5jcasf0SDzicZIk_JviXT8", audioId: "1WBketNp1ki8OUtuGnmKbsuILagTEMSpV", audioBytes: 9897495, audioSeconds: 1236 }
+      { title: "EM Evidence Rundown — Issue 39", driveId: "1wp_Mnnhw-c5jcasf0SDzicZIk_JviXT8", audioId: "1WBketNp1ki8OUtuGnmKbsuILagTEMSpV", audioBytes: 9897495, audioSeconds: 1236, spotifyEpisodeId: "33HQWmZHUhbud6i7ShSWsY" }
     ]
   },
   {
@@ -44,7 +44,7 @@ const updates = [
     htmlPath: "/newsletters/extrication/2026-11-15.html",
     tags: ["special edition", "fire and rescue", "pre-hospital"],
     links: [
-      { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "1A7FZNauaa949atILlhbTQuKt1WaLOuoy", audioId: "1NpP3T2fuj7aY54X_-l8jyWAnYkgi985Z", audioBytes: 9191853, audioSeconds: 1149 }
+      { title: "Extrication Evidence Rundown — Special Edition (November 2026)", driveId: "1A7FZNauaa949atILlhbTQuKt1WaLOuoy", audioId: "1NpP3T2fuj7aY54X_-l8jyWAnYkgi985Z", audioBytes: 9191853, audioSeconds: 1149, spotifyEpisodeId: "6wCOJZ2hBk0ViRnPzws0Gh" }
     ]
   },
   {
