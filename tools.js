@@ -282,6 +282,19 @@ const tools = [
         icon: "defib",
         screenshot: "screenshots/defib-sim.png"
     },
+    {
+        id: "ukro-scenario-builder",
+        name: "UKRO Scenario Builder",
+        description: "Builds a full road traffic collision extrication scenario for UKRO-style training and assessment: set-up and medic guides, patient sheets and a 3D scene of the vehicles and casualties. For training only",
+        category: "Simulation",
+        tags: ["extrication", "RTC", "trauma", "simulation", "pre-hospital", "UKRO", "training"],
+        url: "https://ukro-scenario-builder.netlify.app",
+        // Its own site sends X-Frame-Options: DENY and frame-ancestors 'none', so it can't be shown in the viewer
+        openInNewTab: true,
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/ukro-scenario-builder.png"
+    },
 
     // --- EDUCATION & ADVISORY (Reference & Guidelines) ---
     {
@@ -452,6 +465,18 @@ const tools = [
         featured: false,
         icon: "trauma",
         screenshot: "screenshots/mass-cas-handbook.png"
+    },
+    {
+        id: "cspine-truck-extrication",
+        name: "Neck Movement in Truck-Cab Extrication",
+        description: "Interactive 3D model of how much the cervical spine moves with three truck-cab extrication techniques (Pons Claramonte et al., Medicine 2026), with simplified collision physics, related studies, teaching scenarios and a quiz. A teaching aid, not a crash reconstruction or injury prediction",
+        category: "Education & Advisory",
+        group: "Trauma, environment & other presentations",
+        tags: ["extrication", "c-spine", "trauma", "pre-hospital", "RTC", "3D"],
+        url: "https://cspine3drtc.netlify.app",
+        featured: false,
+        icon: "trauma",
+        screenshot: "screenshots/cspine-truck-extrication.png"
     },
     {
         id: "antiemetics",
