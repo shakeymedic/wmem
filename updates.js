@@ -21,6 +21,15 @@ const docIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 // ============================================================
 const updates = [
   {
+    date: "26 Nov 2026",
+    label: "EM Evidence Rundown — Issue 40",
+    htmlPath: "/newsletters/em/issue-40.html",
+    tags: [],
+    links: [
+      { title: "EM Evidence Rundown — Issue 40", driveId: "1ZfRoAgA6sP0jY81UxYCrTDArKzpXF_dv", audioId: "1NR4RvM8sXrYPr2niPi_D21J2gR5-NgkX", audioBytes: 8509335, audioSeconds: 1063 }
+    ]
+  },
+  {
     date: "19 Nov 2026",
     label: "EM Evidence Rundown — Issue 39",
     htmlPath: "/newsletters/em/issue-39.html",
@@ -34,8 +43,8 @@ const updates = [
     label: "Extrication Evidence Rundown — Special Edition in Spanish and French",
     tags: ["special edition", "fire and rescue", "translation"],
     links: [
-      { title: "Extrication Evidence Rundown — Special Edition, Spanish (Extricación de víctimas: resumen de la evidencia)", driveId: "17gISHAuV588IY5B0sLv64qs9yWMXIkTU" },
-      { title: "Extrication Evidence Rundown — Special Edition, French (Extraction des victimes : synthèse des données probantes)", driveId: "1D31r3SJMaGZ57wPhHjE6qZefJvbGgO83" }
+      { title: "Extrication Evidence Rundown — Special Edition, Spanish (Extricación de víctimas: resumen de la evidencia)", driveId: "17gISHAuV588IY5B0sLv64qs9yWMXIkTU", htmlPath: "/newsletters/extrication/2026-11-18.html" },
+      { title: "Extrication Evidence Rundown — Special Edition, French (Extraction des victimes : synthèse des données probantes)", driveId: "1D31r3SJMaGZ57wPhHjE6qZefJvbGgO83", htmlPath: "/newsletters/extrication/2026-11-18-2026-11-18.html" }
     ]
   },
   {
